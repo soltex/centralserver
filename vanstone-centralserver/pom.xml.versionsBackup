@@ -1,22 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	
+
 	<parent>
 		<groupId>com.vanstone</groupId>
 		<artifactId>centralserver</artifactId>
-		<version>1.0.11</version>
+		<version>1.0.10</version>
 	</parent>
-	
-	<artifactId>vanstone-configuration-client</artifactId>
-	<packaging>jar</packaging>
 
-	<name>vanstone-configuration-client</name>
+	<artifactId>vanstone-centralserver</artifactId>
+	<packaging>war</packaging>
+	<name>vanstone-centralserver Maven Webapp</name>
 	<url>http://maven.apache.org</url>
-
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
 	<distributionManagement>
 		<repository>
 			<id>sagacityidea-release</id>
@@ -24,6 +19,9 @@
 			<url>http://repo.sagacityidea.com:8081/nexus/content/repositories/sagacityidea-release/</url>
 		</repository>
 	</distributionManagement>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -32,12 +30,52 @@
 			<scope>test</scope>
 		</dependency>
 		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<dependency>
 			<groupId>com.vanstone</groupId>
-			<artifactId>vanstone-centralserver-common</artifactId>
+			<artifactId>vanstone-centralserver-weixin-sdk</artifactId>
 			<version>${centralserver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vanstone</groupId>
+			<artifactId>
+				vanstone-centralserver-configuration-sdk
+			</artifactId>
+			<version>${centralserver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vanstone</groupId>
+			<artifactId>vanstone-webframework</artifactId>
+			<version>${vanstone.components.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-core-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
 		</dependency>
 	</dependencies>
 	<build>
+		<finalName>vanstone-centralserver</finalName>
 		<pluginManagement>
 			<plugins>
 				<plugin>

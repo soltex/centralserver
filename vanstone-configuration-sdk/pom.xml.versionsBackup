@@ -5,13 +5,13 @@
 	<parent>
 		<groupId>com.vanstone</groupId>
 		<artifactId>centralserver</artifactId>
-		<version>1.0.11</version>
+		<version>1.0.10</version>
 	</parent>
 	
-	<artifactId>vanstone-configuration-client</artifactId>
+	<artifactId>vanstone-configuration-sdk</artifactId>
 	<packaging>jar</packaging>
 
-	<name>vanstone-configuration-client</name>
+	<name>vanstone-configuration-sdk</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
