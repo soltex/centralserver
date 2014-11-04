@@ -1,0 +1,33 @@
+基于Spring MVC，DB操作基于JDBCTemplate
+
+server requirement : 
+1. 微信账号管理
+2. 微信Token管理
+3. 微信定时刷新
+4. 微信AccessToken获取以及MD5更新
+5. 微信本地数据缓冲
+
+统一的异常处理，
+HttpClientTemplate处理
+重试机制
+SimpleCache
+
+服务器端添加流程
+服务器端定时更新流程
+	定时更新
+	多线程分页更新AccessToken信息
+	多线程更新本地缓冲
+	多线程本地更新ZK中
+	
+
+附件限制大小功能
+	附件大小限制
+
+客户端定时从ZK中定时更新数据.
+
+bootstrap3 验证框架
+HttpClient重试模板
+
+
+1. 服务器端增加自动备份功能
+2. 
