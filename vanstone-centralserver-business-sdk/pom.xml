@@ -39,7 +39,7 @@
 		<dependency>
 			<groupId>com.vanstone</groupId>
 			<artifactId>vanstone-framework</artifactId>
-			<version>${vanstone.components.version}</version>
+			<version>${vanstone.commons.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

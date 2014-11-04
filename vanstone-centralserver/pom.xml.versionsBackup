@@ -61,7 +61,7 @@
 		<dependency>
 			<groupId>com.vanstone</groupId>
 			<artifactId>vanstone-webframework</artifactId>
-			<version>${vanstone.components.version}</version>
+			<version>${vanstone.commons.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
