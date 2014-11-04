@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.vanstone.centralserver.configuration.sdk.persistence.SysConfInfoDOMapper">
+	<resultMap id="BaseResultMap" type="com.vanstone.centralserver.configuration.sdk.persistence.object.SysConfInfoDO">
+		<id column="ID" property="id" jdbcType="INTEGER" />
+		<result column="DATA_ID" property="dataId" jdbcType="VARCHAR" />
+		<result column="GROUP_ID" property="groupId" jdbcType="VARCHAR" />
+		<result column="CONF_VALUE_MD5" property="confValueMd5"
+			jdbcType="VARCHAR" />
+		<result column="SYS_INSERT_TIME" property="sysInsertTime"
+			jdbcType="TIMESTAMP" />
+		<result column="SYS_UPDATE_TIME" property="sysUpdateTime"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs"
+		type="com.vanstone.centralserver.configuration.sdk.persistence.object.SysConfInfoDO"
+		extends="BaseResultMap">
+		<result column="CONF_VALUE" property="confValue" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, DATA_ID, GROUP_ID, CONF_VALUE_MD5, SYS_INSERT_TIME,
+		SYS_UPDATE_TIME
+	</sql>
+	<sql id="Blob_Column_List">
+		CONF_VALUE
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from sys_conf_info
+		where ID = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from
+		sys_conf_info
+		where ID = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.vanstone.centralserver.configuration.sdk.persistence.object.SysConfInfoDO"
+		useGeneratedKeys="true" keyProperty="id">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			select LAST_INSERT_ID() as id
+		</selectKey>
+		insert into sys_conf_info (ID, DATA_ID, GROUP_ID,
+		CONF_VALUE_MD5,
+		SYS_INSERT_TIME, SYS_UPDATE_TIME,
+		CONF_VALUE)
+		values
+		(#{id,jdbcType=INTEGER}, #{dataId,jdbcType=VARCHAR},
+		#{groupId,jdbcType=VARCHAR},
+		#{confValueMd5,jdbcType=VARCHAR},
+		#{sysInsertTime,jdbcType=TIMESTAMP},
+		#{sysUpdateTime,jdbcType=TIMESTAMP},
+		#{confValue,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.vanstone.centralserver.configuration.sdk.persistence.object.SysConfInfoDO"
+		useGeneratedKeys="true" keyProperty="id">
+		<selectKey resultType="int" order="AFTER" keyProperty="id">
+			select LAST_INSERT_ID() as id
+		</selectKey>
+		insert into sys_conf_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="dataId != null">
+				DATA_ID,
+			</if>
+			<if test="groupId != null">
+				GROUP_ID,
+			</if>
+			<if test="confValueMd5 != null">
+				CONF_VALUE_MD5,
+			</if>
+			<if test="sysInsertTime != null">
+				SYS_INSERT_TIME,
+			</if>
+			<if test="sysUpdateTime != null">
+				SYS_UPDATE_TIME,
+			</if>
+			<if test="confValue != null">
+				CONF_VALUE,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="dataId != null">
+				#{dataId,jdbcType=VARCHAR},
+			</if>
+			<if test="groupId != null">
+				#{groupId,jdbcType=VARCHAR},
+			</if>
+			<if test="confValueMd5 != null">
+				#{confValueMd5,jdbcType=VARCHAR},
+			</if>
+			<if test="sysInsertTime != null">
+				#{sysInsertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sysUpdateTime != null">
+				#{sysUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="confValue != null">
+				#{confValue,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.vanstone.centralserver.configuration.sdk.persistence.object.SysConfInfoDO">
+		update sys_conf_info
+		<set>
+			<if test="dataId != null">
+				DATA_ID = #{dataId,jdbcType=VARCHAR},
+			</if>
+			<if test="groupId != null">
+				GROUP_ID = #{groupId,jdbcType=VARCHAR},
+			</if>
+			<if test="confValueMd5 != null">
+				CONF_VALUE_MD5 = #{confValueMd5,jdbcType=VARCHAR},
+			</if>
+			<if test="sysInsertTime != null">
+				SYS_INSERT_TIME = #{sysInsertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sysUpdateTime != null">
+				SYS_UPDATE_TIME = #{sysUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="confValue != null">
+				CONF_VALUE = #{confValue,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs"
+		parameterType="com.vanstone.centralserver.configuration.sdk.persistence.object.SysConfInfoDO">
+		update sys_conf_info
+		set DATA_ID =
+		#{dataId,jdbcType=VARCHAR},
+		GROUP_ID = #{groupId,jdbcType=VARCHAR},
+		CONF_VALUE_MD5 = #{confValueMd5,jdbcType=VARCHAR},
+		SYS_INSERT_TIME =
+		#{sysInsertTime,jdbcType=TIMESTAMP},
+		SYS_UPDATE_TIME =
+		#{sysUpdateTime,jdbcType=TIMESTAMP},
+		CONF_VALUE =
+		#{confValue,jdbcType=LONGVARCHAR}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.vanstone.centralserver.configuration.sdk.persistence.object.SysConfInfoDO">
+		update sys_conf_info
+		set DATA_ID =
+		#{dataId,jdbcType=VARCHAR},
+		GROUP_ID = #{groupId,jdbcType=VARCHAR},
+		CONF_VALUE_MD5 = #{confValueMd5,jdbcType=VARCHAR},
+		SYS_INSERT_TIME =
+		#{sysInsertTime,jdbcType=TIMESTAMP},
+		SYS_UPDATE_TIME =
+		#{sysUpdateTime,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectByDataId_GroupId" parameterType="map"
+		resultMap="ResultMapWithBLOBs">
+		SELECT
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		FROM
+		sys_conf_info
+		WHERE
+		DATA_ID = #{dataId,jdbcType=VARCHAR} AND GROUP_ID = #{groupId,jdbcType=VARCHAR}
+	</select>
+	<select id="selectByDataId_GroupId_NotSelf" parameterType="map"
+		resultMap="ResultMapWithBLOBs">
+		SELECT
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		FROM
+		sys_conf_info
+		WHERE
+		DATA_ID = #{dataId,jdbcType=VARCHAR} AND GROUP_ID = #{groupId,jdbcType=VARCHAR} 
+		AND 
+		ID &lt;&gt; #{id, jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByGroupId_DataId" parameterType="map">
+		DELETE
+		FROM sys_conf_info
+		WHERE
+		DATA_ID = #{dataId,jdbcType=VARCHAR} AND GROUP_ID =
+		#{groupId,jdbcType=VARCHAR}
+	</delete>
+	<select id="selectGroupByGroupId" resultType="string">
+		SELECT DISTINCT GROUP_ID
+		FROM
+		sys_conf_info
+		ORDER BY GROUP_ID
+	</select>
+	<select id="selectByGroupId" parameterType="string" resultMap="ResultMapWithBLOBs">
+		SELECT
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		FROM
+		sys_conf_info
+		WHERE
+		GROUP_ID = #{groupId,jdbcType=VARCHAR}
+		ORDER BY SYS_INSERT_TIME DESC
+	</select>
+	<select id="selectByKey" parameterType="map" resultMap="ResultMapWithBLOBs">
+		SELECT * FROM
+		sys_conf_info
+		<where>
+			<if test="key != null and key != ''">
+				data_id LIKE "%"#{key,jdbcType=VARCHAR}"%"
+				OR
+				group_id LIKE "%"#{key,jdbcType=VARCHAR}"%"
+				OR
+				conf_value LIKE "%"#{key,jdbcType=VARCHAR}"%"
+			</if>
+		</where>
+		ORDER BY group_id
+	</select>
+	<select id="selectTotalByKey" parameterType="map" resultType="integer">
+		SELECT COUNT(0) AS C FROM
+		sys_conf_info
+		<where>
+			<if test="key != null and key != ''">
+				data_id LIKE "%"#{key,jdbcType=VARCHAR}"%"
+				OR
+				group_id LIKE "%"#{key,jdbcType=VARCHAR}"%"
+				OR
+				conf_value LIKE "%"#{key,jdbcType=VARCHAR}"%"
+			</if>
+		</where>
+	</select>
+	<select id="selectAllGroupIdDataIds" resultType="java.util.HashMap">
+		SELECT GROUP_ID
+		AS GROUP_ID,DATA_ID AS DATA_ID FROM
+		sys_conf_info
+	</select>
+	<select id="selectAll" resultMap="ResultMapWithBLOBs">
+		SELECT <include refid="Base_Column_List"/>,<include refid="Blob_Column_List"/> 
+		FROM 
+		sys_conf_info 
+	</select>
+</mapper>

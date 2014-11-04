@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.vanstone.centralserver.weixin.sdk.persistence.WeixinInfoDOMapper">
+	<resultMap id="BaseResultMap"
+		type="com.vanstone.centralserver.weixin.sdk.persistence.object.WeixinInfoDO">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="APPID" property="appid" jdbcType="VARCHAR" />
+		<result column="APP_SECRET" property="appSecret" jdbcType="VARCHAR" />
+		<result column="ACCESS_TOKEN_MD5" property="accessTokenMd5"
+			jdbcType="VARCHAR" />
+		<result column="SYS_INSERT_TIME" property="sysInsertTime"
+			jdbcType="TIMESTAMP" />
+		<result column="SYS_UPDATE_TIME" property="sysUpdateTime"
+			jdbcType="TIMESTAMP" />
+		<result column="LAST_RETRIEVAL_TOKEN_TIME" property="lastRetrievalTokenTime"
+			jdbcType="TIMESTAMP" />
+	</resultMap>
+	<resultMap id="ResultMapWithBLOBs"
+		type="com.vanstone.centralserver.weixin.sdk.persistence.object.WeixinInfoDOWithBLOBs"
+		extends="BaseResultMap">
+		<result column="CONTENT" property="content" jdbcType="LONGVARCHAR" />
+		<result column="ACCESS_TOKEN" property="accessToken" jdbcType="LONGVARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, APPID, APP_SECRET, ACCESS_TOKEN_MD5, SYS_INSERT_TIME,
+		SYS_UPDATE_TIME, LAST_RETRIEVAL_TOKEN_TIME
+	</sql>
+	<sql id="Blob_Column_List">
+		CONTENT, ACCESS_TOKEN
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from weixin_info
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<select id="selectBy_Appid_AppSecret" parameterType="map" resultMap="ResultMapWithBLOBs">
+		SELECT <include refid="Base_Column_List"/>,<include refid="Blob_Column_List"/> 
+		FROM 
+		weixin_info 
+		WHERE 
+		APPID = #{appid,jdbcType=VARCHAR} AND APP_SECRET = #{appSecret,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from weixin_info
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.vanstone.centralserver.weixin.sdk.persistence.object.WeixinInfoDOWithBLOBs">
+		insert into weixin_info (ID, APPID, APP_SECRET,
+		ACCESS_TOKEN_MD5, SYS_INSERT_TIME, SYS_UPDATE_TIME,
+		LAST_RETRIEVAL_TOKEN_TIME, CONTENT,
+		ACCESS_TOKEN)
+		values (#{id,jdbcType=VARCHAR}, #{appid,jdbcType=VARCHAR},
+		#{appSecret,jdbcType=VARCHAR},
+		#{accessTokenMd5,jdbcType=VARCHAR}, #{sysInsertTime,jdbcType=TIMESTAMP},
+		#{sysUpdateTime,jdbcType=TIMESTAMP},
+		#{lastRetrievalTokenTime,jdbcType=TIMESTAMP},
+		#{content,jdbcType=LONGVARCHAR},
+		#{accessToken,jdbcType=LONGVARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.vanstone.centralserver.weixin.sdk.persistence.object.WeixinInfoDOWithBLOBs">
+		insert into weixin_info
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="appid != null">
+				APPID,
+			</if>
+			<if test="appSecret != null">
+				APP_SECRET,
+			</if>
+			<if test="accessTokenMd5 != null">
+				ACCESS_TOKEN_MD5,
+			</if>
+			<if test="sysInsertTime != null">
+				SYS_INSERT_TIME,
+			</if>
+			<if test="sysUpdateTime != null">
+				SYS_UPDATE_TIME,
+			</if>
+			<if test="lastRetrievalTokenTime != null">
+				LAST_RETRIEVAL_TOKEN_TIME,
+			</if>
+			<if test="content != null">
+				CONTENT,
+			</if>
+			<if test="accessToken != null">
+				ACCESS_TOKEN,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="appid != null">
+				#{appid,jdbcType=VARCHAR},
+			</if>
+			<if test="appSecret != null">
+				#{appSecret,jdbcType=VARCHAR},
+			</if>
+			<if test="accessTokenMd5 != null">
+				#{accessTokenMd5,jdbcType=VARCHAR},
+			</if>
+			<if test="sysInsertTime != null">
+				#{sysInsertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sysUpdateTime != null">
+				#{sysUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastRetrievalTokenTime != null">
+				#{lastRetrievalTokenTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="content != null">
+				#{content,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="accessToken != null">
+				#{accessToken,jdbcType=LONGVARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.vanstone.centralserver.weixin.sdk.persistence.object.WeixinInfoDOWithBLOBs">
+		update weixin_info
+		<set>
+			<if test="appid != null">
+				APPID = #{appid,jdbcType=VARCHAR},
+			</if>
+			<if test="appSecret != null">
+				APP_SECRET = #{appSecret,jdbcType=VARCHAR},
+			</if>
+			<if test="accessTokenMd5 != null">
+				ACCESS_TOKEN_MD5 = #{accessTokenMd5,jdbcType=VARCHAR},
+			</if>
+			<if test="sysInsertTime != null">
+				SYS_INSERT_TIME = #{sysInsertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sysUpdateTime != null">
+				SYS_UPDATE_TIME = #{sysUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastRetrievalTokenTime != null">
+				LAST_RETRIEVAL_TOKEN_TIME =
+				#{lastRetrievalTokenTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="accessToken != null">
+				ACCESS_TOKEN = #{accessToken,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateBaseWeixinInfo"
+		parameterType="com.vanstone.centralserver.weixin.sdk.persistence.object.WeixinInfoDOWithBLOBs">
+		update weixin_info
+		<set>
+			<if test="appid != null">
+				APPID = #{appid,jdbcType=VARCHAR},
+			</if>
+			<if test="appSecret != null">
+				APP_SECRET = #{appSecret,jdbcType=VARCHAR},
+			</if>
+			<if test="sysUpdateTime != null">
+				SYS_UPDATE_TIME = #{sysUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="content != null">
+				CONTENT = #{content,jdbcType=LONGVARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKeyWithBLOBs"
+		parameterType="com.vanstone.centralserver.weixin.sdk.persistence.object.WeixinInfoDOWithBLOBs">
+		update weixin_info
+		set APPID = #{appid,jdbcType=VARCHAR},
+		APP_SECRET = #{appSecret,jdbcType=VARCHAR},
+		ACCESS_TOKEN_MD5 = #{accessTokenMd5,jdbcType=VARCHAR},
+		SYS_INSERT_TIME = #{sysInsertTime,jdbcType=TIMESTAMP},
+		SYS_UPDATE_TIME = #{sysUpdateTime,jdbcType=TIMESTAMP},
+		LAST_RETRIEVAL_TOKEN_TIME = #{lastRetrievalTokenTime,jdbcType=TIMESTAMP},
+		CONTENT = #{content,jdbcType=LONGVARCHAR},
+		ACCESS_TOKEN = #{accessToken,jdbcType=LONGVARCHAR}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.vanstone.centralserver.weixin.sdk.persistence.object.WeixinInfoDO">
+		update weixin_info
+		set APPID = #{appid,jdbcType=VARCHAR},
+		APP_SECRET = #{appSecret,jdbcType=VARCHAR},
+		ACCESS_TOKEN_MD5 = #{accessTokenMd5,jdbcType=VARCHAR},
+		SYS_INSERT_TIME = #{sysInsertTime,jdbcType=TIMESTAMP},
+		SYS_UPDATE_TIME = #{sysUpdateTime,jdbcType=TIMESTAMP},
+		LAST_RETRIEVAL_TOKEN_TIME = #{lastRetrievalTokenTime,jdbcType=TIMESTAMP}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByKey" parameterType="map" resultMap="ResultMapWithBLOBs">
+		SELECT <include refid="Base_Column_List"/>,<include refid="Blob_Column_List"/> FROM 
+		weixin_info 
+		<where>
+			<if test="key != null and key != ''">
+				KEY LIKE "%"#{key,jdbcType=VARCHAR}"%" 
+			</if>
+		</where> 
+		ORDER BY SYS_INSERT_TIME DESC 
+	</select>
+	
+	<select id="selectCountByKey" parameterType="map" resultType="integer">
+		SELECT COUNT(0) FROM 
+		weixin_info 
+		<where>
+			<if test="key != null and key != ''">
+				KEY LIKE "%"#{key,jdbcType=VARCHAR}"%" 
+			</if>
+		</where> 
+	</select>
+</mapper>

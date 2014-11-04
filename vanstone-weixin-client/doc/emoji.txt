@@ -1,0 +1,721 @@
+Name	Unified	DoCoMo	KDDI	Softbank	Google
+	black sun with rays	U+2600	U+E63E	U+E488	U+E04A	U+FE000
+	cloud	U+2601	U+E63F	U+E48D	U+E049	U+FE001
+	umbrella with rain drops	U+2614	U+E640	U+E48C	U+E04B	U+FE002
+	snowman without snow	U+26C4	U+E641	U+E485	U+E048	U+FE003
+	high voltage sign	U+26A1	U+E642	U+E487	U+E13D	U+FE004
+	cyclone	U+1F300	U+E643	U+E469	U+E443	U+FE005
+	foggy	U+1F301	U+E644	U+E598	-	U+FE006
+	closed umbrella	U+1F302	U+E645	U+EAE8	U+E43C	U+FE007
+	night with stars	U+1F303	U+E6B3	U+EAF1	U+E44B	U+FE008
+	sunrise over mountains	U+1F304	U+E63E	U+EAF4	U+E04D	U+FE009
+	sunrise	U+1F305	U+E63E	U+EAF4	U+E449	U+FE00A
+	cityscape at dusk	U+1F306	-	U+E5DA	U+E146	U+FE00B
+	sunset over buildings	U+1F307	U+E63E	U+E5DA	U+E44A	U+FE00C
+	rainbow	U+1F308	-	U+EAF2	U+E44C	U+FE00D
+	snowflake	U+2744	-	U+E48A	-	U+FE00E
+	sun behind cloud	U+26C5	U+E63E U+E63F	U+E48E	U+E04A U+E049	U+FE00F
+	bridge at night	U+1F309	U+E6B3	U+E4BF	U+E44B	U+FE010
+	water wave	U+1F30A	U+E73F	U+EB7C	U+E43E	U+FE038
+	volcano	U+1F30B	-	U+EB53	-	U+FE03A
+	milky way	U+1F30C	U+E6B3	U+EB5F	U+E44B	U+FE03B
+	earth globe asia-australia	U+1F30F	-	U+E5B3	-	U+FE039
+	new moon symbol	U+1F311	U+E69C	U+E5A8	-	U+FE011
+	waxing gibbous moon symbol	U+1F314	U+E69D	U+E5A9	U+E04C	U+FE012
+	first quarter moon symbol	U+1F313	U+E69E	U+E5AA	U+E04C	U+FE013
+	crescent moon	U+1F319	U+E69F	U+E486	U+E04C	U+FE014
+	full moon symbol	U+1F315	U+E6A0	-	-	U+FE015
+	first quarter moon with face	U+1F31B	U+E69E	U+E489	U+E04C	U+FE016
+	glowing star	U+1F31F	-	U+E48B	U+E335	U+FEB69
+	shooting star	U+1F320	-	U+E468	-	U+FEB6A
+	clock face one oclock	U+1F550	U+E6BA	U+E594	U+E024	U+FE01E
+	clock face two oclock	U+1F551	U+E6BA	U+E594	U+E025	U+FE01F
+	clock face three oclock	U+1F552	U+E6BA	U+E594	U+E026	U+FE020
+	clock face four oclock	U+1F553	U+E6BA	U+E594	U+E027	U+FE021
+	clock face five oclock	U+1F554	U+E6BA	U+E594	U+E028	U+FE022
+	clock face six oclock	U+1F555	U+E6BA	U+E594	U+E029	U+FE023
+	clock face seven oclock	U+1F556	U+E6BA	U+E594	U+E02A	U+FE024
+	clock face eight oclock	U+1F557	U+E6BA	U+E594	U+E02B	U+FE025
+	clock face nine oclock	U+1F558	U+E6BA	U+E594	U+E02C	U+FE026
+	clock face ten oclock	U+1F559	U+E6BA	U+E594	U+E02D	U+FE027
+	clock face eleven oclock	U+1F55A	U+E6BA	U+E594	U+E02E	U+FE028
+	clock face twelve oclock	U+1F55B	U+E6BA	U+E594	U+E02F	U+FE029
+	watch	U+231A	U+E71F	U+E57A	-	U+FE01D
+	hourglass	U+231B	U+E71C	U+E57B	-	U+FE01C
+	alarm clock	U+23F0	U+E6BA	U+E594	U+E02D	U+FE02A
+	hourglass with flowing sand	U+23F3	U+E71C	U+E47C	-	U+FE01B
+	aries	U+2648	U+E646	U+E48F	U+E23F	U+FE02B
+	taurus	U+2649	U+E647	U+E490	U+E240	U+FE02C
+	gemini	U+264A	U+E648	U+E491	U+E241	U+FE02D
+	cancer	U+264B	U+E649	U+E492	U+E242	U+FE02E
+	leo	U+264C	U+E64A	U+E493	U+E243	U+FE02F
+	virgo	U+264D	U+E64B	U+E494	U+E244	U+FE030
+	libra	U+264E	U+E64C	U+E495	U+E245	U+FE031
+	scorpius	U+264F	U+E64D	U+E496	U+E246	U+FE032
+	sagittarius	U+2650	U+E64E	U+E497	U+E247	U+FE033
+	capricorn	U+2651	U+E64F	U+E498	U+E248	U+FE034
+	aquarius	U+2652	U+E650	U+E499	U+E249	U+FE035
+	pisces	U+2653	U+E651	U+E49A	U+E24A	U+FE036
+	ophiuchus	U+26CE	-	U+E49B	U+E24B	U+FE037
+	four leaf clover	U+1F340	U+E741	U+E513	U+E110	U+FE03C
+	tulip	U+1F337	U+E743	U+E4E4	U+E304	U+FE03D
+	seedling	U+1F331	U+E746	U+EB7D	U+E110	U+FE03E
+	maple leaf	U+1F341	U+E747	U+E4CE	U+E118	U+FE03F
+	cherry blossom	U+1F338	U+E748	U+E4CA	U+E030	U+FE040
+	rose	U+1F339	-	U+E5BA	U+E032	U+FE041
+	fallen leaf	U+1F342	U+E747	U+E5CD	U+E119	U+FE042
+	leaf fluttering in wind	U+1F343	-	U+E5CD	U+E447	U+FE043
+	hibiscus	U+1F33A	-	U+EA94	U+E303	U+FE045
+	sunflower	U+1F33B	-	U+E4E3	U+E305	U+FE046
+	palm tree	U+1F334	-	U+E4E2	U+E307	U+FE047
+	cactus	U+1F335	-	U+EA96	U+E308	U+FE048
+	ear of rice	U+1F33E	-	-	U+E444	U+FE049
+	ear of maize	U+1F33D	-	U+EB36	-	U+FE04A
+	mushroom	U+1F344	-	U+EB37	-	U+FE04B
+	chestnut	U+1F330	-	U+EB38	-	U+FE04C
+	blossom	U+1F33C	-	U+EB49	U+E305	U+FE04D
+	herb	U+1F33F	U+E741	U+EB82	U+E110	U+FE04E
+	cherries	U+1F352	U+E742	U+E4D2	-	U+FE04F
+	banana	U+1F34C	U+E744	U+EB35	-	U+FE050
+	red apple	U+1F34E	U+E745	U+EAB9	U+E345	U+FE051
+	tangerine	U+1F34A	-	U+EABA	U+E346	U+FE052
+	strawberry	U+1F353	-	U+E4D4	U+E347	U+FE053
+	watermelon	U+1F349	-	U+E4CD	U+E348	U+FE054
+	tomato	U+1F345	-	U+EABB	U+E349	U+FE055
+	aubergine	U+1F346	-	U+EABC	U+E34A	U+FE056
+	melon	U+1F348	-	U+EB32	-	U+FE057
+	pineapple	U+1F34D	-	U+EB33	-	U+FE058
+	grapes	U+1F347	-	U+EB34	-	U+FE059
+	peach	U+1F351	-	U+EB39	-	U+FE05A
+	green apple	U+1F34F	U+E745	U+EB5A	U+E345	U+FE05B
+	eyes	U+1F440	U+E691	U+E5A4	U+E419	U+FE190
+	ear	U+1F442	U+E692	U+E5A5	U+E41B	U+FE191
+	nose	U+1F443	-	U+EAD0	U+E41A	U+FE192
+	mouth	U+1F444	U+E6F9	U+EAD1	U+E41C	U+FE193
+	tongue	U+1F445	U+E728	U+EB47	U+E409	U+FE194
+	lipstick	U+1F484	U+E710	U+E509	U+E31C	U+FE195
+	nail polish	U+1F485	-	U+EAA0	U+E31D	U+FE196
+	face massage	U+1F486	-	U+E50B	U+E31E	U+FE197
+	haircut	U+1F487	U+E675	U+EAA1	U+E31F	U+FE198
+	barber pole	U+1F488	-	U+EAA2	U+E320	U+FE199
+	bust in silhouette	U+1F464	U+E6B1	-	-	U+FE19A
+	boy	U+1F466	U+E6F0	U+E4FC	U+E001	U+FE19B
+	girl	U+1F467	U+E6F0	U+E4FA	U+E002	U+FE19C
+	man	U+1F468	U+E6F0	U+E4FC	U+E004	U+FE19D
+	woman	U+1F469	U+E6F0	U+E4FA	U+E005	U+FE19E
+	family	U+1F46A	-	U+E501	-	U+FE19F
+	man and woman holding hands	U+1F46B	-	-	U+E428	U+FE1A0
+	police officer	U+1F46E	-	U+E5DD	U+E152	U+FE1A1
+	woman with bunny ears	U+1F46F	-	U+EADB	U+E429	U+FE1A2
+	bride with veil	U+1F470	-	U+EAE9	-	U+FE1A3
+	person with blond hair	U+1F471	-	U+EB13	U+E515	U+FE1A4
+	man with gua pi mao	U+1F472	-	U+EB14	U+E516	U+FE1A5
+	man with turban	U+1F473	-	U+EB15	U+E517	U+FE1A6
+	older man	U+1F474	-	U+EB16	U+E518	U+FE1A7
+	older woman	U+1F475	-	U+EB17	U+E519	U+FE1A8
+	baby	U+1F476	-	U+EB18	U+E51A	U+FE1A9
+	construction worker	U+1F477	-	U+EB19	U+E51B	U+FE1AA
+	princess	U+1F478	-	U+EB1A	U+E51C	U+FE1AB
+	japanese ogre	U+1F479	-	U+EB44	-	U+FE1AC
+	japanese goblin	U+1F47A	-	U+EB45	-	U+FE1AD
+	ghost	U+1F47B	-	U+E4CB	U+E11B	U+FE1AE
+	baby angel	U+1F47C	-	U+E5BF	U+E04E	U+FE1AF
+	extraterrestrial alien	U+1F47D	-	U+E50E	U+E10C	U+FE1B0
+	alien monster	U+1F47E	-	U+E4EC	U+E12B	U+FE1B1
+	imp	U+1F47F	-	U+E4EF	U+E11A	U+FE1B2
+	skull	U+1F480	-	U+E4F8	U+E11C	U+FE1B3
+	information desk person	U+1F481	-	-	U+E253	U+FE1B4
+	guardsman	U+1F482	-	-	U+E51E	U+FE1B5
+	dancer	U+1F483	-	U+EB1C	U+E51F	U+FE1B6
+	snail	U+1F40C	U+E74E	U+EB7E	-	U+FE1B9
+	snake	U+1F40D	-	U+EB22	U+E52D	U+FE1D3
+	horse	U+1F40E	U+E754	U+E4D8	U+E134	U+FE7DC
+	chicken	U+1F414	-	U+EB23	U+E52E	U+FE1D4
+	boar	U+1F417	-	U+EB24	U+E52F	U+FE1D5
+	bactrian camel	U+1F42B	-	U+EB25	U+E530	U+FE1D6
+	elephant	U+1F418	-	U+EB1F	U+E526	U+FE1CC
+	koala	U+1F428	-	U+EB20	U+E527	U+FE1CD
+	monkey	U+1F412	-	U+E4D9	U+E528	U+FE1CE
+	sheep	U+1F411	-	U+E48F	U+E529	U+FE1CF
+	octopus	U+1F419	-	U+E5C7	U+E10A	U+FE1C5
+	spiral shell	U+1F41A	-	U+EAEC	U+E441	U+FE1C6
+	bug	U+1F41B	-	U+EB1E	U+E525	U+FE1CB
+	ant	U+1F41C	-	U+E4DD	-	U+FE1DA
+	honeybee	U+1F41D	-	U+EB57	-	U+FE1E1
+	lady beetle	U+1F41E	-	U+EB58	-	U+FE1E2
+	tropical fish	U+1F420	U+E751	U+EB1D	U+E522	U+FE1C9
+	blowfish	U+1F421	U+E751	U+E4D3	U+E019	U+FE1D9
+	turtle	U+1F422	-	U+E5D4	-	U+FE1DC
+	baby chick	U+1F424	U+E74F	U+E4E0	U+E523	U+FE1BA
+	front-facing baby chick	U+1F425	U+E74F	U+EB76	U+E523	U+FE1BB
+	bird	U+1F426	U+E74F	U+E4E0	U+E521	U+FE1C8
+	hatching chick	U+1F423	U+E74F	U+E5DB	U+E523	U+FE1DD
+	penguin	U+1F427	U+E750	U+E4DC	U+E055	U+FE1BC
+	poodle	U+1F429	U+E6A1	U+E4DF	U+E052	U+FE1D8
+	fish	U+1F41F	U+E751	U+E49A	U+E019	U+FE1BD
+	dolphin	U+1F42C	-	U+EB1B	U+E520	U+FE1C7
+	mouse face	U+1F42D	-	U+E5C2	U+E053	U+FE1C2
+	tiger face	U+1F42F	-	U+E5C0	U+E050	U+FE1C0
+	cat face	U+1F431	U+E6A2	U+E4DB	U+E04F	U+FE1B8
+	spouting whale	U+1F433	-	U+E470	U+E054	U+FE1C3
+	horse face	U+1F434	U+E754	U+E4D8	U+E01A	U+FE1BE
+	monkey face	U+1F435	-	U+E4D9	U+E109	U+FE1C4
+	dog face	U+1F436	U+E6A1	U+E4E1	U+E052	U+FE1B7
+	pig face	U+1F437	U+E755	U+E4DE	U+E10B	U+FE1BF
+	bear face	U+1F43B	-	U+E5C1	U+E051	U+FE1C1
+	hamster face	U+1F439	-	-	U+E524	U+FE1CA
+	wolf face	U+1F43A	U+E6A1	U+E4E1	U+E52A	U+FE1D0
+	cow face	U+1F42E	-	U+EB21	U+E52B	U+FE1D1
+	rabbit face	U+1F430	-	U+E4D7	U+E52C	U+FE1D2
+	frog face	U+1F438	-	U+E4DA	U+E531	U+FE1D7
+	paw prints	U+1F43E	U+E698	U+E4EE	U+E536	U+FE1DB
+	dragon face	U+1F432	-	U+EB3F	-	U+FE1DE
+	panda face	U+1F43C	-	U+EB46	-	U+FE1DF
+	pig nose	U+1F43D	U+E755	U+EB48	U+E10B	U+FE1E0
+	angry face	U+1F620	U+E6F1	U+E472	U+E059	U+FE320
+	weary face	U+1F629	U+E6F3	U+EB67	U+E403	U+FE321
+	astonished face	U+1F632	U+E6F4	U+EACA	U+E410	U+FE322
+	disappointed face	U+1F61E	U+E6F2	U+EAC0	U+E058	U+FE323
+	dizzy face	U+1F635	U+E6F4	U+E5AE	U+E406	U+FE324
+	face with open mouth and cold sweat	U+1F630	U+E723	U+EACB	U+E40F	U+FE325
+	unamused face	U+1F612	U+E725	U+EAC9	U+E40E	U+FE326
+	smiling face with heart-shaped eyes	U+1F60D	U+E726	U+E5C4	U+E106	U+FE327
+	face with look of triumph	U+1F624	U+E753	U+EAC1	U+E404	U+FE328
+	face with stuck-out tongue and winking eye	U+1F61C	U+E728	U+E4E7	U+E105	U+FE329
+	face with stuck-out tongue and tightly-closed eyes	U+1F61D	U+E728	U+E4E7	U+E409	U+FE32A
+	face savouring delicious food	U+1F60B	U+E752	U+EACD	U+E056	U+FE32B
+	face throwing a kiss	U+1F618	U+E726	U+EACF	U+E418	U+FE32C
+	kissing face with closed eyes	U+1F61A	U+E726	U+EACE	U+E417	U+FE32D
+	face with medical mask	U+1F637	-	U+EAC7	U+E40C	U+FE32E
+	flushed face	U+1F633	U+E72A	U+EAC8	U+E40D	U+FE32F
+	smiling face with open mouth	U+1F603	U+E6F0	U+E471	U+E057	U+FE330
+	smiling face with open mouth and cold sweat	U+1F605	U+E722	U+E471 U+E5B1	U+E415 U+E331	U+FE331
+	smiling face with open mouth and tightly-closed eyes	U+1F606	U+E72A	U+EAC5	U+E40A	U+FE332
+	grinning face with smiling eyes	U+1F601	U+E753	U+EB80	U+E404	U+FE333
+	face with tears of joy	U+1F602	U+E72A	U+EB64	U+E412	U+FE334
+	smiling face with smiling eyes	U+1F60A	U+E6F0	U+EACD	U+E056	U+FE335
+	white smiling face	U+263A	U+E6F0	U+E4FB	U+E414	U+FE336
+	smiling face with open mouth and smiling eyes	U+1F604	U+E6F0	U+E471	U+E415	U+FE338
+	crying face	U+1F622	U+E72E	U+EB69	U+E413	U+FE339
+	loudly crying face	U+1F62D	U+E72D	U+E473	U+E411	U+FE33A
+	fearful face	U+1F628	U+E757	U+EAC6	U+E40B	U+FE33B
+	persevering face	U+1F623	U+E72B	U+EAC2	U+E406	U+FE33C
+	pouting face	U+1F621	U+E724	U+EB5D	U+E416	U+FE33D
+	relieved face	U+1F60C	U+E721	U+EAC5	U+E40A	U+FE33E
+	confounded face	U+1F616	U+E6F3	U+EAC3	U+E407	U+FE33F
+	pensive face	U+1F614	U+E720	U+EAC0	U+E403	U+FE340
+	face screaming in fear	U+1F631	U+E757	U+E5C5	U+E107	U+FE341
+	sleepy face	U+1F62A	U+E701	U+EAC4	U+E408	U+FE342
+	smirking face	U+1F60F	U+E72C	U+EABF	U+E402	U+FE343
+	face with cold sweat	U+1F613	U+E723	U+E5C6	U+E108	U+FE344
+	disappointed but relieved face	U+1F625	U+E723	U+E5C6	U+E401	U+FE345
+	tired face	U+1F62B	U+E72B	U+E474	U+E406	U+FE346
+	winking face	U+1F609	U+E729	U+E5C3	U+E405	U+FE347
+	smiling cat face with open mouth	U+1F63A	U+E6F0	U+EB61	U+E057	U+FE348
+	grinning cat face with smiling eyes	U+1F638	U+E753	U+EB7F	U+E404	U+FE349
+	cat face with tears of joy	U+1F639	U+E72A	U+EB63	U+E412	U+FE34A
+	kissing cat face with closed eyes	U+1F63D	U+E726	U+EB60	U+E418	U+FE34B
+	smiling cat face with heart-shaped eyes	U+1F63B	U+E726	U+EB65	U+E106	U+FE34C
+	crying cat face	U+1F63F	U+E72E	U+EB68	U+E413	U+FE34D
+	pouting cat face	U+1F63E	U+E724	U+EB5E	U+E416	U+FE34E
+	cat face with wry smile	U+1F63C	U+E753	U+EB6A	U+E404	U+FE34F
+	weary cat face	U+1F640	U+E6F3	U+EB66	U+E403	U+FE350
+	face with no good gesture	U+1F645	U+E72F	U+EAD7	U+E423	U+FE351
+	face with ok gesture	U+1F646	U+E70B	U+EAD8	U+E424	U+FE352
+	person bowing deeply	U+1F647	-	U+EAD9	U+E426	U+FE353
+	see-no-evil monkey	U+1F648	-	U+EB50	-	U+FE354
+	speak-no-evil monkey	U+1F64A	-	U+EB51	-	U+FE355
+	hear-no-evil monkey	U+1F649	-	U+EB52	-	U+FE356
+	happy person raising one hand	U+1F64B	-	U+EB85	U+E012	U+FE357
+	person raising both hands in celebration	U+1F64C	-	U+EB86	U+E427	U+FE358
+	person frowning	U+1F64D	U+E6F3	U+EB87	U+E403	U+FE359
+	person with pouting face	U+1F64E	U+E6F1	U+EB88	U+E416	U+FE35A
+	person with folded hands	U+1F64F	-	U+EAD2	U+E41D	U+FE35B
+	house building	U+1F3E0	U+E663	U+E4AB	U+E036	U+FE4B0
+	house with garden	U+1F3E1	U+E663	U+EB09	U+E036	U+FE4B1
+	office building	U+1F3E2	U+E664	U+E4AD	U+E038	U+FE4B2
+	japanese post office	U+1F3E3	U+E665	U+E5DE	U+E153	U+FE4B3
+	hospital	U+1F3E5	U+E666	U+E5DF	U+E155	U+FE4B4
+	bank	U+1F3E6	U+E667	U+E4AA	U+E14D	U+FE4B5
+	automated teller machine	U+1F3E7	U+E668	U+E4A3	U+E154	U+FE4B6
+	hotel	U+1F3E8	U+E669	U+EA81	U+E158	U+FE4B7
+	love hotel	U+1F3E9	U+E669 U+E6EF	U+EAF3	U+E501	U+FE4B8
+	convenience store	U+1F3EA	U+E66A	U+E4A4	U+E156	U+FE4B9
+	school	U+1F3EB	U+E73E	U+EA80	U+E157	U+FE4BA
+	church	U+26EA	-	U+E5BB	U+E037	U+FE4BB
+	fountain	U+26F2	-	U+E5CF	U+E121	U+FE4BC
+	department store	U+1F3EC	-	U+EAF6	U+E504	U+FE4BD
+	japanese castle	U+1F3EF	-	U+EAF7	U+E505	U+FE4BE
+	european castle	U+1F3F0	-	U+EAF8	U+E506	U+FE4BF
+	factory	U+1F3ED	-	U+EAF9	U+E508	U+FE4C0
+	anchor	U+2693	U+E661	U+E4A9	U+E202	U+FE4C1
+	izakaya lantern	U+1F3EE	U+E74B	U+E4BD	U+E30B	U+FE4C2
+	mount fuji	U+1F5FB	U+E740	U+E5BD	U+E03B	U+FE4C3
+	tokyo tower	U+1F5FC	-	U+E4C0	U+E509	U+FE4C4
+	statue of liberty	U+1F5FD	-	-	U+E51D	U+FE4C6
+	silhouette of japan	U+1F5FE	-	U+E572	-	U+FE4C7
+	moyai	U+1F5FF	-	U+EB6C	-	U+FE4C8
+	mans shoe	U+1F45E	U+E699	U+E5B7	U+E007	U+FE4CC
+	athletic shoe	U+1F45F	U+E699	U+EB2B	U+E007	U+FE4CD
+	high-heeled shoe	U+1F460	U+E674	U+E51A	U+E13E	U+FE4D6
+	womans sandal	U+1F461	U+E674	U+E51A	U+E31A	U+FE4D7
+	womans boots	U+1F462	-	U+EA9F	U+E31B	U+FE4D8
+	footprints	U+1F463	U+E698	U+EB2A	U+E536	U+FE553
+	eyeglasses	U+1F453	U+E69A	U+E4FE	-	U+FE4CE
+	t-shirt	U+1F455	U+E70E	U+E5B6	U+E006	U+FE4CF
+	jeans	U+1F456	U+E711	U+EB77	-	U+FE4D0
+	crown	U+1F451	U+E71A	U+E5C9	U+E10E	U+FE4D1
+	necktie	U+1F454	-	U+EA93	U+E302	U+FE4D3
+	womans hat	U+1F452	-	U+EA9E	U+E318	U+FE4D4
+	dress	U+1F457	-	U+EB6B	U+E319	U+FE4D5
+	kimono	U+1F458	-	U+EAA3	U+E321	U+FE4D9
+	bikini	U+1F459	-	U+EAA4	U+E322	U+FE4DA
+	womans clothes	U+1F45A	U+E70E	U+E50D	U+E006	U+FE4DB
+	purse	U+1F45B	U+E70F	U+E504	-	U+FE4DC
+	handbag	U+1F45C	U+E682	U+E49C	U+E323	U+FE4F0
+	pouch	U+1F45D	U+E6AD	-	-	U+FE4F1
+	money bag	U+1F4B0	U+E715	U+E4C7	U+E12F	U+FE4DD
+	currency exchange	U+1F4B1	-	-	U+E149	U+FE4DE
+	chart with upwards trend and yen sign	U+1F4B9	-	U+E5DC	U+E14A	U+FE4DF
+	heavy dollar sign	U+1F4B2	U+E715	U+E579	U+E12F	U+FE4E0
+	credit card	U+1F4B3	-	U+E57C	-	U+FE4E1
+	banknote with yen sign	U+1F4B4	U+E6D6	U+E57D	-	U+FE4E2
+	banknote with dollar sign	U+1F4B5	U+E715	U+E585	U+E12F	U+FE4E3
+	money with wings	U+1F4B8	-	U+EB5B	-	U+FE4E4
+	regional indicator symbol letters cn	U+1F1E8 U+1F1F3	-	U+EB11	U+E513	U+FE4ED
+	regional indicator symbol letters de	U+1F1E9 U+1F1EA	-	U+EB0E	U+E50E	U+FE4E8
+	regional indicator symbol letters es	U+1F1EA U+1F1F8	-	U+E5D5	U+E511	U+FE4EB
+	regional indicator symbol letters fr	U+1F1EB U+1F1F7	-	U+EAFA	U+E50D	U+FE4E7
+	regional indicator symbol letters gb	U+1F1EC U+1F1E7	-	U+EB10	U+E510	U+FE4EA
+	regional indicator symbol letters it	U+1F1EE U+1F1F9	-	U+EB0F	U+E50F	U+FE4E9
+	regional indicator symbol letters jp	U+1F1EF U+1F1F5	-	U+E4CC	U+E50B	U+FE4E5
+	regional indicator symbol letters kr	U+1F1F0 U+1F1F7	-	U+EB12	U+E514	U+FE4EE
+	regional indicator symbol letters ru	U+1F1F7 U+1F1FA	-	U+E5D6	U+E512	U+FE4EC
+	regional indicator symbol letters us	U+1F1FA U+1F1F8	-	U+E573	U+E50C	U+FE4E6
+	fire	U+1F525	-	U+E47B	U+E11D	U+FE4F6
+	electric torch	U+1F526	U+E6FB	U+E583	-	U+FE4FB
+	wrench	U+1F527	U+E718	U+E587	-	U+FE4C9
+	hammer	U+1F528	-	U+E5CB	U+E116	U+FE4CA
+	nut and bolt	U+1F529	-	U+E581	-	U+FE4CB
+	hocho	U+1F52A	-	U+E57F	-	U+FE4FA
+	pistol	U+1F52B	-	U+E50A	U+E113	U+FE4F5
+	crystal ball	U+1F52E	-	U+EA8F	U+E23E	U+FE4F7
+	six pointed star with middle dot	U+1F52F	-	U+EA8F	U+E23E	U+FE4F8
+	japanese symbol for beginner	U+1F530	-	U+E480	U+E209	U+FE044
+	trident emblem	U+1F531	U+E71A	U+E5C9	U+E031	U+FE4D2
+	syringe	U+1F489	-	U+E510	U+E13B	U+FE509
+	pill	U+1F48A	-	U+EA9A	U+E30F	U+FE50A
+	negative squared latin capital letter a	U+1F170	-	U+EB26	U+E532	U+FE50B
+	negative squared latin capital letter b	U+1F171	-	U+EB27	U+E533	U+FE50C
+	negative squared ab	U+1F18E	-	U+EB29	U+E534	U+FE50D
+	negative squared latin capital letter o	U+1F17E	-	U+EB28	U+E535	U+FE50E
+	ribbon	U+1F380	U+E684	U+E59F	U+E314	U+FE50F
+	wrapped present	U+1F381	U+E685	U+E4CF	U+E112	U+FE510
+	birthday cake	U+1F382	U+E686	U+E5A0	U+E34B	U+FE511
+	christmas tree	U+1F384	U+E6A4	U+E4C9	U+E033	U+FE512
+	father christmas	U+1F385	-	U+EAF0	U+E448	U+FE513
+	crossed flags	U+1F38C	-	U+E5D9	U+E143	U+FE514
+	fireworks	U+1F386	-	U+E5CC	U+E117	U+FE515
+	balloon	U+1F388	-	U+EA9B	U+E310	U+FE516
+	party popper	U+1F389	-	U+EA9C	U+E312	U+FE517
+	pine decoration	U+1F38D	-	U+EAE3	U+E436	U+FE518
+	japanese dolls	U+1F38E	-	U+EAE4	U+E438	U+FE519
+	graduation cap	U+1F393	-	U+EAE5	U+E439	U+FE51A
+	school satchel	U+1F392	-	U+EAE6	U+E43A	U+FE51B
+	carp streamer	U+1F38F	-	U+EAE7	U+E43B	U+FE51C
+	firework sparkler	U+1F387	-	U+EAEB	U+E440	U+FE51D
+	wind chime	U+1F390	-	U+EAED	U+E442	U+FE51E
+	jack-o-lantern	U+1F383	-	U+EAEE	U+E445	U+FE51F
+	confetti ball	U+1F38A	-	U+E46F	-	U+FE520
+	tanabata tree	U+1F38B	-	U+EB3D	-	U+FE521
+	moon viewing ceremony	U+1F391	-	U+EAEF	U+E446	U+FE017
+	pager	U+1F4DF	U+E65A	U+E59B	-	U+FE522
+	black telephone	U+260E	U+E687	U+E596	U+E009	U+FE523
+	telephone receiver	U+1F4DE	U+E687	U+E51E	U+E009	U+FE524
+	mobile phone	U+1F4F1	U+E688	U+E588	U+E00A	U+FE525
+	mobile phone with rightwards arrow at left	U+1F4F2	U+E6CE	U+EB08	U+E104	U+FE526
+	memo	U+1F4DD	U+E689	U+EA92	U+E301	U+FE527
+	fax machine	U+1F4E0	U+E6D0	U+E520	U+E00B	U+FE528
+	envelope	U+2709	U+E6D3	U+E521	U+E103	U+FE529
+	incoming envelope	U+1F4E8	U+E6CF	U+E591	U+E103	U+FE52A
+	envelope with downwards arrow above	U+1F4E9	U+E6CF	U+EB62	U+E103	U+FE52B
+	closed mailbox with lowered flag	U+1F4EA	U+E665	U+E51B	U+E101	U+FE52C
+	closed mailbox with raised flag	U+1F4EB	U+E665	U+EB0A	U+E101	U+FE52D
+	postbox	U+1F4EE	U+E665	U+E51B	U+E102	U+FE52E
+	newspaper	U+1F4F0	-	U+E58B	-	U+FE822
+	public address loudspeaker	U+1F4E2	-	U+E511	U+E142	U+FE52F
+	cheering megaphone	U+1F4E3	-	U+E511	U+E317	U+FE530
+	satellite antenna	U+1F4E1	-	U+E4A8	U+E14B	U+FE531
+	outbox tray	U+1F4E4	-	U+E592	-	U+FE533
+	inbox tray	U+1F4E5	-	U+E593	-	U+FE534
+	package	U+1F4E6	U+E685	U+E51F	U+E112	U+FE535
+	e-mail symbol	U+1F4E7	U+E6D3	U+EB71	U+E103	U+FEB92
+	input symbol for latin capital letters	U+1F520	-	U+EAFD	-	U+FEB7C
+	input symbol for latin small letters	U+1F521	-	U+EAFE	-	U+FEB7D
+	input symbol for numbers	U+1F522	-	U+EAFF	-	U+FEB7E
+	input symbol for symbols	U+1F523	-	U+EB00	-	U+FEB7F
+	input symbol for latin letters	U+1F524	-	U+EB55	-	U+FEB80
+	black nib	U+2712	U+E6AE	U+EB03	-	U+FE536
+	seat	U+1F4BA	U+E6B2	-	U+E11F	U+FE537
+	personal computer	U+1F4BB	U+E716	U+E5B8	U+E00C	U+FE538
+	pencil	U+270F	U+E719	U+E4A1	U+E301	U+FE539
+	paperclip	U+1F4CE	U+E730	U+E4A0	-	U+FE53A
+	briefcase	U+1F4BC	U+E682	U+E5CE	U+E11E	U+FE53B
+	minidisc	U+1F4BD	-	U+E582	U+E316	U+FE53C
+	floppy disk	U+1F4BE	-	U+E562	U+E316	U+FE53D
+	optical disc	U+1F4BF	U+E68C	U+E50C	U+E126	U+FE81D
+	dvd	U+1F4C0	U+E68C	U+E50C	U+E127	U+FE81E
+	black scissors	U+2702	U+E675	U+E516	U+E313	U+FE53E
+	round pushpin	U+1F4CD	-	U+E560	-	U+FE53F
+	page with curl	U+1F4C3	U+E689	U+E561	U+E301	U+FE540
+	page facing up	U+1F4C4	U+E689	U+E569	U+E301	U+FE541
+	calendar	U+1F4C5	-	U+E563	-	U+FE542
+	file folder	U+1F4C1	-	U+E58F	-	U+FE543
+	open file folder	U+1F4C2	-	U+E590	-	U+FE544
+	notebook	U+1F4D3	U+E683	U+E56B	U+E148	U+FE545
+	open book	U+1F4D6	U+E683	U+E49F	U+E148	U+FE546
+	notebook with decorative cover	U+1F4D4	U+E683	U+E49D	U+E148	U+FE547
+	closed book	U+1F4D5	U+E683	U+E568	U+E148	U+FE502
+	green book	U+1F4D7	U+E683	U+E565	U+E148	U+FE4FF
+	blue book	U+1F4D8	U+E683	U+E566	U+E148	U+FE500
+	orange book	U+1F4D9	U+E683	U+E567	U+E148	U+FE501
+	books	U+1F4DA	U+E683	U+E56F	U+E148	U+FE503
+	name badge	U+1F4DB	-	U+E51D	-	U+FE504
+	scroll	U+1F4DC	U+E70A	U+E55F	-	U+FE4FD
+	clipboard	U+1F4CB	U+E689	U+E564	U+E301	U+FE548
+	tear-off calendar	U+1F4C6	-	U+E56A	-	U+FE549
+	bar chart	U+1F4CA	-	U+E574	U+E14A	U+FE54A
+	chart with upwards trend	U+1F4C8	-	U+E575	U+E14A	U+FE54B
+	chart with downwards trend	U+1F4C9	-	U+E576	-	U+FE54C
+	card index	U+1F4C7	U+E683	U+E56C	U+E148	U+FE54D
+	pushpin	U+1F4CC	-	U+E56D	-	U+FE54E
+	ledger	U+1F4D2	U+E683	U+E56E	U+E148	U+FE54F
+	straight ruler	U+1F4CF	-	U+E570	-	U+FE550
+	triangular ruler	U+1F4D0	-	U+E4A2	-	U+FE551
+	bookmark tabs	U+1F4D1	U+E689	U+EB0B	U+E301	U+FE552
+	running shirt with sash	U+1F3BD	U+E652	-	-	U+FE7D0
+	baseball	U+26BE	U+E653	U+E4BA	U+E016	U+FE7D1
+	flag in hole	U+26F3	U+E654	U+E599	U+E014	U+FE7D2
+	tennis racquet and ball	U+1F3BE	U+E655	U+E4B7	U+E015	U+FE7D3
+	soccer ball	U+26BD	U+E656	U+E4B6	U+E018	U+FE7D4
+	ski and ski boot	U+1F3BF	U+E657	U+EAAC	U+E013	U+FE7D5
+	basketball and hoop	U+1F3C0	U+E658	U+E59A	U+E42A	U+FE7D6
+	chequered flag	U+1F3C1	U+E659	U+E4B9	U+E132	U+FE7D7
+	snowboarder	U+1F3C2	U+E712	U+E4B8	-	U+FE7D8
+	runner	U+1F3C3	U+E733	U+E46B	U+E115	U+FE7D9
+	surfer	U+1F3C4	U+E712	U+EB41	U+E017	U+FE7DA
+	trophy	U+1F3C6	-	U+E5D3	U+E131	U+FE7DB
+	american football	U+1F3C8	-	U+E4BB	U+E42B	U+FE7DD
+	swimmer	U+1F3CA	-	U+EADE	U+E42D	U+FE7DE
+	railway car	U+1F683	U+E65B	U+E4B5	U+E01E	U+FE7DF
+	metro	U+1F687	U+E65C	U+E5BC	U+E434	U+FE7E0
+	circled latin capital letter m	U+24C2	U+E65C	U+E5BC	U+E434	U+FE7E1
+	high-speed train	U+1F684	U+E65D	U+E4B0	U+E435	U+FE7E2
+	high-speed train with bullet nose	U+1F685	U+E65D	U+E4B0	U+E01F	U+FE7E3
+	automobile	U+1F697	U+E65E	U+E4B1	U+E01B	U+FE7E4
+	recreational vehicle	U+1F699	U+E65F	U+E4B1	U+E42E	U+FE7E5
+	bus	U+1F68C	U+E660	U+E4AF	U+E159	U+FE7E6
+	bus stop	U+1F68F	-	U+E4A7	U+E150	U+FE7E7
+	ship	U+1F6A2	U+E661	U+EA82	U+E202	U+FE7E8
+	airplane	U+2708	U+E662	U+E4B3	U+E01D	U+FE7E9
+	sailboat	U+26F5	U+E6A3	U+E4B4	U+E01C	U+FE7EA
+	station	U+1F689	-	U+EB6D	U+E039	U+FE7EC
+	rocket	U+1F680	-	U+E5C8	U+E10D	U+FE7ED
+	speedboat	U+1F6A4	U+E6A3	U+E4B4	U+E135	U+FE7EE
+	taxi	U+1F695	U+E65E	U+E4B1	U+E15A	U+FE7EF
+	delivery truck	U+1F69A	-	U+E4B2	U+E42F	U+FE7F1
+	fire engine	U+1F692	-	U+EADF	U+E430	U+FE7F2
+	ambulance	U+1F691	-	U+EAE0	U+E431	U+FE7F3
+	police car	U+1F693	-	U+EAE1	U+E432	U+FE7F4
+	fuel pump	U+26FD	U+E66B	U+E571	U+E03A	U+FE7F5
+	negative squared latin capital letter p	U+1F17F	U+E66C	U+E4A6	U+E14F	U+FE7F6
+	horizontal traffic light	U+1F6A5	U+E66D	U+E46A	U+E14E	U+FE7F7
+	construction sign	U+1F6A7	-	U+E5D7	U+E137	U+FE7F8
+	police cars revolving light	U+1F6A8	-	U+EB73	U+E432	U+FE7F9
+	hot springs	U+2668	U+E6F7	U+E4BC	U+E123	U+FE7FA
+	tent	U+26FA	-	U+E5D0	U+E122	U+FE7FB
+	carousel horse	U+1F3A0	U+E679	-	-	U+FE7FC
+	ferris wheel	U+1F3A1	-	U+E46D	U+E124	U+FE7FD
+	roller coaster	U+1F3A2	-	U+EAE2	U+E433	U+FE7FE
+	fishing pole and fish	U+1F3A3	U+E751	U+EB42	U+E019	U+FE7FF
+	microphone	U+1F3A4	U+E676	U+E503	U+E03C	U+FE800
+	movie camera	U+1F3A5	U+E677	U+E517	U+E03D	U+FE801
+	cinema	U+1F3A6	U+E677	U+E517	U+E507	U+FE802
+	headphone	U+1F3A7	U+E67A	U+E508	U+E30A	U+FE803
+	artist palette	U+1F3A8	U+E67B	U+E59C	U+E502	U+FE804
+	top hat	U+1F3A9	U+E67C	U+EAF5	U+E503	U+FE805
+	circus tent	U+1F3AA	U+E67D	U+E59E	-	U+FE806
+	ticket	U+1F3AB	U+E67E	U+E49E	U+E125	U+FE807
+	clapper board	U+1F3AC	U+E6AC	U+E4BE	U+E324	U+FE808
+	performing arts	U+1F3AD	-	U+E59D	U+E503	U+FE809
+	video game	U+1F3AE	U+E68B	U+E4C6	-	U+FE80A
+	mahjong tile red dragon	U+1F004	-	U+E5D1	U+E12D	U+FE80B
+	direct hit	U+1F3AF	-	U+E4C5	U+E130	U+FE80C
+	slot machine	U+1F3B0	-	U+E46E	U+E133	U+FE80D
+	billiards	U+1F3B1	-	U+EADD	U+E42C	U+FE80E
+	game die	U+1F3B2	-	U+E4C8	-	U+FE80F
+	bowling	U+1F3B3	-	U+EB43	-	U+FE810
+	flower playing cards	U+1F3B4	-	U+EB6E	-	U+FE811
+	playing card black joker	U+1F0CF	-	U+EB6F	-	U+FE812
+	musical note	U+1F3B5	U+E6F6	U+E5BE	U+E03E	U+FE813
+	multiple musical notes	U+1F3B6	U+E6FF	U+E505	U+E326	U+FE814
+	saxophone	U+1F3B7	-	-	U+E040	U+FE815
+	guitar	U+1F3B8	-	U+E506	U+E041	U+FE816
+	musical keyboard	U+1F3B9	-	U+EB40	-	U+FE817
+	trumpet	U+1F3BA	-	U+EADC	U+E042	U+FE818
+	violin	U+1F3BB	-	U+E507	-	U+FE819
+	musical score	U+1F3BC	U+E6FF	U+EACC	U+E326	U+FE81A
+	part alternation mark	U+303D	-	-	U+E12C	U+FE81B
+	camera	U+1F4F7	U+E681	U+E515	U+E008	U+FE4EF
+	video camera	U+1F4F9	U+E677	U+E57E	U+E03D	U+FE4F9
+	television	U+1F4FA	U+E68A	U+E502	U+E12A	U+FE81C
+	radio	U+1F4FB	-	U+E5B9	U+E128	U+FE81F
+	videocassette	U+1F4FC	-	U+E580	U+E129	U+FE820
+	kiss mark	U+1F48B	U+E6F9	U+E4EB	U+E003	U+FE823
+	love letter	U+1F48C	U+E717	U+EB78	U+E103 U+E328	U+FE824
+	ring	U+1F48D	U+E71B	U+E514	U+E034	U+FE825
+	gem stone	U+1F48E	U+E71B	U+E514	U+E035	U+FE826
+	kiss	U+1F48F	U+E6F9	U+E5CA	U+E111	U+FE827
+	bouquet	U+1F490	-	U+EA95	U+E306	U+FE828
+	couple with heart	U+1F491	U+E6ED	U+EADA	U+E425	U+FE829
+	wedding	U+1F492	-	U+E5BB	U+E43D	U+FE82A
+	no one under eighteen symbol	U+1F51E	-	U+EA83	U+E207	U+FEB25
+	copyright sign	U+00A9	U+E731	U+E558	U+E24E	U+FEB29
+	registered sign	U+00AE	U+E736	U+E559	U+E24F	U+FEB2D
+	trade mark sign	U+2122	U+E732	U+E54E	U+E537	U+FEB2A
+	information source	U+2139	-	U+E533	-	U+FEB47
+	hash key	U+0023 U+20E3	U+E6E0	U+EB84	U+E210	U+FE82C
+	keycap 1	U+0031 U+20E3	U+E6E2	U+E522	U+E21C	U+FE82E
+	keycap 2	U+0032 U+20E3	U+E6E3	U+E523	U+E21D	U+FE82F
+	keycap 3	U+0033 U+20E3	U+E6E4	U+E524	U+E21E	U+FE830
+	keycap 4	U+0034 U+20E3	U+E6E5	U+E525	U+E21F	U+FE831
+	keycap 5	U+0035 U+20E3	U+E6E6	U+E526	U+E220	U+FE832
+	keycap 6	U+0036 U+20E3	U+E6E7	U+E527	U+E221	U+FE833
+	keycap 7	U+0037 U+20E3	U+E6E8	U+E528	U+E222	U+FE834
+	keycap 8	U+0038 U+20E3	U+E6E9	U+E529	U+E223	U+FE835
+	keycap 9	U+0039 U+20E3	U+E6EA	U+E52A	U+E224	U+FE836
+	keycap 0	U+0030 U+20E3	U+E6EB	U+E5AC	U+E225	U+FE837
+	keycap ten	U+1F51F	-	U+E52B	-	U+FE83B
+	antenna with bars	U+1F4F6	-	U+EA84	U+E20B	U+FE838
+	vibration mode	U+1F4F3	-	U+EA90	U+E250	U+FE839
+	mobile phone off	U+1F4F4	-	U+EA91	U+E251	U+FE83A
+	hamburger	U+1F354	U+E673	U+E4D6	U+E120	U+FE960
+	rice ball	U+1F359	U+E749	U+E4D5	U+E342	U+FE961
+	shortcake	U+1F370	U+E74A	U+E4D0	U+E046	U+FE962
+	steaming bowl	U+1F35C	U+E74C	U+E5B4	U+E340	U+FE963
+	bread	U+1F35E	U+E74D	U+EAAF	U+E339	U+FE964
+	cooking	U+1F373	-	U+E4D1	U+E147	U+FE965
+	soft ice cream	U+1F366	-	U+EAB0	U+E33A	U+FE966
+	french fries	U+1F35F	-	U+EAB1	U+E33B	U+FE967
+	dango	U+1F361	-	U+EAB2	U+E33C	U+FE968
+	rice cracker	U+1F358	-	U+EAB3	U+E33D	U+FE969
+	cooked rice	U+1F35A	U+E74C	U+EAB4	U+E33E	U+FE96A
+	spaghetti	U+1F35D	-	U+EAB5	U+E33F	U+FE96B
+	curry and rice	U+1F35B	-	U+EAB6	U+E341	U+FE96C
+	oden	U+1F362	-	U+EAB7	U+E343	U+FE96D
+	sushi	U+1F363	-	U+EAB8	U+E344	U+FE96E
+	bento box	U+1F371	-	U+EABD	U+E34C	U+FE96F
+	pot of food	U+1F372	-	U+EABE	U+E34D	U+FE970
+	shaved ice	U+1F367	-	U+EAEA	U+E43F	U+FE971
+	meat on bone	U+1F356	-	U+E4C4	-	U+FE972
+	fish cake with swirl design	U+1F365	U+E643	U+E4ED	-	U+FE973
+	roasted sweet potato	U+1F360	-	U+EB3A	-	U+FE974
+	slice of pizza	U+1F355	-	U+EB3B	-	U+FE975
+	poultry leg	U+1F357	-	U+EB3C	-	U+FE976
+	ice cream	U+1F368	-	U+EB4A	-	U+FE977
+	doughnut	U+1F369	-	U+EB4B	-	U+FE978
+	cookie	U+1F36A	-	U+EB4C	-	U+FE979
+	chocolate bar	U+1F36B	-	U+EB4D	-	U+FE97A
+	candy	U+1F36C	-	U+EB4E	-	U+FE97B
+	lollipop	U+1F36D	-	U+EB4F	-	U+FE97C
+	custard	U+1F36E	-	U+EB56	-	U+FE97D
+	honey pot	U+1F36F	-	U+EB59	-	U+FE97E
+	fried shrimp	U+1F364	-	U+EB70	-	U+FE97F
+	fork and knife	U+1F374	U+E66F	U+E4AC	U+E043	U+FE980
+	hot beverage	U+2615	U+E670	U+E597	U+E045	U+FE981
+	cocktail glass	U+1F378	U+E671	U+E4C2	U+E044	U+FE982
+	beer mug	U+1F37A	U+E672	U+E4C3	U+E047	U+FE983
+	teacup without handle	U+1F375	U+E71E	U+EAAE	U+E338	U+FE984
+	sake bottle and cup	U+1F376	U+E74B	U+EA97	U+E30B	U+FE985
+	wine glass	U+1F377	U+E756	U+E4C1	U+E044	U+FE986
+	clinking beer mugs	U+1F37B	U+E672	U+EA98	U+E30C	U+FE987
+	tropical drink	U+1F379	U+E671	U+EB3E	U+E044	U+FE988
+	north east arrow	U+2197	U+E678	U+E555	U+E236	U+FEAF0
+	south east arrow	U+2198	U+E696	U+E54D	U+E238	U+FEAF1
+	north west arrow	U+2196	U+E697	U+E54C	U+E237	U+FEAF2
+	south west arrow	U+2199	U+E6A5	U+E556	U+E239	U+FEAF3
+	arrow pointing rightwards then curving upwards	U+2934	U+E6F5	U+EB2D	U+E236	U+FEAF4
+	arrow pointing rightwards then curving downwards	U+2935	U+E700	U+EB2E	U+E238	U+FEAF5
+	left right arrow	U+2194	U+E73C	U+EB7A	-	U+FEAF6
+	up down arrow	U+2195	U+E73D	U+EB7B	-	U+FEAF7
+	upwards black arrow	U+2B06	-	U+E53F	U+E232	U+FEAF8
+	downwards black arrow	U+2B07	-	U+E540	U+E233	U+FEAF9
+	black rightwards arrow	U+27A1	-	U+E552	U+E234	U+FEAFA
+	leftwards black arrow	U+2B05	-	U+E553	U+E235	U+FEAFB
+	black right-pointing triangle	U+25B6	-	U+E52E	U+E23A	U+FEAFC
+	black left-pointing triangle	U+25C0	-	U+E52D	U+E23B	U+FEAFD
+	black right-pointing double triangle	U+23E9	-	U+E530	U+E23C	U+FEAFE
+	black left-pointing double triangle	U+23EA	-	U+E52F	U+E23D	U+FEAFF
+	black up-pointing double triangle	U+23EB	-	U+E545	-	U+FEB03
+	black down-pointing double triangle	U+23EC	-	U+E544	-	U+FEB02
+	up-pointing red triangle	U+1F53A	-	U+E55A	-	U+FEB78
+	down-pointing red triangle	U+1F53B	-	U+E55B	-	U+FEB79
+	up-pointing small red triangle	U+1F53C	-	U+E543	-	U+FEB01
+	down-pointing small red triangle	U+1F53D	-	U+E542	-	U+FEB00
+	heavy large circle	U+2B55	U+E6A0	U+EAAD	U+E332	U+FEB44
+	cross mark	U+274C	-	U+E550	U+E333	U+FEB45
+	negative squared cross mark	U+274E	-	U+E551	U+E333	U+FEB46
+	heavy exclamation mark symbol	U+2757	U+E702	U+E482	U+E021	U+FEB04
+	exclamation question mark	U+2049	U+E703	U+EB2F	-	U+FEB05
+	double exclamation mark	U+203C	U+E704	U+EB30	-	U+FEB06
+	black question mark ornament	U+2753	-	U+E483	U+E020	U+FEB09
+	white question mark ornament	U+2754	-	U+E483	U+E336	U+FEB0A
+	white exclamation mark ornament	U+2755	U+E702	U+E482	U+E337	U+FEB0B
+	wavy dash	U+3030	U+E709	-	-	U+FEB07
+	curly loop	U+27B0	U+E70A	U+EB31	-	U+FEB08
+	double curly loop	U+27BF	U+E6DF	-	U+E211	U+FE82B
+	heavy black heart	U+2764	U+E6EC	U+E595	U+E022	U+FEB0C
+	beating heart	U+1F493	U+E6ED	U+EB75	U+E327	U+FEB0D
+	broken heart	U+1F494	U+E6EE	U+E477	U+E023	U+FEB0E
+	two hearts	U+1F495	U+E6EF	U+E478	U+E327	U+FEB0F
+	sparkling heart	U+1F496	U+E6EC	U+EAA6	U+E327	U+FEB10
+	growing heart	U+1F497	U+E6ED	U+EB75	U+E328	U+FEB11
+	heart with arrow	U+1F498	U+E6EC	U+E4EA	U+E329	U+FEB12
+	blue heart	U+1F499	U+E6EC	U+EAA7	U+E32A	U+FEB13
+	green heart	U+1F49A	U+E6EC	U+EAA8	U+E32B	U+FEB14
+	yellow heart	U+1F49B	U+E6EC	U+EAA9	U+E32C	U+FEB15
+	purple heart	U+1F49C	U+E6EC	U+EAAA	U+E32D	U+FEB16
+	heart with ribbon	U+1F49D	U+E6EC	U+EB54	U+E437	U+FEB17
+	revolving hearts	U+1F49E	U+E6ED	U+E5AF	U+E327	U+FEB18
+	heart decoration	U+1F49F	U+E6F8	U+E595	U+E204	U+FEB19
+	black heart suit	U+2665	U+E68D	U+EAA5	U+E20C	U+FEB1A
+	black spade suit	U+2660	U+E68E	U+E5A1	U+E20E	U+FEB1B
+	black diamond suit	U+2666	U+E68F	U+E5A2	U+E20D	U+FEB1C
+	black club suit	U+2663	U+E690	U+E5A3	U+E20F	U+FEB1D
+	smoking symbol	U+1F6AC	U+E67F	U+E47D	U+E30E	U+FEB1E
+	no smoking symbol	U+1F6AD	U+E680	U+E47E	U+E208	U+FEB1F
+	wheelchair symbol	U+267F	U+E69B	U+E47F	U+E20A	U+FEB20
+	triangular flag on post	U+1F6A9	U+E6DE	U+EB2C	-	U+FEB22
+	warning sign	U+26A0	U+E737	U+E481	U+E252	U+FEB23
+	no entry	U+26D4	U+E72F	U+E484	U+E137	U+FEB26
+	black universal recycling symbol	U+267B	U+E735	U+EB79	-	U+FEB2C
+	bicycle	U+1F6B2	U+E71D	U+E4AE	U+E136	U+FE7EB
+	pedestrian	U+1F6B6	U+E733	U+EB72	U+E201	U+FE7F0
+	mens symbol	U+1F6B9	-	-	U+E138	U+FEB33
+	womens symbol	U+1F6BA	-	-	U+E139	U+FEB34
+	bath	U+1F6C0	U+E6F7	U+E5D8	U+E13F	U+FE505
+	restroom	U+1F6BB	U+E66E	U+E4A5	U+E151	U+FE506
+	toilet	U+1F6BD	U+E66E	U+E4A5	U+E140	U+FE507
+	water closet	U+1F6BE	U+E66E	U+E4A5	U+E309	U+FE508
+	baby symbol	U+1F6BC	-	U+EB18	U+E13A	U+FEB35
+	door	U+1F6AA	U+E714	-	-	U+FE4F3
+	no entry sign	U+1F6AB	U+E738	U+E541	-	U+FEB48
+	heavy check mark	U+2714	-	U+E557	-	U+FEB49
+	squared cl	U+1F191	U+E6DB	U+E5AB	-	U+FEB84
+	squared cool	U+1F192	-	U+EA85	U+E214	U+FEB38
+	squared free	U+1F193	U+E6D7	U+E578	-	U+FEB21
+	squared id	U+1F194	U+E6D8	U+EA88	U+E229	U+FEB81
+	squared new	U+1F195	U+E6DD	U+E5B5	U+E212	U+FEB36
+	squared ng	U+1F196	U+E72F	-	-	U+FEB28
+	squared ok	U+1F197	U+E70B	U+E5AD	U+E24D	U+FEB27
+	squared sos	U+1F198	-	U+E4E8	-	U+FEB4F
+	squared up with exclamation mark	U+1F199	-	U+E50F	U+E213	U+FEB37
+	squared vs	U+1F19A	-	U+E5D2	U+E12E	U+FEB32
+	squared katakana koko	U+1F201	-	-	U+E203	U+FEB24
+	squared katakana sa	U+1F202	-	U+EA87	U+E228	U+FEB3F
+	squared cjk unified ideograph-7981	U+1F232	U+E738	-	-	U+FEB2E
+	squared cjk unified ideograph-7a7a	U+1F233	U+E739	U+EA8A	U+E22B	U+FEB2F
+	squared cjk unified ideograph-5408	U+1F234	U+E73A	-	-	U+FEB30
+	squared cjk unified ideograph-6e80	U+1F235	U+E73B	U+EA89	U+E22A	U+FEB31
+	squared cjk unified ideograph-6709	U+1F236	-	-	U+E215	U+FEB39
+	squared cjk unified ideograph-7121	U+1F21A	-	-	U+E216	U+FEB3A
+	squared cjk unified ideograph-6708	U+1F237	-	-	U+E217	U+FEB3B
+	squared cjk unified ideograph-7533	U+1F238	-	-	U+E218	U+FEB3C
+	squared cjk unified ideograph-5272	U+1F239	-	U+EA86	U+E227	U+FEB3E
+	squared cjk unified ideograph-6307	U+1F22F	-	U+EA8B	U+E22C	U+FEB40
+	squared cjk unified ideograph-55b6	U+1F23A	-	U+EA8C	U+E22D	U+FEB41
+	circled ideograph secret	U+3299	U+E734	U+E4F1	U+E315	U+FEB2B
+	circled ideograph congratulation	U+3297	-	U+EA99	U+E30D	U+FEB43
+	circled ideograph advantage	U+1F250	-	U+E4F7	U+E226	U+FEB3D
+	circled ideograph accept	U+1F251	-	U+EB01	-	U+FEB50
+	heavy plus sign	U+2795	-	U+E53C	-	U+FEB51
+	heavy minus sign	U+2796	-	U+E53D	-	U+FEB52
+	heavy multiplication x	U+2716	-	U+E54F	U+E333	U+FEB53
+	heavy division sign	U+2797	-	U+E554	-	U+FEB54
+	diamond shape with a dot inside	U+1F4A0	U+E6F8	-	-	U+FEB55
+	electric light bulb	U+1F4A1	U+E6FB	U+E476	U+E10F	U+FEB56
+	anger symbol	U+1F4A2	U+E6FC	U+E4E5	U+E334	U+FEB57
+	bomb	U+1F4A3	U+E6FE	U+E47A	U+E311	U+FEB58
+	sleeping symbol	U+1F4A4	U+E701	U+E475	U+E13C	U+FEB59
+	collision symbol	U+1F4A5	U+E705	U+E5B0	-	U+FEB5A
+	splashing sweat symbol	U+1F4A6	U+E706	U+E5B1	U+E331	U+FEB5B
+	droplet	U+1F4A7	U+E707	U+E4E6	U+E331	U+FEB5C
+	dash symbol	U+1F4A8	U+E708	U+E4F4	U+E330	U+FEB5D
+	pile of poo	U+1F4A9	-	U+E4F5	U+E05A	U+FE4F4
+	flexed biceps	U+1F4AA	-	U+E4E9	U+E14C	U+FEB5E
+	dizzy symbol	U+1F4AB	-	U+EB5C	U+E407	U+FEB5F
+	speech balloon	U+1F4AC	-	U+E4FD	-	U+FE532
+	sparkles	U+2728	U+E6FA	U+EAAB	U+E32E	U+FEB60
+	eight pointed black star	U+2734	U+E6F8	U+E479	U+E205	U+FEB61
+	eight spoked asterisk	U+2733	U+E6F8	U+E53E	U+E206	U+FEB62
+	medium white circle	U+26AA	U+E69C	U+E53A	U+E219	U+FEB65
+	medium black circle	U+26AB	U+E69C	U+E53B	U+E219	U+FEB66
+	large red circle	U+1F534	U+E69C	U+E54A	U+E219	U+FEB63
+	large blue circle	U+1F535	U+E69C	U+E54B	U+E21A	U+FEB64
+	black square button	U+1F532	U+E69C	U+E54B	U+E21A	U+FEB64
+	white square button	U+1F533	U+E69C	U+E54B	U+E21B	U+FEB67
+	white medium star	U+2B50	-	U+E48B	U+E32F	U+FEB68
+	white large square	U+2B1C	-	U+E548	U+E21B	U+FEB6B
+	black large square	U+2B1B	-	U+E549	U+E21A	U+FEB6C
+	white small square	U+25AB	-	U+E531	U+E21B	U+FEB6D
+	black small square	U+25AA	-	U+E532	U+E21A	U+FEB6E
+	white medium small square	U+25FD	-	U+E534	U+E21B	U+FEB6F
+	black medium small square	U+25FE	-	U+E535	U+E21A	U+FEB70
+	white medium square	U+25FB	-	U+E538	U+E21B	U+FEB71
+	black medium square	U+25FC	-	U+E539	U+E21A	U+FEB72
+	large orange diamond	U+1F536	-	U+E546	U+E21B	U+FEB73
+	large blue diamond	U+1F537	-	U+E547	U+E21B	U+FEB74
+	small orange diamond	U+1F538	-	U+E536	U+E21B	U+FEB75
+	small blue diamond	U+1F539	-	U+E537	U+E21B	U+FEB76
+	sparkle	U+2747	U+E6FA	U+E46C	U+E32E	U+FEB77
+	white flower	U+1F4AE	-	U+E4F0	-	U+FEB7A
+	hundred points symbol	U+1F4AF	-	U+E4F2	-	U+FEB7B
+	leftwards arrow with hook	U+21A9	U+E6DA	U+E55D	-	U+FEB83
+	rightwards arrow with hook	U+21AA	-	U+E55C	-	U+FEB88
+	clockwise downwards and upwards open circle arrows	U+1F503	U+E735	U+EB0D	-	U+FEB91
+	speaker with three sound waves	U+1F50A	-	U+E511	U+E141	U+FE821
+	battery	U+1F50B	-	U+E584	-	U+FE4FC
+	electric plug	U+1F50C	-	U+E589	-	U+FE4FE
+	left-pointing magnifying glass	U+1F50D	U+E6DC	U+E518	U+E114	U+FEB85
+	right-pointing magnifying glass	U+1F50E	U+E6DC	U+EB05	U+E114	U+FEB8D
+	lock	U+1F512	U+E6D9	U+E51C	U+E144	U+FEB86
+	open lock	U+1F513	U+E6D9	U+E51C	U+E145	U+FEB87
+	lock with ink pen	U+1F50F	U+E6D9	U+EB0C	U+E144	U+FEB90
+	closed lock with key	U+1F510	U+E6D9	U+EAFC	U+E144	U+FEB8A
+	key	U+1F511	U+E6D9	U+E519	U+E03F	U+FEB82
+	bell	U+1F514	U+E713	U+E512	U+E325	U+FE4F2
+	ballot box with check	U+2611	-	U+EB02	-	U+FEB8B
+	radio button	U+1F518	-	U+EB04	-	U+FEB8C
+	bookmark	U+1F516	-	U+EB07	-	U+FEB8F
+	link symbol	U+1F517	-	U+E58A	-	U+FEB4B
+	back with leftwards arrow above	U+1F519	-	U+EB06	U+E235	U+FEB8E
+	end with leftwards arrow above	U+1F51A	U+E6B9	-	-	U+FE01A
+	on with exclamation mark with left right arrow above	U+1F51B	U+E6B8	-	-	U+FE019
+	soon with rightwards arrow above	U+1F51C	U+E6B7	-	-	U+FE018
+	top with upwards arrow above	U+1F51D	-	-	U+E24C	U+FEB42
+	white heavy check mark	U+2705	-	U+E55E	-	U+FEB4A
+	raised fist	U+270A	U+E693	U+EB83	U+E010	U+FEB93
+	raised hand	U+270B	U+E695	U+E5A7	U+E012	U+FEB95
+	victory hand	U+270C	U+E694	U+E5A6	U+E011	U+FEB94
+	fisted hand sign	U+1F44A	U+E6FD	U+E4F3	U+E00D	U+FEB96
+	thumbs up sign	U+1F44D	U+E727	U+E4F9	U+E00E	U+FEB97
+	white up pointing index	U+261D	-	U+E4F6	U+E00F	U+FEB98
+	white up pointing backhand index	U+1F446	-	U+EA8D	U+E22E	U+FEB99
+	white down pointing backhand index	U+1F447	-	U+EA8E	U+E22F	U+FEB9A
+	white left pointing backhand index	U+1F448	-	U+E4FF	U+E230	U+FEB9B
+	white right pointing backhand index	U+1F449	-	U+E500	U+E231	U+FEB9C
+	waving hand sign	U+1F44B	U+E695	U+EAD6	U+E41E	U+FEB9D
+	clapping hands sign	U+1F44F	-	U+EAD3	U+E41F	U+FEB9E
+	ok hand sign	U+1F44C	U+E70B	U+EAD4	U+E420	U+FEB9F
+	thumbs down sign	U+1F44E	U+E700	U+EAD5	U+E421	U+FEBA0
+	open hands sign	U+1F450	U+E695	U+EAD6	U+E422	U+FEBA1
