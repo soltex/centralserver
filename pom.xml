@@ -4,7 +4,7 @@
 
 	<groupId>com.vanstone</groupId>
 	<artifactId>centralserver</artifactId>
-	<version>1.0.11</version>
+	<version>1.0.12</version>
 	<packaging>pom</packaging>
 
 	<name>centralserver</name>
@@ -29,7 +29,7 @@
 		</repository>
 	</distributionManagement>
 	<properties>
-		<centralserver.version>1.0.11</centralserver.version>
+		<centralserver.version>1.0.12</centralserver.version>
 		<vanstone.commons.version>1.2.8</vanstone.commons.version>
 	</properties>
 	<dependencies>
