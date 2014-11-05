@@ -91,6 +91,10 @@ public abstract class AbstractMsg {
 	 * */
 	private Map<String, Object> extendParams = new LinkedHashMap<String, Object>();
 	
+	public AbstractMsg(String msgType) {
+		this.msgType = msgType;
+	}
+	
 	public String getToUserName() {
 		return toUserName;
 	}

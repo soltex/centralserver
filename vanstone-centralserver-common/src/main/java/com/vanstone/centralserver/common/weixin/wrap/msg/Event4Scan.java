@@ -23,8 +23,7 @@ public class Event4Scan extends AbstractEvent {
 	private String Ticket;
 	
 	public Event4Scan() {
-		this.setMsgType(TYPE_EVENT);
-		this.setEvent(RECEIVE_EVENT_SCAN);
+		super(RECEIVE_EVENT_SCAN);
 	}
 
 	public String getEventKey() {

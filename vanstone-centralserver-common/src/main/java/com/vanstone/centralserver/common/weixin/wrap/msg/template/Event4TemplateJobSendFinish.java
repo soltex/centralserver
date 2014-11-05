@@ -17,10 +17,9 @@ public class Event4TemplateJobSendFinish extends AbstractEvent {
 	private String status;
 	
 	public Event4TemplateJobSendFinish() {
-		this.setMsgType(TYPE_EVENT);
-		this.setEvent(TEMPLATESENDJOBFINISH_EVENT);
+		super(TEMPLATESENDJOBFINISH_EVENT);
 	}
-
+	
 	public Integer getMsgId() {
 		return msgId;
 	}

@@ -71,8 +71,6 @@ public class SimpleCache<T extends Object> {
 	
 	/**
 	 * 缓冲数据
-	 * @author shipeng
-	 *
 	 * @param <T>
 	 */
 	private static class CacheData<T> {

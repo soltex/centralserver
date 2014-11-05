@@ -23,9 +23,9 @@ public class ReplyMsg4Voice extends AbstractMsg {
 	private String mediaId;
 
 	public ReplyMsg4Voice() {
-		this.setMsgType(COMMON_TYPE_VOICE);
+		super(COMMON_TYPE_VOICE);
 	}
-
+	
 	public String getMediaId() {
 		return mediaId;
 	}

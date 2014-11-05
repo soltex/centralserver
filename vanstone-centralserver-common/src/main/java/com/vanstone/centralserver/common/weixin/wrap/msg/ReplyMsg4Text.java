@@ -23,7 +23,7 @@ public class ReplyMsg4Text extends AbstractMsg {
 	private String content;
 	
 	public ReplyMsg4Text() {
-		this.setMsgType(COMMON_TYPE_TEXT);
+		super(COMMON_TYPE_TEXT);
 	}
 
 	public String getContent() {

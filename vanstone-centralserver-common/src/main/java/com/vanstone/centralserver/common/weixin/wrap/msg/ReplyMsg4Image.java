@@ -26,7 +26,7 @@ public class ReplyMsg4Image extends AbstractMsg {
 	private String mediaId;
 
 	public ReplyMsg4Image() {
-		this.setMsgType(COMMON_TYPE_IMAGE);
+		super(COMMON_TYPE_IMAGE);
 	}
 
 	public String getMediaId() {

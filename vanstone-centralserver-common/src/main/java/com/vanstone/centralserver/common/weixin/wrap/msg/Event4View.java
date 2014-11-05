@@ -11,8 +11,7 @@ public class Event4View extends AbstractEvent {
 	private String eventKey;
 
 	public Event4View() {
-		this.setMsgType(TYPE_EVENT);
-		this.setEvent(RECEIVE_EVENT_VIEW);
+		super(RECEIVE_EVENT_VIEW);
 	}
 	
 	public String getEventKey() {

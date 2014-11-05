@@ -42,7 +42,7 @@ public class ReplyMsg4News extends AbstractMsg {
 	private Collection<ArticleItem> articleItems = new ArrayList<ArticleItem>();
 	
 	public ReplyMsg4News() {
-		this.setMsgType(COMMON_TYPE_NEWS);
+		super(COMMON_TYPE_NEWS);
 	}
 	
 	/**

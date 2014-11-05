@@ -29,7 +29,7 @@ public class Msg4Link extends AbstractMsg {
 	private String msgId;
 	
 	public Msg4Link() {
-		this.setMsgType(COMMON_TYPE_LINK);
+		super(COMMON_TYPE_LINK);
 	}
 	
 	public String getTitle() {

@@ -33,7 +33,7 @@ public class ReplyMsg4Video extends AbstractMsg {
 	private String description;
 
 	public ReplyMsg4Video() {
-		this.setMsgType(COMMON_TYPE_VIDEO);
+		super(COMMON_TYPE_VIDEO);
 	}
 
 	public String getMediaId() {

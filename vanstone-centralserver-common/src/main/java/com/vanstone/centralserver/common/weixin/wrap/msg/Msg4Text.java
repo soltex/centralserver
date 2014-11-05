@@ -23,7 +23,7 @@ import com.vanstone.emoji.EmojiHelper;
 public class Msg4Text extends AbstractMsg {
 	
 	public Msg4Text() {
-		this.setMsgType(COMMON_TYPE_TEXT);
+		super(COMMON_TYPE_TEXT);
 	}
 	
 	/**文本消息内容*/

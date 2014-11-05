@@ -23,7 +23,7 @@ public class Msg4Voice extends AbstractMsg {
 	private String msgId;
 
 	public Msg4Voice() {
-		this.setMsgId(COMMON_TYPE_VOICE);
+		super(COMMON_TYPE_VOICE);
 	}
 
 	public String getMediaId() {

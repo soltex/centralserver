@@ -37,7 +37,7 @@ public class ReplyMsg4Music extends AbstractMsg {
 	private String thumbMediaId;
 	
 	public ReplyMsg4Music() {
-		this.setMsgType(COMMON_TYPE_MUSIC);
+		super(COMMON_TYPE_MUSIC);
 	}
 	
 	public String getTitle() {

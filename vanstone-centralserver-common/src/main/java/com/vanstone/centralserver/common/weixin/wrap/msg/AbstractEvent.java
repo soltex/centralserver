@@ -7,7 +7,12 @@ package com.vanstone.centralserver.common.weixin.wrap.msg;
 public class AbstractEvent extends AbstractMsg {
 	
 	private String event;
-
+	
+	public AbstractEvent(String event) {
+		super(TYPE_EVENT);
+		this.event = event;
+	}
+	
 	public String getEvent() {
 		return event;
 	}

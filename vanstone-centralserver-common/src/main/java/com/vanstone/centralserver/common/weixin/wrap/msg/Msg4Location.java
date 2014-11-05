@@ -20,7 +20,7 @@ package com.vanstone.centralserver.common.weixin.wrap.msg;
 public class Msg4Location extends AbstractMsg {
 
 	public Msg4Location() {
-		this.setMsgType(COMMON_TYPE_LOCATION);
+		super(COMMON_TYPE_LOCATION);
 	}
 	
 	/**地理位置维度*/

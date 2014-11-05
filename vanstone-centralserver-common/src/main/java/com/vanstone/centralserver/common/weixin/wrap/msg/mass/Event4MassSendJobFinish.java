@@ -34,10 +34,9 @@ public class Event4MassSendJobFinish extends AbstractEvent {
 	private int sentCount;
 	/** 发送失败的粉丝数 */
 	private int errorCount;
-
+	
 	public Event4MassSendJobFinish() {
-		this.setMsgType(TYPE_EVENT);
-		this.setEvent(MASSSENDJOBFINISH_EVENT);
+		super(MASSSENDJOBFINISH_EVENT);
 	}
 	
 	public int getMsgId() {

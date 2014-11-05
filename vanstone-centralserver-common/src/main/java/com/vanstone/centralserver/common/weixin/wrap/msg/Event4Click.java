@@ -22,8 +22,7 @@ public class Event4Click extends AbstractEvent {
 	private String eventKey;
 	
 	public Event4Click() {
-		this.setMsgType(TYPE_EVENT);
-		this.setEvent(RECEIVE_EVENT_CLICK);
+		super(RECEIVE_EVENT_CLICK);
 	}
 	
 	public String getEventKey() {

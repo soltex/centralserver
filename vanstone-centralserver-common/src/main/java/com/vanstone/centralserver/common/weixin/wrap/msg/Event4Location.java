@@ -27,8 +27,7 @@ public class Event4Location extends AbstractEvent {
 	private Double Precision;
 
 	public Event4Location() {
-		this.setMsgType(TYPE_EVENT);
-		this.setEvent(RECEIVE_EVENT_LOCATION);
+		super(RECEIVE_EVENT_LOCATION);
 	}
 
 	public Double getLatitude() {

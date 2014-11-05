@@ -25,8 +25,9 @@ public class Msg4Image extends AbstractMsg {
 	private String msgId;
 	
 	public Msg4Image() {
-		this.setMsgType(COMMON_TYPE_IMAGE);
+		super(COMMON_TYPE_IMAGE);
 	}
+	
 	public String getPicUrl() {
 		return picUrl;
 	}
