@@ -20,4 +20,9 @@ public class IndexAction extends AbstractWebAction {
 		return "/index";
 	}
 	
+	@RequestMapping("/index_sub")
+	public String indexSub(ModelMap modelMap) {
+		return "/index_sub";
+	}
+	
 }

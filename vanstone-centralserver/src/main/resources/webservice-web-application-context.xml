@@ -37,4 +37,6 @@
 	<!-- context:component-scan这个是为了扫描@Components，@Service，@Responsity等 -->
 	<context:component-scan base-package="com.vanstone.centralserver.webservice" />
 	
+	<mvc:resources mapping="/styles/**" location="/styles/" cache-period="0"/>
+	
 </beans> 

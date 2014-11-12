@@ -53,6 +53,11 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vanstone</groupId>
+			<artifactId>vanstone-centralserver-admisnervice-sdk</artifactId>
+			<version>${centralserver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.vanstone</groupId>
 			<artifactId>
 				vanstone-centralserver-configuration-sdk
 			</artifactId>

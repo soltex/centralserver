@@ -20,6 +20,7 @@
 		<module>vanstone-weixin-client</module>
 		<module>vanstone-configuration-sdk</module>
 		<module>vanstone-centralserver</module>
+    <module>vanstone-centralserver-admisnervice-sdk</module>
   </modules>
 	<distributionManagement>
 		<repository>

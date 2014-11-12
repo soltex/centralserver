@@ -19,7 +19,6 @@ import org.springframework.util.CollectionUtils;
 
 import com.vanstone.business.MyAssert4Business;
 import com.vanstone.business.ObjectDuplicateException;
-import com.vanstone.centralserver.business.sdk.AbstractBaseBusinessSDKService;
 import com.vanstone.centralserver.business.sdk.configuration.IConfInfo;
 import com.vanstone.centralserver.business.sdk.configuration.IConfigurationServiceMgr;
 import com.vanstone.centralserver.common.Constants;
@@ -31,12 +30,13 @@ import com.vanstone.centralserver.configuration.sdk.persistence.object.SysConfIn
 import com.vanstone.common.util.MD5Util;
 import com.vanstone.common.util.web.PageInfo;
 import com.vanstone.common.util.web.PageUtil;
+import com.vanstone.framework.business.services.DefaultBusinessService;
 
 /**
  * ConfigurationServiceImpl
  */
 @Service("configurationService")
-public class ConfigurationServiceMgrImpl extends AbstractBaseBusinessSDKService implements IConfigurationServiceMgr {
+public class ConfigurationServiceMgrImpl extends DefaultBusinessService implements IConfigurationServiceMgr {
 	
     private static final long serialVersionUID = -5530903674093816970L;
     

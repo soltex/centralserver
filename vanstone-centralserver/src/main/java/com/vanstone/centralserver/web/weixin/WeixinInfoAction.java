@@ -23,7 +23,7 @@ import com.vanstone.centralserver.common.Constants;
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.centralserver.weixin.sdk.WeixinInfoBuilder;
 import com.vanstone.common.util.web.PageInfo;
-import com.vanstone.webframework.CommandObject;
+import com.vanstone.webframework.dwz.DWZObject;
 
 /**
  * @author shipeng
@@ -42,18 +42,20 @@ public class WeixinInfoAction extends AbstractWebAction{
 	
 	@RequestMapping(value="/add-weixininfo-action")
 	@ResponseBody
-	public CommandObject addWeixinInfoAction(HttpServletRequest servletRequest, HttpServletResponse servletResponse,@ModelAttribute("weixinInfoForm")WeixinInfoForm form) {
+	public DWZObject addWeixinInfoAction(HttpServletRequest servletRequest, HttpServletResponse servletResponse,@ModelAttribute("weixinInfoForm")WeixinInfoForm form) {
 		IWeixinInfo weixinInfo = WeixinInfoBuilder.create(form.getId(), form.getAppid(), form.getAppSecret(), form.getContent());
 		try {
 			this.weixinServiceMgr.addWeixinInfo(weixinInfo);
 		} catch (WeixinException e) {
 			e.printStackTrace();
-			return CommandObject.createFailCommand(e.getErrorCode() + " : " + e.getErrorCode().getDesc(), null);
+			return DWZObject.createErrorObject(e.getErrorCode().getDesc());
 		} catch (AppnameExistsException e) {
 			e.printStackTrace();
-			return CommandObject.createFailCommand("Appname : " + form.getId() + " 已存在，请检查", null);
+			return DWZObject.createErrorObject("Appname : " + form.getId() + " 已存在，请检查");
 		}
-		return CommandObject.createSuccessCommand("添加成功", "/admin/weixin/view-weixininfos.jhtml");
+		DWZObject object = DWZObject.createSuccessObject("添加成功");
+		object.setForwardUrl("/admin/weixin/view-weixininfos.jhtml");
+		return object;
 	}
 	
 	@RequestMapping("/view-weixininfos")
@@ -65,12 +67,16 @@ public class WeixinInfoAction extends AbstractWebAction{
 	
 	@RequestMapping("/update-all-weixins")
 	@ResponseBody
-	public CommandObject updateAllWeixins() {
+	public DWZObject updateAllWeixins() {
 		FlushResult flushResult = this.weixinServiceMgr.flushAllAccessToken();
 		if (flushResult.isSuccess()) {
-			return CommandObject.createSuccessCommand("刷新成功", "/admin/weixin/view-weixininfos.jhtml");
+			DWZObject object = DWZObject.createSuccessObject("刷新成功");
+			object.setForwardUrl("/admin/weixin/view-weixininfos.jhtml");
+			return object;
 		}else{
-			return CommandObject.createFailCommand("刷新失败 \n " +  flushResult.toResultString(), "/admin/weixin/view-weixininfos.jhtml");
+			DWZObject object = DWZObject.createErrorObject("刷新失败 \n " +  flushResult.toResultString());
+			object.setForwardUrl("/admin/weixin/view-weixininfos.jhtml");
+			return object;
 		}
 	}
 }

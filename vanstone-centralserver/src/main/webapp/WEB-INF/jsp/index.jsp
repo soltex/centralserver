@@ -9,10 +9,7 @@
 
 
 
-<div class="jumbotron">
-  <h1>欢迎使用Central Server 控制台</h1>
-  <p><a class="btn btn-primary btn-lg" role="button" href="/admin/weixin/view-weixininfos.jhtml">微信信息管理</a></p>
-</div>
+<jsp:include page="/index_sub.jhtml"></jsp:include>
 
 
 

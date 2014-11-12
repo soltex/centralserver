@@ -27,3 +27,5 @@ mvn archetype:create -DgroupId=com.vanstone -DartifactId=vanstone-img-server-sdk
 mvn archetype:create -DgroupId=com.vanstone -DartifactId=vanstone-img-server-common -Dversion=1.0
 
 mvn archetype:create -DgroupId=com.vanstone -DartifactId=vanstone-zk -Dversion=1.0
+
+mvn archetype:create -DgroupId=com.vanstone -DartifactId=vanstone-centralserver-admisnervice-sdk -Dversion=1.0

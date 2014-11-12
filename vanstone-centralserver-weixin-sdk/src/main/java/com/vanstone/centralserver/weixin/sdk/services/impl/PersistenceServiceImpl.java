@@ -16,19 +16,19 @@ import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 
 import com.vanstone.business.MyAssert4Business;
-import com.vanstone.centralserver.business.sdk.AbstractBaseBusinessSDKService;
 import com.vanstone.centralserver.business.sdk.weixin.AppnameExistsException;
 import com.vanstone.centralserver.business.sdk.weixin.IWeixinInfo;
 import com.vanstone.centralserver.weixin.sdk.persistence.WeixinInfoDOMapper;
 import com.vanstone.centralserver.weixin.sdk.persistence.object.WeixinInfoDOWithBLOBs;
 import com.vanstone.centralserver.weixin.sdk.services.IPersistenceService;
 import com.vanstone.common.util.MD5Util;
+import com.vanstone.framework.business.services.DefaultBusinessService;
 
 /**
  * @author shipengpipi@126.com
  */
 @Service("persistenceService")
-public class PersistenceServiceImpl extends AbstractBaseBusinessSDKService implements IPersistenceService {
+public class PersistenceServiceImpl extends DefaultBusinessService implements IPersistenceService {
 
     private static final long serialVersionUID = -6074987906916401258L;
     

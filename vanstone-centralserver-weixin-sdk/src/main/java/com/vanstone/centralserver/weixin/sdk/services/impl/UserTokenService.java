@@ -21,7 +21,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.vanstone.centralserver.business.sdk.AbstractBaseBusinessSDKService;
 import com.vanstone.centralserver.common.Constants;
 import com.vanstone.centralserver.common.JsonUtil;
 import com.vanstone.centralserver.common.weixin.WeixinException;
@@ -29,12 +28,13 @@ import com.vanstone.centralserver.common.weixin.WeixinException.ErrorCode;
 import com.vanstone.centralserver.common.weixin.wrap.token.UserToken;
 import com.vanstone.centralserver.weixin.sdk.services.IPersistenceService;
 import com.vanstone.centralserver.weixin.sdk.services.IUserTokenService;
+import com.vanstone.framework.business.services.DefaultBusinessService;
 
 /**
  * @author shipengpipi@126.com
  */
 @Service("userTokenService")
-public class UserTokenService extends AbstractBaseBusinessSDKService implements IUserTokenService {
+public class UserTokenService extends DefaultBusinessService implements IUserTokenService {
 	
     private static final long serialVersionUID = -1403028030806712136L;
     

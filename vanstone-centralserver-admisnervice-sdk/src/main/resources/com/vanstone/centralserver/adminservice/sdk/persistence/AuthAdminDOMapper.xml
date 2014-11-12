@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper
+	namespace="com.vanstone.centralserver.adminservice.sdk.persistence.AuthAdminDOMapper">
+	<resultMap id="BaseResultMap"
+		type="com.vanstone.centralserver.adminservice.sdk.persistence.object.AuthAdminDO">
+		<id column="ID" property="id" jdbcType="VARCHAR" />
+		<result column="ADMIN_NAME" property="adminName" jdbcType="VARCHAR" />
+		<result column="ADMIN_PWD" property="adminPwd" jdbcType="VARCHAR" />
+		<result column="SYS_INSERT_TIME" property="sysInsertTime"
+			jdbcType="TIMESTAMP" />
+		<result column="SYS_UPDATE_TIME" property="sysUpdateTime"
+			jdbcType="TIMESTAMP" />
+		<result column="LAST_LOGIN_TIME" property="lastLoginTime"
+			jdbcType="TIMESTAMP" />
+		<result column="ADMIN_STATE" property="adminState" jdbcType="INTEGER" />
+		<result column="FULL_NAME" property="fullName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ID, ADMIN_NAME, ADMIN_PWD, SYS_INSERT_TIME, SYS_UPDATE_TIME,
+		LAST_LOGIN_TIME, ADMIN_STATE,
+		FULL_NAME
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from auth_admin
+		where ID = #{id,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from auth_admin
+		where ID = #{id,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert"
+		parameterType="com.vanstone.centralserver.adminservice.sdk.persistence.object.AuthAdminDO">
+		insert into auth_admin (ID, ADMIN_NAME, ADMIN_PWD,
+		SYS_INSERT_TIME, SYS_UPDATE_TIME, LAST_LOGIN_TIME,
+		ADMIN_STATE, FULL_NAME)
+		values (#{id,jdbcType=VARCHAR}, #{adminName,jdbcType=VARCHAR},
+		#{adminPwd,jdbcType=VARCHAR},
+		#{sysInsertTime,jdbcType=TIMESTAMP}, #{sysUpdateTime,jdbcType=TIMESTAMP},
+		#{lastLoginTime,jdbcType=TIMESTAMP},
+		#{adminState,jdbcType=INTEGER}, #{fullName,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.vanstone.centralserver.adminservice.sdk.persistence.object.AuthAdminDO">
+		insert into auth_admin
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				ID,
+			</if>
+			<if test="adminName != null">
+				ADMIN_NAME,
+			</if>
+			<if test="adminPwd != null">
+				ADMIN_PWD,
+			</if>
+			<if test="sysInsertTime != null">
+				SYS_INSERT_TIME,
+			</if>
+			<if test="sysUpdateTime != null">
+				SYS_UPDATE_TIME,
+			</if>
+			<if test="lastLoginTime != null">
+				LAST_LOGIN_TIME,
+			</if>
+			<if test="adminState != null">
+				ADMIN_STATE,
+			</if>
+			<if test="fullName != null">
+				FULL_NAME,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+			<if test="adminName != null">
+				#{adminName,jdbcType=VARCHAR},
+			</if>
+			<if test="adminPwd != null">
+				#{adminPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="sysInsertTime != null">
+				#{sysInsertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sysUpdateTime != null">
+				#{sysUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastLoginTime != null">
+				#{lastLoginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="adminState != null">
+				#{adminState,jdbcType=INTEGER},
+			</if>
+			<if test="fullName != null">
+				#{fullName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.vanstone.centralserver.adminservice.sdk.persistence.object.AuthAdminDO">
+		update auth_admin
+		<set>
+			<if test="adminName != null">
+				ADMIN_NAME = #{adminName,jdbcType=VARCHAR},
+			</if>
+			<if test="adminPwd != null">
+				ADMIN_PWD = #{adminPwd,jdbcType=VARCHAR},
+			</if>
+			<if test="sysInsertTime != null">
+				SYS_INSERT_TIME = #{sysInsertTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="sysUpdateTime != null">
+				SYS_UPDATE_TIME = #{sysUpdateTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="lastLoginTime != null">
+				LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+			</if>
+			<if test="adminState != null">
+				ADMIN_STATE = #{adminState,jdbcType=INTEGER},
+			</if>
+			<if test="fullName != null">
+				FULL_NAME = #{fullName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.vanstone.centralserver.adminservice.sdk.persistence.object.AuthAdminDO">
+		update auth_admin
+		set ADMIN_NAME = #{adminName,jdbcType=VARCHAR},
+		ADMIN_PWD = #{adminPwd,jdbcType=VARCHAR},
+		SYS_INSERT_TIME = #{sysInsertTime,jdbcType=TIMESTAMP},
+		SYS_UPDATE_TIME = #{sysUpdateTime,jdbcType=TIMESTAMP},
+		LAST_LOGIN_TIME = #{lastLoginTime,jdbcType=TIMESTAMP},
+		ADMIN_STATE = #{adminState,jdbcType=INTEGER},
+		FULL_NAME = #{fullName,jdbcType=VARCHAR}
+		where ID = #{id,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByAdminName" parameterType="map" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"/> FROM 
+		auth_admin 
+		WHERE 
+		ADMIN_NAME = #{adminName,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List"/> FROM 
+		auth_admin 
+		ORDER BY SYS_INSERT_TIME DESC 
+	</select>
+	<select id="selectTotalAll" resultType="integer">
+		SELECT COUNT(0) AS C FROM 
+		auth_admin
+	</select>
+</mapper>

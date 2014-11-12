@@ -75,7 +75,11 @@
 	<listener>
 		<listener-class>com.vanstone.centralserver.weixin.sdk.context.WeixinServerServletContextListener</listener-class>
 	</listener>
+	<!-- admin module -->
+	<listener>
+		<listener-class>com.vanstone.centralserver.adminservice.sdk.context.AuthContext</listener-class>
+	</listener>
 	<welcome-file-list>
-		<welcome-file>index.jhtml</welcome-file>
+		<welcome-file>login.jhtml</welcome-file>
 	</welcome-file-list>
 </web-app>

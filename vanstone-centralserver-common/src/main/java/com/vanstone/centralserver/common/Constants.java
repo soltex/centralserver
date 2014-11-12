@@ -18,6 +18,18 @@ import com.vanstone.centralserver.common.configuration.GroupIdDataIdObject;
  */
 public abstract class Constants {
 	
+	/**管理员默认名称*/
+	public static final String DEFAULT_ADMIN_NAME = "root";
+	
+	/**管理员默认密码*/
+	public static final String DEFAULT_ADMIN_PWD = "root";
+	
+	/**管理员在httpsession中的名称*/
+	public static final String ADMIN_IN_SESSION_NAME = "centralserver.admin.sessionname";
+	
+	/**默认Container*/
+	public static final String DWZ_DEFAULT_CONTAINER_ID = "container";
+	
 	/**http网页协议前缀*/
 	public static final String HTTP_PROTOCOLS_URL_PREFIX = "http://";
 	
