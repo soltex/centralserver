@@ -6,6 +6,9 @@ package com.vanstone.centralserver.business.sdk.adminservice;
 import java.util.Collection;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import com.vanstone.business.ObjectDuplicateException;
 
@@ -25,7 +28,7 @@ public interface IAuthServiceMgr {
 	 * @return
 	 * @throws ObjectDuplicateException
 	 */
-	Admin addAdmin(String adminName, String adminPwd, String fullName) throws ObjectDuplicateException;
+	Admin addAdmin(@NotBlank String adminName, @NotBlank String adminPwd, String fullName) throws ObjectDuplicateException;
 	
 	/**
 	 * 更新管理员姓名
@@ -33,7 +36,7 @@ public interface IAuthServiceMgr {
 	 * @param fullName
 	 * @return
 	 */
-	Admin updateAdminFullName(String id, String fullName);
+	Admin updateAdminFullName(@NotBlank String id, String fullName);
 	
 	/**
 	 * 更新密码
@@ -41,21 +44,21 @@ public interface IAuthServiceMgr {
 	 * @param password
 	 * @return
 	 */
-	Admin updatePassword(String id, String password);
+	Admin updatePassword(@NotBlank String id, @NotBlank String password);
 	
 	/**
 	 * 获取管理员信息
 	 * @param id
 	 * @return
 	 */
-	Admin getAdmin(String id);
+	Admin getAdmin(@NotBlank String id);
 	
 	/**
 	 * 通过用户名获取Admin
 	 * @param adminName
 	 * @return
 	 */
-	Admin getAdminByAdminName(String adminName);
+	Admin getAdminByAdminName(@NotBlank String adminName);
 	
 	/**
 	 * 登陆系统
@@ -64,13 +67,20 @@ public interface IAuthServiceMgr {
 	 * @return
 	 * @throws AdminException
 	 */
-	Admin login(String adminName, String password, HttpServletRequest servletRequest) throws AdminException;
+	Admin login(@NotBlank String adminName, @NotBlank String password, @NotNull HttpServletRequest servletRequest) throws AdminException;
 	
 	/**
 	 *  退出系统
 	 * @param servletRequest
 	 */
-	void logout(HttpServletRequest servletRequest);
+	void logout(@NotNull HttpServletRequest servletRequest);
+	
+	/**
+	 * 获取当前Admin
+	 * @param servletRequest
+	 * @return
+	 */
+	Admin getCurrentAdmin(@NotNull HttpServletRequest servletRequest);
 	
 	/**
 	 * 获取Admins列表
@@ -92,12 +102,12 @@ public interface IAuthServiceMgr {
 	 * @param adminState
 	 * @return
 	 */
-	Admin updateAdminState(String id, AdminState adminState);
+	Admin updateAdminState(@NotBlank String id, @NotBlank AdminState adminState);
 	
 	/**
 	 * 删除Admin
 	 * @param id
 	 */
-	void deleteAdmin(String id);
+	void deleteAdmin(@NotBlank String id);
 	
 }

@@ -5,6 +5,8 @@ package com.vanstone.centralserver.business.sdk.configuration;
 
 import java.util.Collection;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.vanstone.business.ObjectDuplicateException;
 import com.vanstone.common.util.web.PageInfo;
 
@@ -21,7 +23,7 @@ public interface IConfigurationServiceMgr {
 	 * @param groupid
 	 * @return
 	 */
-	String getValue(String groupid,String dataid);
+	String getValue(String groupid,@NotBlank String dataid);
 	
 	/**
 	 * 获取Integer值
@@ -54,7 +56,7 @@ public interface IConfigurationServiceMgr {
 	 * @param value
 	 * @throws ObjectDuplicateException
 	 */
-	void addConf(String groupId,String dataId,String value) throws ObjectDuplicateException;
+	void addConf(String groupId,@NotBlank String dataId, @NotBlank String value) throws ObjectDuplicateException;
 	
 	/**
 	 * 更新Conf
@@ -62,7 +64,7 @@ public interface IConfigurationServiceMgr {
 	 * @param dataId
 	 * @param value
 	 */
-	void updateConf(int id, String groupId, String dataId, String value) throws ObjectDuplicateException ;
+	void updateConf(int id, String groupId, @NotBlank String dataId, @NotBlank String value) throws ObjectDuplicateException ;
 	
 	/**
 	 * 通过GroupId DataId 更新 Value
@@ -70,20 +72,20 @@ public interface IConfigurationServiceMgr {
 	 * @param dataId
 	 * @param value
 	 */
-	void updateConf(String groupId, String dataId, String value);
+	void updateConf(@NotBlank String groupId, @NotBlank String dataId, @NotBlank String value);
 	
 	/**
 	 * 删除Conf
 	 * @param groupId
 	 * @param dataId
 	 */
-	void deleteConf(String groupId,String dataId);
+	void deleteConf(String groupId,@NotBlank String dataId);
 	
 	/**
 	 * 通过GroupId删除Conf
 	 * @param groupId
 	 */
-	void deleteConfsByGroupId(String groupId);
+	void deleteConfsByGroupId(@NotBlank String groupId);
 	
 	/**
 	 * 获取Groups
@@ -97,7 +99,7 @@ public interface IConfigurationServiceMgr {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-    Collection getConfsByGroupId(String groupId);
+    Collection getConfsByGroupId(@NotBlank String groupId);
 	
 	/**
 	 * 检索Confs获取Collection<IConfInfo>
@@ -135,7 +137,7 @@ public interface IConfigurationServiceMgr {
 	 * @param groupId
 	 * @param dataId
 	 */
-	void refreshConf(String groupId, String dataId);
+	void refreshConf(@NotBlank String groupId, @NotBlank String dataId);
 	
 	/**
 	 * 关闭

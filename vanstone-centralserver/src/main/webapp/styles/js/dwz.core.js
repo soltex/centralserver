@@ -26,7 +26,7 @@
 			dialogAjaxSuccess:'dwz.dialogAjaxSuccess'
 		},
 		pageInfo: {pageNum:"pageNum", numPerPage:"numPerPage", orderField:"orderField", orderDirection:"orderDirection"},
-		statusCode: {ok:200, error:300, timeout:301},
+		statusCode: {ok:200, error:300, timeout:301, redirect: 302},
 		keys: {statusCode:"statusCode", message:"message"},
 
 		conf:{
@@ -127,8 +127,10 @@
 				if(json[DWZ.keys.message]) {
 					info(json[DWZ.keys.message]);
 				}
-			}
-			if (json[DWZ.keys.statusCode] == DWZ.statusCode.ok) {
+			} else if (json[DWZ.keys.statusCode] == DWZ.statusCode.redirect) {
+				//转向重定向
+				window.location.href=json.redirectUrl;
+			} else if (json[DWZ.keys.statusCode] == DWZ.statusCode.ok) {
 				//成功信息
 				if(json[DWZ.keys.message]) {
 					success(json[DWZ.keys.message]);

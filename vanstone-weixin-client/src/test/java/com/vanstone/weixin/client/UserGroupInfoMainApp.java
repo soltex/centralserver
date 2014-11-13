@@ -21,7 +21,7 @@ public class UserGroupInfoMainApp {
 	 */
 	public static void main(String[] args) throws WeixinException {
 		IWeixinAPIManager weixinAPIManager  = WeixinClientFactory.getWeixinAPIManager();
-		Collection<UserGroupInfo> userGroupInfos = weixinAPIManager.getUserGroupInfos("sagacityidea");
+		Collection<UserGroupInfo> userGroupInfos = weixinAPIManager.getUserGroupInfos("jiujuyayuan");
 		for (UserGroupInfo info : userGroupInfos) {
 			Gson gson = new Gson();
 			System.out.println(gson.toJson(info));

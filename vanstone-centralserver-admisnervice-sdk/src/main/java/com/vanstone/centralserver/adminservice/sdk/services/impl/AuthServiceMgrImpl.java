@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
+import org.springframework.validation.annotation.Validated;
 
 import com.vanstone.business.ObjectDuplicateException;
 import com.vanstone.centralserver.adminservice.sdk.persistence.AuthAdminDOMapper;
@@ -28,7 +29,6 @@ import com.vanstone.centralserver.business.sdk.adminservice.AdminException.Error
 import com.vanstone.centralserver.business.sdk.adminservice.AdminState;
 import com.vanstone.centralserver.business.sdk.adminservice.IAuthServiceMgr;
 import com.vanstone.centralserver.common.Constants;
-import com.vanstone.centralserver.common.MyAssert;
 import com.vanstone.dal.id.IDBuilder;
 import com.vanstone.framework.business.services.DefaultBusinessService;
 
@@ -36,6 +36,7 @@ import com.vanstone.framework.business.services.DefaultBusinessService;
  * @author shipeng
  */
 @Service("authServiceMgr")
+@Validated
 public class AuthServiceMgrImpl extends DefaultBusinessService implements IAuthServiceMgr {
 
 	/***/
@@ -51,8 +52,6 @@ public class AuthServiceMgrImpl extends DefaultBusinessService implements IAuthS
 	 */
 	@Override
 	public Admin addAdmin(final String adminName, final String adminPwd, final String fullName) throws ObjectDuplicateException {
-		MyAssert.hasText(adminName);
-		MyAssert.hasText(adminPwd);
 		Admin admin = this.getAdminByAdminName(adminName);
 		if (admin != null) {
 			throw new ObjectDuplicateException();
@@ -123,7 +122,6 @@ public class AuthServiceMgrImpl extends DefaultBusinessService implements IAuthS
 	 */
 	@Override
 	public Admin getAdmin(String id) {
-		MyAssert.hasText(id);
 		AuthAdminDO model = this.authAdminDOMapper.selectByPrimaryKey(id);
 		if (model == null) {
 			return null;
@@ -133,7 +131,6 @@ public class AuthServiceMgrImpl extends DefaultBusinessService implements IAuthS
 	
 	@Override
 	public Admin getAdminByAdminName(String adminName) {
-		MyAssert.hasText(adminName);
 		AuthAdminDO model = this.authAdminDOMapper.selectByAdminName(adminName);
 		if (model == null) {
 			return null;
@@ -146,10 +143,6 @@ public class AuthServiceMgrImpl extends DefaultBusinessService implements IAuthS
 	 */
 	@Override
 	public Admin login(final String adminName, final String password, final HttpServletRequest servletRequest) throws AdminException {
-		MyAssert.hasText(adminName);
-		MyAssert.hasText(password);
-		MyAssert.notNull(servletRequest);
-		
 		Admin admin = this.getAdminByAdminName(adminName);
 		if (admin == null) {
 			LOG.error("Admin name not found ,{}", adminName);
@@ -185,10 +178,14 @@ public class AuthServiceMgrImpl extends DefaultBusinessService implements IAuthS
 	 */
 	@Override
 	public void logout(final HttpServletRequest servletRequest) {
-		MyAssert.notNull(servletRequest);
 		servletRequest.getSession().invalidate();
 	}
 
+	@Override
+	public Admin getCurrentAdmin(HttpServletRequest servletRequest) {
+		return (Admin)servletRequest.getSession().getAttribute(Constants.ADMIN_IN_SESSION_NAME);
+	}
+	
 	@Override
 	public Collection<Admin> getAdmins(int offset, int limit) {
 		List<AuthAdminDO> authAdminDOs = this.authAdminDOMapper.selectAll(new RowBounds(offset, limit));
@@ -209,8 +206,6 @@ public class AuthServiceMgrImpl extends DefaultBusinessService implements IAuthS
 	
 	@Override
 	public Admin updateAdminState(final String id, final AdminState adminState) {
-		MyAssert.hasText(id);
-		MyAssert.notNull(adminState);
 		final	Admin admin = this.getAdmin(id);
 		if (admin == null) {
 			throw new IllegalArgumentException();

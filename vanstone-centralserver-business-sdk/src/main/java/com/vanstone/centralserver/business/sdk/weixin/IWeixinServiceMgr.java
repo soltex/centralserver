@@ -3,6 +3,8 @@
  */
 package com.vanstone.centralserver.business.sdk.weixin;
 
+import javax.validation.constraints.NotNull;
+
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.common.util.web.PageInfo;
 
@@ -22,7 +24,7 @@ public interface IWeixinServiceMgr {
 	 * @return
 	 * @throws AppnameExistsException
 	 */
-	IWeixinInfo addWeixinInfo(IWeixinInfo weixinInfo) throws WeixinException, AppnameExistsException;
+	IWeixinInfo addWeixinInfo(@NotNull IWeixinInfo weixinInfo) throws WeixinException, AppnameExistsException;
 	
 	/**
 	 * 更新微信基本信息
@@ -32,14 +34,14 @@ public interface IWeixinServiceMgr {
 	 * @throws WeixinException
 	 * @throws AppnameExistsException
 	 */
-	IWeixinInfo updateWeixinInfo(IWeixinInfo weixinInfo) throws WeixinException;
+	IWeixinInfo updateWeixinInfo(@NotNull IWeixinInfo weixinInfo) throws WeixinException;
 
 	/**
 	 * 删除微信配置信息
 	 * 
 	 * @param weixinInfo
 	 */
-	void deleteWeixinInfo(IWeixinInfo weixinInfo);
+	void deleteWeixinInfo(@NotNull IWeixinInfo weixinInfo);
 
 	/**
 	 * 刷新WeixinAccessToken信息
@@ -48,7 +50,7 @@ public interface IWeixinServiceMgr {
 	 * @return
 	 * @throws WeixinException
 	 */
-	IWeixinInfo flushAccessToken(IWeixinInfo weixinInfo) throws WeixinException;
+	IWeixinInfo flushAccessToken(@NotNull IWeixinInfo weixinInfo) throws WeixinException;
 
 	/**
 	 * 刷新全部AccessToken

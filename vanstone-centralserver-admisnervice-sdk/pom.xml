@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>centralserver</artifactId>
 		<groupId>com.vanstone</groupId>
-		<version>1.0.12</version>
+		<version>1.0.13</version>
 	</parent>
 	<artifactId>vanstone-centralserver-admisnervice-sdk</artifactId>
 	<name>vanstone-centralserver-admisnervice-sdk</name>
@@ -44,6 +44,11 @@
 			<groupId>com.vanstone</groupId>
 			<artifactId>vanstone-centralserver-business-sdk</artifactId>
 			<version>${centralserver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
 		</dependency>
 	</dependencies>
 	<build>

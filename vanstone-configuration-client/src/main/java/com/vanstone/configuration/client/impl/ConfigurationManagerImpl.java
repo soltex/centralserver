@@ -22,11 +22,9 @@ import org.slf4j.LoggerFactory;
 
 import com.vanstone.centralserver.common.Constants;
 import com.vanstone.centralserver.common.MyAssert;
-import com.vanstone.centralserver.common.conf.VanstoneConf;
 import com.vanstone.centralserver.common.configuration.GroupIdDataIdObject;
-import com.vanstone.centralserver.common.zk.CuratorFrameworkBuilder;
-import com.vanstone.centralserver.common.zk.ZKManager;
 import com.vanstone.configuration.client.IConfigurationManager;
+import com.vanstone.zk.ZKManager;
 
 /**
  * @author shipeng
@@ -37,8 +35,6 @@ public class ConfigurationManagerImpl implements IConfigurationManager {
 	private static Logger LOG = LoggerFactory.getLogger(ConfigurationManagerImpl.class);
 	/**本地缓冲,格式为 groupId : (dataId : value)*/
 	private ConcurrentHashMap<String, ConcurrentHashMap<String, String>> localCache = new ConcurrentHashMap<String, ConcurrentHashMap<String,String>>();
-	/**CuratorFramework*/
-	private CuratorFramework curatorFramework;
 	/**节点监控器*/
 	private ConcurrentHashMap<String,PathChildrenCache> pathChildrenCaches = new ConcurrentHashMap<String, PathChildrenCache>();
 	/**刷新器*/
@@ -48,8 +44,6 @@ public class ConfigurationManagerImpl implements IConfigurationManager {
 	
 	@Override
 	public void start() {
-		curatorFramework = CuratorFrameworkBuilder.createCuratorFramework(VanstoneConf.getInstance().getZk(), VanstoneConf.getInstance().getZkConnectionTimeoutMS());
-		curatorFramework.start();
 		LOG.info("CuratorFramework initial ok.");
 		scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
 		scheduledExecutorService.scheduleAtFixedRate(new Runnable() {
@@ -71,9 +65,6 @@ public class ConfigurationManagerImpl implements IConfigurationManager {
 	
 	@Override
 	public void close() {
-		if (curatorFramework != null) {
-			curatorFramework.close();
-		}
 		Collection<PathChildrenCache> pathChildrenCacheSet = pathChildrenCaches.values();
 		if (pathChildrenCacheSet != null && pathChildrenCacheSet.size() >0) {
 			for (PathChildrenCache pathChildrenCache : pathChildrenCacheSet) {
@@ -84,6 +75,7 @@ public class ConfigurationManagerImpl implements IConfigurationManager {
 				}
 			}
 		}
+		ZKManager.getInstance().close();
 		LOG.info("Configuration Manager close.");
 	}
 	
@@ -116,7 +108,7 @@ public class ConfigurationManagerImpl implements IConfigurationManager {
 	 * @return
 	 */
 	private String saveIntoLocalCache(final String groupId, final String dataId) {
-		String value = ZKManager.getInstance().getNodeValue(curatorFramework, Constants.getConfigurationNode(groupId, dataId));
+		String value = ZKManager.getInstance().getNodeValue(Constants.getConfigurationNode(groupId, dataId));
 		if (value == null) {
 			return null;
 		}
@@ -131,7 +123,7 @@ public class ConfigurationManagerImpl implements IConfigurationManager {
 		String key = buildPathChildCacheKey(groupId, dataId);
 		PathChildrenCache loadpathChildrenCache = pathChildrenCaches.get(key);
 		if (loadpathChildrenCache == null) {
-			final PathChildrenCache pathChildrenCache = new PathChildrenCache(curatorFramework, Constants.getConfigurationMonitorNode(groupId, dataId), true);
+			final PathChildrenCache pathChildrenCache = new PathChildrenCache(ZKManager.getInstance().getCuratorFramework(), Constants.getConfigurationMonitorNode(groupId, dataId), true);
 			pathChildrenCache.getListenable().addListener(new PathChildrenCacheListener() {
 				@Override
 				public void childEvent(CuratorFramework client, PathChildrenCacheEvent event) throws Exception {

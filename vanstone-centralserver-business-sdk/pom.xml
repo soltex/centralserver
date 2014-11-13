@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>com.vanstone</groupId>
 		<artifactId>centralserver</artifactId>
-		<version>1.0.12</version>
+		<version>1.0.13</version>
 	</parent>
 
 	<artifactId>vanstone-centralserver-business-sdk</artifactId>
@@ -52,6 +52,11 @@
 			<artifactId>servlet-api</artifactId>
 			<version>2.5</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.vanstone</groupId>
+			<artifactId>vanstone-webframework</artifactId>
+			<version>${vanstone.commons.version}</version>
 		</dependency>
 	</dependencies>
 	<build>

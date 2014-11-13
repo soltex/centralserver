@@ -9,40 +9,37 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.curator.framework.CuratorFramework;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.util.CollectionUtils;
+import org.springframework.validation.annotation.Validated;
 
 import com.vanstone.business.MyAssert4Business;
 import com.vanstone.business.ObjectDuplicateException;
 import com.vanstone.centralserver.business.sdk.configuration.IConfInfo;
 import com.vanstone.centralserver.business.sdk.configuration.IConfigurationServiceMgr;
 import com.vanstone.centralserver.common.Constants;
-import com.vanstone.centralserver.common.conf.VanstoneConf;
-import com.vanstone.centralserver.common.zk.CuratorFrameworkBuilder;
-import com.vanstone.centralserver.common.zk.ZKManager;
 import com.vanstone.centralserver.configuration.sdk.persistence.SysConfInfoDOMapper;
 import com.vanstone.centralserver.configuration.sdk.persistence.object.SysConfInfoDO;
 import com.vanstone.common.util.MD5Util;
 import com.vanstone.common.util.web.PageInfo;
 import com.vanstone.common.util.web.PageUtil;
 import com.vanstone.framework.business.services.DefaultBusinessService;
+import com.vanstone.zk.ZKManager;
 
 /**
  * ConfigurationServiceImpl
  */
 @Service("configurationService")
+@Validated
 public class ConfigurationServiceMgrImpl extends DefaultBusinessService implements IConfigurationServiceMgr {
 	
     private static final long serialVersionUID = -5530903674093816970L;
     
     private static Log LOG = LogFactory.getLog(ConfigurationServiceMgrImpl.class);
-    /**ZK CuratorFramework*/
-    private CuratorFramework curatorFramework = CuratorFrameworkBuilder.createCuratorFrameworkAndStart(VanstoneConf.getInstance().getZk(), VanstoneConf.getInstance().getZkConnectionTimeoutMS());
     
     @Autowired
     private SysConfInfoDOMapper sysConfInfoDOMapper;
@@ -88,9 +85,6 @@ public class ConfigurationServiceMgrImpl extends DefaultBusinessService implemen
 
 	@Override
     public void addConf(final String groupId, final String dataId, final String value) throws ObjectDuplicateException {
-		MyAssert4Business.hasText(dataId);
-		MyAssert4Business.hasText(value);
-		
 		SysConfInfoDO sysConfInfoDO = this.sysConfInfoDOMapper.selectByDataId_GroupId(groupId, dataId);
 		if (sysConfInfoDO != null) {
 			throw new ObjectDuplicateException();
@@ -113,7 +107,7 @@ public class ConfigurationServiceMgrImpl extends DefaultBusinessService implemen
         	//当并发过大时，key有可能会重复
         	throw new ObjectDuplicateException();
         }
-		ZKManager.getInstance().setNodeValue(this.curatorFramework, Constants.getConfigurationNode(groupId, dataId), value);
+		ZKManager.getInstance().setNodeValue(Constants.getConfigurationNode(groupId, dataId), value);
 		LOG.info("Add Configuration ok :" + groupId + " : " + dataId + " : " +  value);
     }
 	
@@ -139,16 +133,12 @@ public class ConfigurationServiceMgrImpl extends DefaultBusinessService implemen
 				sysConfInfoDOMapper.updateByPrimaryKeyWithBLOBs(sysConfInfoDO);
 			}
 		});
-		ZKManager.getInstance().deleteNode(this.curatorFramework, Constants.getConfigurationNode(sysConfInfoDO.getGroupId(), sysConfInfoDO.getDataId()));
-		ZKManager.getInstance().setNodeValue(this.curatorFramework, Constants.getConfigurationNode(groupId, dataId), value);
+		ZKManager.getInstance().deleteNode(Constants.getConfigurationNode(sysConfInfoDO.getGroupId(), sysConfInfoDO.getDataId()));
+		ZKManager.getInstance().setNodeValue(Constants.getConfigurationNode(groupId, dataId), value);
     }
 	
 	@Override
 	public void updateConf(final String groupId, final String dataId, final String value) {
-		MyAssert4Business.hasText(groupId);
-		MyAssert4Business.hasText(dataId);
-		MyAssert4Business.hasText(value);
-		
 		final SysConfInfoDO sysConfInfoDO = this.sysConfInfoDOMapper.selectByDataId_GroupId(groupId, dataId);
 		if (sysConfInfoDO == null) {
 			LOG.error(new StringBuffer().append("Load conf not found [").append(groupId).append("] [").append(dataId).append("]"));
@@ -165,12 +155,11 @@ public class ConfigurationServiceMgrImpl extends DefaultBusinessService implemen
 				sysConfInfoDOMapper.updateByPrimaryKeySelective(model);
 			}
 		});
-		ZKManager.getInstance().setNodeValue(this.curatorFramework, Constants.getConfigurationNode(groupId, dataId), value);
+		ZKManager.getInstance().setNodeValue(Constants.getConfigurationNode(groupId, dataId), value);
 	}
 	
 	@Override
     public void deleteConf(final String groupId, final String dataId) {
-		MyAssert4Business.hasText(dataId);
 		String value = this.getValue(_parseGroupId(groupId), dataId);
 		if (StringUtils.isEmpty(value)) {
 			return;
@@ -181,20 +170,19 @@ public class ConfigurationServiceMgrImpl extends DefaultBusinessService implemen
 				sysConfInfoDOMapper.deleteByGroupId_DataId(groupId, dataId);
 			}
 		});
-		ZKManager.getInstance().deleteNode(curatorFramework, Constants.getConfigurationNode(groupId, dataId));
+		ZKManager.getInstance().deleteNode(Constants.getConfigurationNode(groupId, dataId));
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
 	public void deleteConfsByGroupId(String groupId) {
-		MyAssert4Business.hasText(groupId);
 		Collection<IConfInfo> confInfos = this.getConfsByGroupId(groupId);
 		if (!CollectionUtils.isEmpty(confInfos)) {
 			for (IConfInfo confInfo : confInfos) {
 				this.deleteConf(confInfo.getGroupId(), confInfo.getDataId());
 			}
 		}
-		ZKManager.getInstance().deleteNode(curatorFramework, Constants.getConfigurationNode(groupId));
+		ZKManager.getInstance().deleteNode(Constants.getConfigurationNode(groupId));
 		LOG.info("Delete Confs By GroupId : " + groupId);
 	}
 	
@@ -206,7 +194,6 @@ public class ConfigurationServiceMgrImpl extends DefaultBusinessService implemen
 	@SuppressWarnings("rawtypes")
     @Override
     public Collection getConfsByGroupId(String groupId) {
-		MyAssert4Business.hasText(groupId);
 		return this.sysConfInfoDOMapper.selectByGroupId(groupId);
 	}
 	
@@ -240,7 +227,7 @@ public class ConfigurationServiceMgrImpl extends DefaultBusinessService implemen
 		}
 		ZKManager zkManager = ZKManager.getInstance();
 		for (SysConfInfoDO model : sysConfInfoDOs) {
-			zkManager.setNodeValue(curatorFramework, Constants.getConfigurationNode(model.getGroupId(), model.getDataId()), model.getConfValue());
+			zkManager.setNodeValue(Constants.getConfigurationNode(model.getGroupId(), model.getDataId()), model.getConfValue());
 			LOG.info("Refresh configruation : " + ToStringBuilder.reflectionToString(model, ToStringStyle.SHORT_PREFIX_STYLE));
 		}
 		LOG.info("Refresh all configurations ok.");
@@ -248,20 +235,16 @@ public class ConfigurationServiceMgrImpl extends DefaultBusinessService implemen
 	
 	@Override
 	public void refreshConf(String groupId, String dataId) {
-		MyAssert4Business.hasText(groupId);
-		MyAssert4Business.hasText(dataId);
 		String value = this.getValue(groupId, dataId);
 		if (value == null || "".equals(value)) {
 			return;
 		}
-		ZKManager.getInstance().setNodeValue(curatorFramework, Constants.getConfigurationNode(groupId, dataId), value);
+		ZKManager.getInstance().setNodeValue(Constants.getConfigurationNode(groupId, dataId), value);
 	}
 	
 	@Override
 	public void close() {
-		if (curatorFramework != null) {
-			curatorFramework.close();
-		}
+		ZKManager.getInstance().close();
 	}
 	
 	private String _parseGroupId(String groupId) {

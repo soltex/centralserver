@@ -1,27 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<?xml version="1.0"?>
+<project
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+	xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 	<modelVersion>4.0.0</modelVersion>
-
-	<groupId>com.vanstone</groupId>
-	<artifactId>centralserver</artifactId>
-	<version>1.0.13</version>
-	<packaging>pom</packaging>
-
-	<name>centralserver</name>
+	<parent>
+		<artifactId>centralserver</artifactId>
+		<groupId>com.vanstone</groupId>
+		<version>1.0.12</version>
+	</parent>
+	<artifactId>vanstone-centralserver-admisnervice-sdk</artifactId>
+	<name>vanstone-centralserver-admisnervice-sdk</name>
 	<url>http://maven.apache.org</url>
-	
-	<modules>
-		<module>vanstone-centralserver-common</module>
-		<module>vanstone-centralserver-business-sdk</module>
-		<module>vanstone-centralserver-configuration-sdk</module>
-		<module>vanstone-centralserver-weixin-sdk</module>
-		<module>vanstone-weixin-sdk</module>
-		<module>vanstone-configuration-client</module>
-		<module>vanstone-weixin-client</module>
-		<module>vanstone-configuration-sdk</module>
-		<module>vanstone-centralserver</module>
-    <module>vanstone-centralserver-admisnervice-sdk</module>
-  </modules>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
 	<distributionManagement>
 		<repository>
 			<id>sagacityidea-release</id>
@@ -29,12 +21,35 @@
 			<url>http://repo.sagacityidea.com:8081/nexus/content/repositories/sagacityidea-release/</url>
 		</repository>
 	</distributionManagement>
-	<properties>
-		<centralserver.version>1.0.13</centralserver.version>
-		<vanstone.commons.version>1.2.10</vanstone.commons.version>
-	</properties>
 	<dependencies>
-		
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.6</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>servlet-api</artifactId>
+			<version>2.5</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>javax.servlet.jsp</groupId>
+			<artifactId>jsp-api</artifactId>
+			<version>2.0</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>com.vanstone</groupId>
+			<artifactId>vanstone-centralserver-business-sdk</artifactId>
+			<version>${centralserver.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>4.2.0.Final</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<pluginManagement>

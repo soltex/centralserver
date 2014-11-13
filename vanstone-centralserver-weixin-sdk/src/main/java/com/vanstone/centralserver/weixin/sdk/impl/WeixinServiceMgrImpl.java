@@ -8,36 +8,33 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 
-import org.apache.curator.framework.CuratorFramework;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import com.vanstone.centralserver.business.sdk.weixin.AppnameExistsException;
 import com.vanstone.centralserver.business.sdk.weixin.FlushResult;
 import com.vanstone.centralserver.business.sdk.weixin.IWeixinInfo;
 import com.vanstone.centralserver.business.sdk.weixin.IWeixinServiceMgr;
 import com.vanstone.centralserver.common.Constants;
-import com.vanstone.centralserver.common.MyAssert;
-import com.vanstone.centralserver.common.conf.VanstoneConf;
 import com.vanstone.centralserver.common.weixin.AppDevInfo;
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.centralserver.common.weixin.wrap.token.UserToken;
-import com.vanstone.centralserver.common.zk.CuratorFrameworkBuilder;
-import com.vanstone.centralserver.common.zk.ZKManager;
 import com.vanstone.centralserver.weixin.sdk.services.IPersistenceService;
 import com.vanstone.centralserver.weixin.sdk.services.IUserTokenService;
 import com.vanstone.common.util.web.PageInfo;
 import com.vanstone.common.util.web.PageUtil;
+import com.vanstone.zk.ZKManager;
 
 /**
  * @author shipengpipi@126.com
  */
 @Service("weixinServiceMgr")
+@Validated
 public class WeixinServiceMgrImpl implements IWeixinServiceMgr {
 
 	private static Logger LOG = LoggerFactory.getLogger(WeixinServiceMgrImpl.class);
@@ -46,12 +43,9 @@ public class WeixinServiceMgrImpl implements IWeixinServiceMgr {
 	private IUserTokenService userTokenService;
 	@Autowired
 	private IPersistenceService persistenceService;
-	/** CuratorFramework client */
-	private CuratorFramework curatorFramework;
 	
 	@Override
 	public IWeixinInfo addWeixinInfo(IWeixinInfo weixinInfo) throws WeixinException, AppnameExistsException {
-		MyAssert.notNull(weixinInfo);
 		// LoadAccessToken
 		UserToken userToken = this.userTokenService.loadUserTokenFromWebServer(weixinInfo.getAppid(),
 				weixinInfo.getAppSecret());
@@ -64,13 +58,12 @@ public class WeixinServiceMgrImpl implements IWeixinServiceMgr {
 		appDevInfo.setAccessToken(userToken.getAccessToken());
 		appDevInfo.setAppname(weixinInfo.getId());
 		appDevInfo.setSecret(weixinInfo.getAppSecret());
-		ZKManager.getInstance().setNodeValue(curatorFramework, Constants.getAppnameNode(weixinInfo.getId()), appDevInfo.toJsonString());
+		ZKManager.getInstance().setNodeValue(Constants.getAppnameNode(weixinInfo.getId()), appDevInfo.toJsonString());
 		return weixinInfo;
 	}
 	
 	@Override
 	public IWeixinInfo updateWeixinInfo(IWeixinInfo weixinInfo) throws WeixinException {
-		MyAssert.notNull(weixinInfo);
 		UserToken userToken = this.userTokenService.loadUserTokenFromWebServer(weixinInfo.getAppid(),
 				weixinInfo.getAppSecret());
 		// 写入DB
@@ -84,24 +77,22 @@ public class WeixinServiceMgrImpl implements IWeixinServiceMgr {
 		appDevInfo.setSecret(weixinInfo.getAppSecret());
 		
 		// 写入ZK
-		ZKManager.getInstance().setNodeValue(curatorFramework, Constants.getAppnameNode(weixinInfo.getId()), appDevInfo.toJsonString());
+		ZKManager.getInstance().setNodeValue(Constants.getAppnameNode(weixinInfo.getId()), appDevInfo.toJsonString());
 		return weixinInfo;
 	}
-
+	
 	@Override
 	public void deleteWeixinInfo(IWeixinInfo weixinInfo) {
-		MyAssert.notNull(weixinInfo);
 		this.persistenceService.deleteWeixinInfo(weixinInfo.getId());
 		// 删除ZK NODE
-		if (ZKManager.getInstance().existsNode(curatorFramework, Constants.getAppnameNode(weixinInfo.getId()))) {
-			ZKManager.getInstance().deleteNode(curatorFramework, Constants.getAppnameNode(weixinInfo.getId()));
+		if (ZKManager.getInstance().existsNode(Constants.getAppnameNode(weixinInfo.getId()))) {
+			ZKManager.getInstance().deleteNode(Constants.getAppnameNode(weixinInfo.getId()));
 			LOG.info("DELETE ZK NODE : " + Constants.getAppnameNode(weixinInfo.getId()));
 		}
 	}
 
 	@Override
 	public IWeixinInfo flushAccessToken(IWeixinInfo weixinInfo) throws WeixinException {
-		MyAssert.notNull(weixinInfo);
 		UserToken userToken = this.userTokenService.loadUserTokenFromWebServer(weixinInfo.getAppid(),
 				weixinInfo.getAppSecret());
 		// 写入DB
@@ -114,21 +105,8 @@ public class WeixinServiceMgrImpl implements IWeixinServiceMgr {
 		appDevInfo.setSecret(weixinInfo.getAppSecret());
 		
 		// 写入ZK
-		ZKManager.getInstance().setNodeValue(curatorFramework, Constants.getAppnameNode(weixinInfo.getId()),
-				appDevInfo.toJsonString());
+		ZKManager.getInstance().setNodeValue(Constants.getAppnameNode(weixinInfo.getId()), appDevInfo.toJsonString());
 		return weixinInfo;
-	}
-	
-	@PostConstruct
-	private void init() {
-		try {
-			curatorFramework = CuratorFrameworkBuilder.createCuratorFramework(VanstoneConf.getInstance().getZk(),
-					VanstoneConf.getInstance().getZkConnectionTimeoutMS());
-			curatorFramework.start();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw new ExceptionInInitializerError(e);
-		}
 	}
 	
 	@Override
@@ -181,11 +159,9 @@ public class WeixinServiceMgrImpl implements IWeixinServiceMgr {
 
 	@PreDestroy
 	public void close() {
-		if (curatorFramework != null) {
-			curatorFramework.close();
-		}
+		ZKManager.getInstance().close();
 	}
-
+	
 	@Override
 	public PageInfo<IWeixinInfo> getWeixinInfos(String key, int pageno, int size) {
 		int rows = this.persistenceService.getTotalWeixinInfos(key);

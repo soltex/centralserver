@@ -22,8 +22,7 @@ import com.vanstone.centralserver.common.Constants;
 import com.vanstone.centralserver.common.MyAssert;
 import com.vanstone.centralserver.common.conf.VanstoneConf;
 import com.vanstone.centralserver.common.weixin.AppDevInfo;
-import com.vanstone.centralserver.common.zk.CuratorFrameworkBuilder;
-import com.vanstone.centralserver.common.zk.ZKManager;
+import com.vanstone.zk.ZKManager;
 
 /**
  * 订阅者
@@ -36,13 +35,11 @@ public class AccessTokenSubscriber {
 	
 	/** Local cache */
 	private final ConcurrentHashMap<String, AppDevInfo> localCache = new ConcurrentHashMap<String, AppDevInfo>();
-	/** Curator Framework Of ZK */
-	private CuratorFramework curatorFramework;
 	/** 节点监听 */
 	private ConcurrentHashMap<String, PathChildrenCache> localPathChildrenCacheMap = new ConcurrentHashMap<String, PathChildrenCache>();
 	/** 客户端调度器 */
 	private ScheduledExecutorService scheduledExecutorService;
-
+	
 	/** 是否启动 */
 	private boolean start = false;
 
@@ -59,16 +56,15 @@ public class AccessTokenSubscriber {
 
 	private AccessTokenSubscriber() {
 		if (VanstoneConf.getInstance().containAppnames()) {
-			curatorFramework = CuratorFrameworkBuilder.createCuratorFramework(VanstoneConf.getInstance().getZk(),
-					VanstoneConf.getInstance().getZkConnectionTimeoutMS());
+			ZKManager.getInstance();
 		}
 	}
-
+	
 	public void start() {
-		if (curatorFramework == null) {
-			throw new ExceptionInInitializerError("curatorframework initial fail.");
-		}
-		curatorFramework.start();
+//		if (curatorFramework == null) {
+//			throw new ExceptionInInitializerError("curatorframework initial fail.");
+//		}
+//		curatorFramework.start();
 		// 初始化LocalCache
 		this.initLocalCache();
 		// 初始化NodeListener
@@ -81,9 +77,6 @@ public class AccessTokenSubscriber {
 	 * 关闭ZK
 	 */
 	public void close() {
-		if (this.curatorFramework != null) {
-			this.curatorFramework.close();
-		}
 		if (localPathChildrenCacheMap != null && localPathChildrenCacheMap.size() > 0) {
 			for (PathChildrenCache pathChildrenCache : localPathChildrenCacheMap.values()) {
 				try {
@@ -97,13 +90,14 @@ public class AccessTokenSubscriber {
 				&& !scheduledExecutorService.isTerminated()) {
 			scheduledExecutorService.shutdown();
 		}
+		ZKManager.getInstance().close();
 	}
-
+	
 	private void initLocalCache() {
 		Collection<String> appnames = VanstoneConf.getInstance().getAppnames();
 		if (appnames != null && appnames.size() > 0) {
 			for (String id : appnames) {
-				String value = ZKManager.getInstance().getNodeValue(curatorFramework, Constants.getAppnameNode(id));
+				String value = ZKManager.getInstance().getNodeValue(Constants.getAppnameNode(id));
 				if (value == null || "".equals(value)) {
 					continue;
 				}
@@ -122,8 +116,7 @@ public class AccessTokenSubscriber {
 								Collection<String> appnames = VanstoneConf.getInstance().getAppnames();
 								if (appnames != null && appnames.size() > 0) {
 									for (String id : appnames) {
-										String value = ZKManager.getInstance().getNodeValue(curatorFramework,
-												Constants.getAppnameNode(id));
+										String value = ZKManager.getInstance().getNodeValue(Constants.getAppnameNode(id));
 										if (value == null || "".equals(value)) {
 											continue;
 										}
@@ -148,10 +141,9 @@ public class AccessTokenSubscriber {
 		}
 		// Initial PathChildCache
 		for (String id : appnames) {
-			final PathChildrenCache pathChildrenCache = new PathChildrenCache(curatorFramework,
-					Constants.getClientMonitorPath(id), true);
+			final PathChildrenCache pathChildrenCache = new PathChildrenCache(ZKManager.getInstance().getCuratorFramework(), Constants.getClientMonitorPath(id), true);
 			LOG.info("start monitor node : " + Constants.getClientMonitorPath(id));
-
+			
 			localPathChildrenCacheMap.put(id, pathChildrenCache);
 			pathChildrenCache.getListenable().addListener(newPathChildrenCacheListener(pathChildrenCache));
 			try {
@@ -267,7 +259,7 @@ public class AccessTokenSubscriber {
 			LOG.info("The Appname  " + appname + " has been cached in local.");
 			return;
 		}
-		String value = ZKManager.getInstance().getNodeValue(curatorFramework, Constants.getAppnameNode(appname));
+		String value = ZKManager.getInstance().getNodeValue(Constants.getAppnameNode(appname));
 		if (value == null || "".equals(value)) {
 			throw new IllegalArgumentException("Appname'value not found in zk node.");
 		}
@@ -275,8 +267,7 @@ public class AccessTokenSubscriber {
 		localCache.put(appname, appDevInfo);
 		LOG.info("Load ZK Node value into Localcache");
 		// Add listener in node
-		final PathChildrenCache pathChildrenCache = new PathChildrenCache(curatorFramework,
-				Constants.getClientMonitorPath(appname), true);
+		final PathChildrenCache pathChildrenCache = new PathChildrenCache(ZKManager.getInstance().getCuratorFramework(), Constants.getClientMonitorPath(appname), true);
 		LOG.info("start monitor node : " + Constants.getClientMonitorPath(appname));
 		localPathChildrenCacheMap.put(appname, pathChildrenCache);
 		pathChildrenCache.getListenable().addListener(newPathChildrenCacheListener(pathChildrenCache));
