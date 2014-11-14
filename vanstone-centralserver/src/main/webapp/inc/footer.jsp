@@ -9,7 +9,7 @@
 
 
 
-<div style="display: none;" id="data_loading" class=""><div class="inner">处理中...</div></div>
+<div style="display: none;" id="data_loading" class=""><div class="inner" style="background-image: url('/styles/images/loading1.gif');">.</div></div>
 
 <!-- Modal -->
 <div class="modal fade" id="modal-dialog" tabindex="-1" role="dialog" aria-hidden="true">

@@ -26,12 +26,12 @@ body {
 }
 
 #data_loading .inner {
-    background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);
+    /*background: none repeat scroll 0 0 rgba(0, 0, 0, 0.6);*/
     border-radius: 2px;
     display: inline-block;
-    height: 22px;
-    line-height: 22px;
-    padding: 0 10px;
+    height: 32px;
+    width: 32px;
+    /*padding: 10px 10px 10px 10px;*/
 }
 
 

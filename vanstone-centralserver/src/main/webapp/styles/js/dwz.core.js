@@ -133,7 +133,7 @@
 			} else if (json[DWZ.keys.statusCode] == DWZ.statusCode.ok) {
 				//成功信息
 				if(json[DWZ.keys.message]) {
-					success(json[DWZ.keys.message]);
+					info(json[DWZ.keys.message]);
 				}
 				
 				//成功后执行dialog
