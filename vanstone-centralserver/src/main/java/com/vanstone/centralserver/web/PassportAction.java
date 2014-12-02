@@ -15,9 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.vanstone.centralserver.AbstractWebAction;
 import com.vanstone.centralserver.business.sdk.adminservice.AdminException;
-import com.vanstone.centralserver.business.sdk.adminservice.IAuthServiceMgr;
 import com.vanstone.centralserver.business.sdk.adminservice.AdminException.ErrorCode;
-import com.vanstone.webframework.dwz.DWZObject;
+import com.vanstone.centralserver.business.sdk.adminservice.IAuthServiceMgr;
+import com.vanstone.webframework.dwz.ViewCommandHelper;
+import com.vanstone.webframework.dwz.ViewCommandObject;
 
 /**
  * @author shipeng
@@ -35,11 +36,11 @@ public class PassportAction extends AbstractWebAction {
 	
 	@RequestMapping("/login-action")
 	@ResponseBody
-	public DWZObject loginAction(@ModelAttribute("passportForm")PassportForm passportForm, ModelMap modelMap, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
+	public ViewCommandObject loginAction(@ModelAttribute("passportForm")PassportForm passportForm, ModelMap modelMap, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
 		try {
 			authServiceMgr.login(passportForm.getAdminName(), passportForm.getAdminPwd(), servletRequest);
 		} catch (AdminException e) {
-			DWZObject object = DWZObject.createErrorObject();
+			ViewCommandObject object = ViewCommandHelper.createErrorObject();
 			if (e.getErrorCode().equals(ErrorCode.Admin_Hasbeen_Forbit)) {
 				object.setMessage("当前账户已被禁用，请联系管理员开通");
 			}else if (e.getErrorCode().equals(ErrorCode.AdminName_Not_Found)) {
@@ -49,7 +50,7 @@ public class PassportAction extends AbstractWebAction {
 			}
 			return object;
 		}
-		DWZObject object = DWZObject.createSuccessObject();
+		ViewCommandObject object = ViewCommandHelper.createSuccessObject();
 		object.addParam("redirectUrl", "/index.jhtml");
 		return object;
 	}

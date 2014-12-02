@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.vanstone.centralserver.common.ServletUtil;
 import com.vanstone.framework.business.ServiceManagerFactory;
-import com.vanstone.webframework.dwz.DWZObject;
+import com.vanstone.webframework.dwz.ViewCommandHelper;
 
 /**
  * @author shipeng
@@ -44,7 +44,7 @@ public class AuthenticationFilter implements Filter {
 					return;
 				}
 				//非登录登出页面
-				ServletUtil.write(servletResponse, DWZObject.createRedirectObject("/login.jhtml").toJsonString());
+				ServletUtil.write(servletResponse, ViewCommandHelper.createRedirectObject("/login.jhtml").toJsonString());
 				return;
 			}else {
 				//普通操作

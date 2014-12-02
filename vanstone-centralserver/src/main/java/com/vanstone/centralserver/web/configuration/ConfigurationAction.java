@@ -21,7 +21,8 @@ import com.vanstone.centralserver.business.sdk.configuration.IConfInfo;
 import com.vanstone.centralserver.business.sdk.configuration.IConfigurationServiceMgr;
 import com.vanstone.centralserver.common.Constants;
 import com.vanstone.common.util.web.PageInfo;
-import com.vanstone.webframework.dwz.DWZObject;
+import com.vanstone.webframework.dwz.ViewCommandHelper;
+import com.vanstone.webframework.dwz.ViewCommandObject;
 
 /**
  * 配置管理Action
@@ -51,21 +52,21 @@ public class ConfigurationAction extends AbstractWebAction {
 	
 	@RequestMapping("/add-configuration-action")
 	@ResponseBody
-	public DWZObject addConfigurationAction(@ModelAttribute("confForm")ConfForm confForm) {
+	public ViewCommandObject addConfigurationAction(@ModelAttribute("confForm")ConfForm confForm) {
 		try {
 			this.configurationServiceMgr.addConf(confForm.getGroupId(), confForm.getDataId(), confForm.getValue());
 		} catch (ObjectDuplicateException e) {
-			DWZObject object = DWZObject.createErrorObject("GROUPID 和 DATAID 重复，请检查");
+			ViewCommandObject object = ViewCommandHelper.createErrorObject("GROUPID 和 DATAID 重复，请检查");
 			return object;
 		}
-		DWZObject object = DWZObject.createSuccessObject("添加配置信息成功。");
+		ViewCommandObject object = ViewCommandHelper.createSuccessObject("添加配置信息成功。");
 		object.setForwardUrl("/admin/configuration/view-configurations.jhtml");
 		return object;
 	}
 	
 	@RequestMapping("/clear-all-configurations")
 	@ResponseBody
-	public DWZObject clearAllConfigurations() {
+	public ViewCommandObject clearAllConfigurations() {
 		Collection<String> groupIds = this.configurationServiceMgr.getGroups();
 		if (!CollectionUtils.isEmpty(groupIds)) {
 			for (String groupId : groupIds) {
@@ -74,19 +75,19 @@ public class ConfigurationAction extends AbstractWebAction {
 				}
 			}
 		}
-		DWZObject object = DWZObject.createSuccessObject("清理完成。");
+		ViewCommandObject object = ViewCommandHelper.createSuccessObject("清理完成。");
 		object.setForwardUrl("/admin/configuration/view-configurations.jhtml");
 		return object;
 	}
 	
 	@RequestMapping("/delete-configuration/{groupId}/{dataId}")
 	@ResponseBody
-	public DWZObject deleteConfiguration(@PathVariable("groupId")String groupId, @PathVariable("dataId")String dataId, ModelMap modelMap, @RequestParam(value="p",required=false)Integer p) {
+	public ViewCommandObject deleteConfiguration(@PathVariable("groupId")String groupId, @PathVariable("dataId")String dataId, ModelMap modelMap, @RequestParam(value="p",required=false)Integer p) {
 		this.configurationServiceMgr.deleteConf(groupId, dataId);
 		if (p == null) {
 			p =1;
 		}
-		DWZObject object = DWZObject.createSuccessObject("删除配置信息成功.");
+		ViewCommandObject object = ViewCommandHelper.createSuccessObject("删除配置信息成功.");
 		object.setForwardUrl("/admin/configuration/view-configurations.jhtml?p=" + p);
 		return object;
 	}

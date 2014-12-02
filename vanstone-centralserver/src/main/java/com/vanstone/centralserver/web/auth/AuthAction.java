@@ -22,8 +22,9 @@ import com.vanstone.centralserver.common.Constants;
 import com.vanstone.common.util.random.RandomNumber;
 import com.vanstone.common.util.web.PageInfo;
 import com.vanstone.common.util.web.PageUtil;
-import com.vanstone.webframework.dwz.DWZDialogObject;
-import com.vanstone.webframework.dwz.DWZObject;
+import com.vanstone.webframework.dwz.DialogViewCommandObject;
+import com.vanstone.webframework.dwz.ViewCommandHelper;
+import com.vanstone.webframework.dwz.ViewCommandObject;
 
 /**
  * @author shipeng
@@ -56,15 +57,15 @@ public class AuthAction extends AbstractWebAction {
 	
 	@RequestMapping("/add-admin-action")
 	@ResponseBody
-	public DWZDialogObject addAdminAction(@ModelAttribute("authForm")AuthForm authForm, ModelMap modelMap) {
+	public DialogViewCommandObject addAdminAction(@ModelAttribute("authForm")AuthForm authForm, ModelMap modelMap) {
 		try {
 			this.authServiceMgr.addAdmin(authForm.getAdminName(), authForm.getAdminPwd(), authForm.getFullName());
 		} catch (ObjectDuplicateException e) {
-			DWZDialogObject object = DWZDialogObject.createErrorDialog(false);
+			DialogViewCommandObject object = ViewCommandHelper.createErrorDialog(false);
 			object.setMessage("账户名" + authForm.getAdminName() + "重复，请重新选择。");
 			return object;
 		}
-		DWZDialogObject successObject = DWZDialogObject.createSuccessDialog(true);
+		DialogViewCommandObject successObject = ViewCommandHelper.createSuccessDialog(true);
 		successObject.setForwardUrl("/admin/auth/view-admins.jhtml");
 		successObject.setRel(authForm.getRel());
 		return successObject;
@@ -83,9 +84,9 @@ public class AuthAction extends AbstractWebAction {
 	
 	@RequestMapping("/update-fullname-action/{id}")
 	@ResponseBody
-	public DWZDialogObject updateFullNameAction(@PathVariable("id")String id, @ModelAttribute("authForm")AuthForm authForm, ModelMap modelMap) {
+	public DialogViewCommandObject updateFullNameAction(@PathVariable("id")String id, @ModelAttribute("authForm")AuthForm authForm, ModelMap modelMap) {
 		this.authServiceMgr.updateAdminFullName(id, authForm.getFullName());
-		DWZDialogObject successObject = DWZDialogObject.createSuccessDialog(true);
+		DialogViewCommandObject successObject = ViewCommandHelper.createSuccessDialog(true);
 		successObject.setMessage("修改姓名成功");
 		successObject.setForwardUrl("/admin/auth/view-admins.jhtml");
 		successObject.setRel(authForm.getRel());
@@ -94,19 +95,20 @@ public class AuthAction extends AbstractWebAction {
 	
 	@RequestMapping("/reset-password/{id}")
 	@ResponseBody
-	public DWZObject resetPassword(@PathVariable("id")String id) {
+	public ViewCommandObject resetPassword(@PathVariable("id")String id) {
 		String newPassword = RandomNumber.randomNumber(6);
 		this.authServiceMgr.updatePassword(id, newPassword);
-		DWZObject object = DWZObject.createSuccessObject("密码已重置.");
+		ViewCommandObject object = ViewCommandHelper.createSuccessObject("密码已重置.");
+		
 		object.setForwardUrl("/admin/auth/view-admins.jhtml");
 		return object;
 	}
 	
 	@RequestMapping("/delete-admin/{id}")
 	@ResponseBody
-	public DWZObject deleteAdmin(@PathVariable("id")String id) {
+	public ViewCommandObject deleteAdmin(@PathVariable("id")String id) {
 		this.authServiceMgr.deleteAdmin(id);
-		DWZObject object = DWZObject.createSuccessObject("管理员已删除");
+		ViewCommandObject object = ViewCommandHelper.createSuccessObject("管理员已删除");
 		object.setForwardUrl("/auth/admin/view-admins.jhtml");
 		return object;
 	}
