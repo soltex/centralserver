@@ -33,6 +33,8 @@ public class ServletUtil {
 		}
 		try {
 			servletResponse.getWriter().print(text);
+			servletResponse.getWriter().flush();
+			servletResponse.getWriter().close();
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new RuntimeException(e);
