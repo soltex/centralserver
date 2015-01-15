@@ -31,7 +31,7 @@
 	</distributionManagement>
 	<properties>
 		<centralserver.version>1.0.13</centralserver.version>
-		<vanstone.commons.version>1.2.10</vanstone.commons.version>
+		<vanstone.commons.version>1.2.11</vanstone.commons.version>
 	</properties>
 	<dependencies>
 		
