@@ -90,14 +90,20 @@ public class ReplyMsg4News extends AbstractMsg {
 			Element titleElement = itemElement.addElement("Title");
 			titleElement.setText(item.getTitle());
 			
-			Element descriptionElement = itemElement.addElement("Description");
-			descriptionElement.setText(item.getDescription());
+			if (item.getDescription() != null && !item.getDescription().equals("")) {
+				Element descriptionElement = itemElement.addElement("Description");
+				descriptionElement.setText(item.getDescription());
+			}
 			
-			Element picUrlElement = itemElement.addElement("PicUrl");
-			picUrlElement.setText(item.getPicUrl());
+			if (item.getPicUrl() != null && !item.getPicUrl().equals("")) {
+				Element picUrlElement = itemElement.addElement("PicUrl");
+				picUrlElement.setText(item.getPicUrl());
+			}
 			
-			Element UrlElement = itemElement.addElement("Url");
-			UrlElement.setText(item.getUrl());
+			if (item.getUrl() != null && !item.getUrl().equals("")) {
+				Element UrlElement = itemElement.addElement("Url");
+				UrlElement.setText(item.getUrl());
+			}
 		}
 		return document.asXML();
 	}
