@@ -61,11 +61,11 @@ public class AuthAction extends AbstractWebAction {
 		try {
 			this.authServiceMgr.addAdmin(authForm.getAdminName(), authForm.getAdminPwd(), authForm.getFullName());
 		} catch (ObjectDuplicateException e) {
-			DialogViewCommandObject object = ViewCommandHelper.createErrorDialog(false);
+			DialogViewCommandObject object = ViewCommandHelper.createErrorDialog(false, true);
 			object.setMessage("账户名" + authForm.getAdminName() + "重复，请重新选择。");
 			return object;
 		}
-		DialogViewCommandObject successObject = ViewCommandHelper.createSuccessDialog(true);
+		DialogViewCommandObject successObject = ViewCommandHelper.createSuccessDialog(true, false);
 		successObject.setForwardUrl("/admin/auth/view-admins.jhtml");
 		successObject.setRel(authForm.getRel());
 		return successObject;
@@ -86,7 +86,7 @@ public class AuthAction extends AbstractWebAction {
 	@ResponseBody
 	public DialogViewCommandObject updateFullNameAction(@PathVariable("id")String id, @ModelAttribute("authForm")AuthForm authForm, ModelMap modelMap) {
 		this.authServiceMgr.updateAdminFullName(id, authForm.getFullName());
-		DialogViewCommandObject successObject = ViewCommandHelper.createSuccessDialog(true);
+		DialogViewCommandObject successObject = ViewCommandHelper.createSuccessDialog(true, false);
 		successObject.setMessage("修改姓名成功");
 		successObject.setForwardUrl("/admin/auth/view-admins.jhtml");
 		successObject.setRel(authForm.getRel());

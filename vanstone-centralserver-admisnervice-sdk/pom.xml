@@ -6,7 +6,7 @@
 	<parent>
 		<artifactId>centralserver</artifactId>
 		<groupId>com.vanstone</groupId>
-		<version>1.0.13</version>
+		<version>1.0.14</version>
 	</parent>
 	<artifactId>vanstone-centralserver-admisnervice-sdk</artifactId>
 	<name>vanstone-centralserver-admisnervice-sdk</name>
