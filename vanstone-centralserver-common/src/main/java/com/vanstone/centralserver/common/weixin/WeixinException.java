@@ -130,13 +130,17 @@ public class WeixinException extends Exception {
     	WEIXIN_ERROR_45016(" 	系统分组，不允许修改",45016),
     	WEIXIN_ERROR_45017(" 	分组名字过长",45017),
     	WEIXIN_ERROR_45018(" 	分组数量超过上限",45018),
+    	WEIXIN_ERROR_45028(" 	has no masssend quota",45028),
     	WEIXIN_ERROR_46001(" 	不存在媒体数据",46001),
     	WEIXIN_ERROR_46002(" 	不存在的菜单版本",46002),
     	WEIXIN_ERROR_46003(" 	不存在的菜单数据",46003),
     	WEIXIN_ERROR_46004(" 	不存在的用户",46004),
     	WEIXIN_ERROR_47001(" 	解析JSON/XML内容错误",47001),
     	WEIXIN_ERROR_48001(" 	api功能未授权",48001),
-    	WEIXIN_ERROR_50001(" 	用户未授权该api ",50001)
+    	WEIXIN_ERROR_50001(" 	用户未授权该api ",50001),
+    	
+    	
+    	WEIXIN_UNKNOWN_ERROR("微信位置错误，请Debug信息查看",-2);
     	;
     	
     	
@@ -166,7 +170,7 @@ public class WeixinException extends Exception {
 					return errorCode;
 				}
 			}
-			return null;
+			return ErrorCode.WEIXIN_UNKNOWN_ERROR;
 		}
     }
 }
