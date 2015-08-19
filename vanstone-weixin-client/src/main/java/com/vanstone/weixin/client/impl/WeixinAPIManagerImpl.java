@@ -658,6 +658,35 @@ public class WeixinAPIManagerImpl implements IWeixinAPIManager {
 	}
 
 	@Override
+	public String buildShortUrl(String appname, String url) throws WeixinException {
+		MyAssert.hasText(appname);
+		MyAssert.hasText(url);
+		
+		final String accessToken = validateAndReturnAccessToken(appname);
+		final Map<String, Object> map = new LinkedHashMap<String, Object>();
+		map.put("action", "long2short");
+		map.put("long_url", url);
+		
+		String json = JsonUtil.object2PrettyString(map,false);
+		
+		StringEntity stringEntity = new StringEntity(json, Constants.SYS_CHARSET_UTF8);
+		
+		HttpPost httpPost = new HttpPost(Constants.getShortUrlURL(accessToken));
+		httpPost.setEntity(stringEntity);
+		
+		return this.httpClientTemplate.execute(httpPost, new HttpClientCallback<String>() {
+			@Override
+			public String executeHttpResponse(HttpResponse httpResponse, Map<String, Object> jsonMap) throws WeixinException {
+				Object shortUrl = jsonMap.get("short_url");
+				if (shortUrl != null) {
+					return (String)shortUrl;
+				}
+				return null;
+			}
+		});
+	}
+	
+	@Override
 	public void close() {
 		this.accessTokenSubscriber.close();
 		LOG.info("Weixin API Manager Close.");

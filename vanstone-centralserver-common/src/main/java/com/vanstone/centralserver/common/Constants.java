@@ -192,6 +192,9 @@ public abstract class Constants {
 	/**默认微信模板消息颜色值*/
 	public static final String WEIXIN_TEMPLATE_MSG_DEFAULT_COLOR = "#1E2633";
 	
+	/**短URL生成用的URL Template*/
+	public static final String SHORTURL_TEMPLATE = "https://api.weixin.qq.com/cgi-bin/shorturl?access_token=#ACCESS_TOKEN#";
+	
 	/**
 	 * 获取Webservice添加地址
 	 * @return
@@ -596,4 +599,15 @@ public abstract class Constants {
 		url = url.replaceAll("#OPENID#", openid);
 		return url.replaceAll("#LANGUAGE#", language);
 	}
+	
+	/**
+	 * 生成shorturl
+	 * @param token
+	 * @return
+	 */
+	public static String getShortUrlURL(String token) {
+		MyAssert.hasText(token);
+		return SHORTURL_TEMPLATE.replaceAll("#ACCESS_TOKEN#", token);
+	}
+	
 }

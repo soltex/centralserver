@@ -268,6 +268,15 @@ public interface IWeixinAPIManager {
 	void downloadQCImage(String ticket, File image) throws WeixinException;
 	
 	/**
+	 * 生成短url
+	 * @param appname
+	 * @param url
+	 * @return
+	 * @throws WeixinException
+	 */
+	String buildShortUrl(String appname, String url) throws WeixinException;
+	
+	/**
 	 * 关闭
 	 */
 	void close();

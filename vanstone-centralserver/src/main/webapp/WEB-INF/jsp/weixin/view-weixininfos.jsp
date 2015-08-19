@@ -40,15 +40,15 @@
 				<td>${model.id }</td>
 				<td>${model.appid }</td>
 				<td>${model.appSecret }</td>
-				<td><fmt:formatDate value="${model.sysInsertTime }" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-				<td><fmt:formatDate value="${model.sysUpdateTime }" pattern="yyyy-MM-dd hh:mm:ss" /></td>
-				<td><fmt:formatDate value="${model.lastRetrievalTokenTime }" pattern="yyyy-MM-dd hh:mm:ss" /></td>
+				<td><fmt:formatDate value="${model.sysInsertTime }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+				<td><fmt:formatDate value="${model.sysUpdateTime }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+				<td><fmt:formatDate value="${model.lastRetrievalTokenTime }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 				<td>
 					<a href="#" data-ajax="container">更新选定项</a> | 
 					<a href=""   title="确认删除？"  data-todo="ajaxTodo">删除</a>
 				</td>
 			</tr>
-			<tr class="danger">
+			<tr class="info">
 				<td colspan="8"><span class="badge badge-danger" >Weixin Access Token　　</span>${model.accessToken }</td>
 			</tr>
 		</c:forEach>
