@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.vanstone.weixin.client.impl;
+package com.vanstone.centralserver.common.util;
 
 import java.io.IOException;
 import java.util.Map;

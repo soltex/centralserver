@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.vanstone.weixin.client.impl;
+package com.vanstone.centralserver.common.util;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;

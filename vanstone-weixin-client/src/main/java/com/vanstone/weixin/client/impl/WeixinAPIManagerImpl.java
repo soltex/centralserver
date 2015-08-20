@@ -39,6 +39,8 @@ import com.vanstone.centralserver.common.MyAssert;
 import com.vanstone.centralserver.common.ServletUtil;
 import com.vanstone.centralserver.common.URLUtil;
 import com.vanstone.centralserver.common.conf.VanstoneConf;
+import com.vanstone.centralserver.common.util.HttpClientTemplate;
+import com.vanstone.centralserver.common.util.HttpClientTemplate.HttpClientCallback;
 import com.vanstone.centralserver.common.weixin.AppDevInfo;
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.centralserver.common.weixin.WeixinException.ErrorCode;
@@ -76,7 +78,6 @@ import com.vanstone.centralserver.common.weixin.wrap.user.UserGroupInfo;
 import com.vanstone.centralserver.common.weixin.wrap.user.UserOpenIdCollection;
 import com.vanstone.centralserver.common.weixin.wrap.user.UserWeixinBaseInfo;
 import com.vanstone.weixin.client.IWeixinAPIManager;
-import com.vanstone.weixin.client.impl.HttpClientTemplate.HttpClientCallback;
 
 /**
  * 微信操作管理类

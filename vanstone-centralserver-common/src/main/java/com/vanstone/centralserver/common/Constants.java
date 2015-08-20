@@ -11,6 +11,7 @@ import org.apache.commons.lang.StringUtils;
 
 import com.vanstone.centralserver.common.conf.VanstoneConf;
 import com.vanstone.centralserver.common.configuration.GroupIdDataIdObject;
+import com.vanstone.centralserver.common.corp.media.MediaType;
 
 /**
  * Weixin 全局常量
@@ -158,6 +159,13 @@ public abstract class Constants {
 	
 	/**发送Template消息地址模板*/
 	public static final String SEND_TEMPLATE_MSG_TEMPLATE = "https://api.weixin.qq.com/cgi-bin/message/template/send?access_token=#ACCESS_TOKEN#";
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
@@ -610,4 +618,143 @@ public abstract class Constants {
 		return SHORTURL_TEMPLATE.replaceAll("#ACCESS_TOKEN#", token);
 	}
 	
+	
+	
+	/** 企业号相关地址信息 */
+	
+	/**企业号获取AccessToken地址*/
+	public static final String CORP_RETRIEVAL_ACCESSTOKEN_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=#CORPID#&corpsecret=#CORPSECRET#";
+	
+	public static String getCorpRetrievalAccessToken(String corpID, String corpSecret) {
+		MyAssert.hasText(corpID);
+		MyAssert.hasText(corpSecret);
+		String url = CORP_RETRIEVAL_ACCESSTOKEN_TEMPLATE.replaceAll("#CORPID#", corpID);
+		url = url.replaceAll("#CORPSECRET#", corpSecret);
+		return url;
+	}
+	
+	/**创建企业应用菜单URL*/
+	public static final String CORP_CREATE_MENU_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/menu/create?access_token=#ACCESS_TOKEN#&agentid=#AGENTID#";
+	
+	public static String getCorpCreateMenuUrl(String accessToken, int agentID) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_CREATE_MENU_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#AGENTID#", String.valueOf(agentID));
+		return url;
+	}
+	
+	public static final String CORP_RETRIEVAL_APPINFO_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/agent/get?access_token=#ACCESS_TOKEN#&agentid=#AGENTID#";
+	
+	public static String getCorpRetrievalAppInfoUrl(String accessToken, int agentID){
+		MyAssert.hasText(accessToken);
+		String url = CORP_RETRIEVAL_APPINFO_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#AGENTID#", String.valueOf(agentID));
+		return url;
+	}
+	
+	public static final String CORP_UPDATE_CORPINFO_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/agent/set?access_token=#ACCESS_TOKEN#";
+	
+	public static String getCorpUpdateCorpInfoUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_UPDATE_CORPINFO_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
+	public static final String CORP_GET_AGENTS_LIST_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/agent/list?access_token=#ACCESS_TOKEN#";
+	
+	public static String getCorpAgentsListUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_GET_AGENTS_LIST_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
+	public static final String COPR_UPLOAD_TEMP_MEDIA_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/media/upload?access_token=#ACCESS_TOKEN#&type=#TYPE#";
+	
+	public static final String getCorpUploadTempMediaUrl(String accessToken, MediaType mediaType) {
+		MyAssert.hasText(accessToken);
+		MyAssert.notNull(mediaType);
+		String url = COPR_UPLOAD_TEMP_MEDIA_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#TYPE#", mediaType.getCode());
+		return url;
+	}
+	
+	public static final String CORP_DOWNLOAD_TEMP_MEDIA_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/media/get?access_token=#ACCESS_TOKEN#&media_id=#MEDIA_ID#";
+	
+	public static final String getCorpDownloadTempMediaUrl(String accessToken, String mediaID) {
+		MyAssert.hasText(accessToken);
+		MyAssert.hasText(mediaID);
+		String url = CORP_DOWNLOAD_TEMP_MEDIA_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#MEDIA_ID#", mediaID);
+		return url;
+	}
+	
+	public static final String CORP_FOREVER_UPLOAD_MPNEWS_ARTICLES_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/material/add_mpnews?access_token=#ACCESS_TOKEN#";
+	
+	public static final String getCorpForeverUploadNpnewsArticlesUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_FOREVER_UPLOAD_MPNEWS_ARTICLES_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
+	public static final String CORP_FOREVER_UPDATE_UPLOAD_MPNEWS_ARTCILES_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/material/update_mpnews?access_token=#ACCESS_TOKEN#";
+	
+	public static final String getCorpForeverUpdateUploadMpnewsArticlesUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_FOREVER_UPDATE_UPLOAD_MPNEWS_ARTCILES_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
+	public static final String CORP_UPLOAD_FOREVER_MEDIA_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/material/add_material?agentid=#AGENTID#&type=#TYPE#&access_token=#ACCESS_TOKEN#";
+	
+	public static final String getCorpUploadForeverMediaUrl(int agentID, MediaType mediaType, String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_UPLOAD_FOREVER_MEDIA_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#AGENTID#", String.valueOf(agentID));
+		url = url.replaceAll("#TYPE#", mediaType.getCode());
+		return url;
+	}
+	
+	public static final String CORP_DOWNLOAD_FOREVER_MEDIA_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/material/get?access_token=#ACCESS_TOKEN#&media_id=#MEDIA_ID#&agentid=#AGENTID#";
+	
+	public static final String getCorpDownloadForeverMediaUrl(int agentID, String mediaID, String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_DOWNLOAD_FOREVER_MEDIA_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#AGENTID#", String.valueOf(agentID));
+		url = url.replaceAll("#MEDIA_ID#", mediaID);
+		return url;
+	}
+	
+	public static final String CORP_DELETE_FOREVER_MEDIA_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/material/del?access_token=#ACCESS_TOKEN#&agentid=#AGENTID#&media_id=#MEDIA_ID#";
+	
+	public static String getCorpDeleteForeverMediaUrl(String accessToken, int agentID, String mediaID) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_DELETE_FOREVER_MEDIA_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#AGENTID#", String.valueOf(agentID));
+		url = url.replaceAll("#MEDIA_ID#", mediaID);
+		return url;
+	}
+	
+	public static final String CORP_FOREVER_STAT_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/material/get_count?access_token=#ACCESS_TOKEN#&agentid=#AGENTID#";
+	
+	public static String getCorpForeverStatUrl(String accessToken, int agentID) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_FOREVER_STAT_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#AGENTID#", String.valueOf(agentID));
+		return url;
+	}
+	
+	
+	
+	
+	
+	
+	
+	// ================================== 企业号主动发送消息 ================================== //
+	public static final String CORP_SEND_MSG_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/message/send?access_token=#ACCESS_TOKEN#";
+	
+	public static String getCorpSendMsgUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_SEND_MSG_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
 }
