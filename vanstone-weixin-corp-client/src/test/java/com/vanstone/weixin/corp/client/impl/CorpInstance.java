@@ -3,7 +3,7 @@
  */
 package com.vanstone.weixin.corp.client.impl;
 
-import com.vanstone.weixin.corp.client.ICorp;
+import com.vanstone.centralserver.common.corp.ICorp;
 
 /**
  * @author shipeng

@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.Collection;
 
 import com.vanstone.centralserver.common.corp.CorpAppInfo;
+import com.vanstone.centralserver.common.corp.ICorp;
+import com.vanstone.centralserver.common.corp.ICorpApp;
 import com.vanstone.centralserver.common.corp.ReportLocationFlag;
 import com.vanstone.centralserver.common.corp.media.MPNewsArticle;
 import com.vanstone.centralserver.common.corp.media.MediaResult;
@@ -156,6 +158,6 @@ public interface WeixinCorpClientManager {
 	 * @return
 	 * @throws WeixinException
 	 */
-	CorpMsgResult sendCorpMsg(ICorp corp, ICorpApp corpApp, AbstractCorpMsg corpMsg) throws WeixinException;
+	CorpMsgResult sendCorpMsg(ICorp corp, AbstractCorpMsg corpMsg) throws WeixinException;
 	
 }

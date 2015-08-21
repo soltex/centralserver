@@ -28,6 +28,8 @@ import com.vanstone.centralserver.common.Constants;
 import com.vanstone.centralserver.common.JsonUtil;
 import com.vanstone.centralserver.common.MyAssert;
 import com.vanstone.centralserver.common.corp.CorpAppInfo;
+import com.vanstone.centralserver.common.corp.ICorp;
+import com.vanstone.centralserver.common.corp.ICorpApp;
 import com.vanstone.centralserver.common.corp.ReportLocationFlag;
 import com.vanstone.centralserver.common.corp.media.MPNewsArticle;
 import com.vanstone.centralserver.common.corp.media.MediaResult;
@@ -41,8 +43,6 @@ import com.vanstone.centralserver.common.util.UnixJavaDateTimeUtil;
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.centralserver.common.weixin.WeixinException.ErrorCode;
 import com.vanstone.centralserver.common.weixin.wrap.menu.Menu;
-import com.vanstone.weixin.corp.client.ICorp;
-import com.vanstone.weixin.corp.client.ICorpApp;
 import com.vanstone.weixin.corp.client.WeixinCorpClientManager;
 
 /**
@@ -570,11 +570,12 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 	
 	@Override
-	public CorpMsgResult sendCorpMsg(ICorp corp, ICorpApp corpApp, AbstractCorpMsg corpMsg) throws WeixinException {
+	public CorpMsgResult sendCorpMsg(ICorp corp, AbstractCorpMsg corpMsg) throws WeixinException {
 		MyAssert.notNull(corp);
-		MyAssert.notNull(corpApp);
 		String accessToken = this.getAccessToken(corp);
 		HttpPost post = new HttpPost(Constants.getCorpSendMsgUrl(accessToken));
+		StringEntity stringEntity = new StringEntity(corpMsg.toJson(), Constants.SYS_CHARSET_UTF8);
+		post.setEntity(stringEntity);
 		return this.clientTemplate.execute(post, new HttpClientCallback<CorpMsgResult>() {
 			@Override
 			public CorpMsgResult executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
@@ -583,12 +584,8 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 				String invaliduser = (String) map.get("invaliduser");
 				String invalidparty = (String) map.get("invalidparty");
 				String invalidtag = (String) map.get("invalidtag");
-				if (errcode == ErrorCode.WEIXIN_SUCCESS_0.getCode()) {
-					return new CorpMsgResult();
-				} else {
-					ErrorCode errorCode = ErrorCode.parseErrorCode(errcode);
-					return new CorpMsgResult(errorCode, errmsg, invaliduser, invalidparty, invalidtag);
-				}
+				ErrorCode errorCode = ErrorCode.parseErrorCode(errcode);
+				return new CorpMsgResult(errorCode, errmsg, invaliduser, invalidparty, invalidtag);
 			}
 		});
 	}

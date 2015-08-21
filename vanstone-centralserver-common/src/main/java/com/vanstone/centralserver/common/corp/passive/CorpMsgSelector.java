@@ -5,12 +5,9 @@ package com.vanstone.centralserver.common.corp.passive;
 
 /**
  * @author shipeng
- *
  */
-public enum MsgType {
+public class CorpMsgSelector {
 	
-	Text,
 	
-	Event;
 	
 }

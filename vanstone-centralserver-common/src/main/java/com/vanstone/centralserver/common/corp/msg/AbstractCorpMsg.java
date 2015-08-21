@@ -3,10 +3,12 @@
  */
 package com.vanstone.centralserver.common.corp.msg;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.vanstone.centralserver.common.MyAssert;
+import com.vanstone.centralserver.common.corp.ICorpApp;
 
 /**
  * @author shipeng
@@ -19,13 +21,31 @@ public abstract class AbstractCorpMsg {
 	private String toparty;
 	private String totag;
 	private int agentid;
-	private boolean safe;
+	private boolean safe = false;
 	
-	protected AbstractCorpMsg(CorpMsgType msgType, int agentid) {
+	/**是否为全部*/
+	private boolean alluser=false;
+	
+	protected AbstractCorpMsg(CorpMsgType msgType, ICorpApp agentid, boolean safe, boolean alluser, Collection<String> touserids, Collection<String> topartyids, Collection<String> tagids) {
 		MyAssert.notNull(msgType);
-		this.agentid = agentid;
+		MyAssert.notNull(agentid);
+		this.msgType = msgType;
+		this.agentid = agentid.getId();
+		this.safe = safe;
+		
+		if (alluser) {
+			this.touser = "@all";
+		}else{
+			this.touser = __list_to_string(touserids);
+			this.toparty = __list_to_string(topartyids);
+			this.totag = __list_to_string(tagids);
+		}
 	}
 	
+	public boolean isAlluser() {
+		return alluser;
+	}
+
 	public CorpMsgType getMsgType() {
 		return msgType;
 	}
@@ -34,24 +54,12 @@ public abstract class AbstractCorpMsg {
 		return touser;
 	}
 	
-	public void setTouser(String touser) {
-		this.touser = touser;
-	}
-
 	public String getToparty() {
 		return toparty;
 	}
 
-	public void setToparty(String toparty) {
-		this.toparty = toparty;
-	}
-
 	public String getTotag() {
 		return totag;
-	}
-
-	public void setTotag(String totag) {
-		this.totag = totag;
 	}
 
 	public int getAgentid() {
@@ -61,9 +69,21 @@ public abstract class AbstractCorpMsg {
 	public boolean isSafe() {
 		return safe;
 	}
-
-	public void setSafe(boolean safe) {
-		this.safe = safe;
+	
+	/**
+	 * list转换为分隔符形式的string
+	 * @param list
+	 * @return
+	 */
+	private String __list_to_string(Collection<String> list) {
+		if (list == null || list.size() <=0) {
+			return null;
+		}
+		StringBuffer sb = new StringBuffer();
+		for (String str : list) {
+			sb.append(str).append("|");
+		}
+		return sb.toString();
 	}
 	
 	/**
@@ -93,3 +113,4 @@ public abstract class AbstractCorpMsg {
 		return map;
 	}
 }
+ 

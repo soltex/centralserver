@@ -11,6 +11,9 @@ import com.vanstone.centralserver.common.corp.media.MPNewsArticle;
 import com.vanstone.centralserver.common.corp.media.MediaResult;
 import com.vanstone.centralserver.common.corp.media.MediaStat;
 import com.vanstone.centralserver.common.corp.media.MediaType;
+import com.vanstone.centralserver.common.corp.msg.CorpMsg4File;
+import com.vanstone.centralserver.common.corp.msg.CorpMsg4Img;
+import com.vanstone.centralserver.common.corp.msg.CorpMsg4Text;
 import com.vanstone.centralserver.common.util.DebugUtil;
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.centralserver.common.weixin.wrap.ButtonType;
@@ -84,7 +87,7 @@ public class WeixinCorpClientManagerImplTest {
 	
 	@Test
 	public void testdownloadTempMedia() throws WeixinException {
-		this.weixinCorpClientManager.downloadTempMedia(CorpInstance.Sagacityidea, "1ZEFQQFPexFbYysKnw5ONukzsJTwMdp8OpVIimdz9guqLHW8ZSJCk3fgZldWXircN5W2VdJPGbty0XribS4eMKw", new File("e:/aaa.jpg"));
+		this.weixinCorpClientManager.downloadTempMedia(CorpInstance.Sagacityidea, "2pR72hFxy6P9YklrN-JgGel2pFPM5BbzyjsaceBl0dFSmu0mRKUw24y3vRHz9XmcO7aHJYvE0bQPOD8029KW-qg", new File("e:/aaa.jpg"));
 	}
 	
 	@Test
@@ -118,5 +121,42 @@ public class WeixinCorpClientManagerImplTest {
 	public void testgetMediaStat() throws WeixinException {
 		MediaStat stat = this.weixinCorpClientManager.getMediaStat(CorpInstance.Sagacityidea, CorpAppInstance.App1);
 		DebugUtil.print(stat);
+	}
+	
+	@Test
+	public void testsendCorpMsg() {
+		Collection<String> userids = new ArrayList<String>();
+		userids.add("shipeng");
+		CorpMsg4Text corpMsg4Text = new CorpMsg4Text(CorpAppInstance.App1, false, userids, null, null);
+		corpMsg4Text.setContent("投资公司初期注册资本100亿元，由京津冀三省市政府及铁路总公司按照3:3:3:1的比例共同出资成立");
+		try {
+			this.weixinCorpClientManager.sendCorpMsg(CorpInstance.Sagacityidea, corpMsg4Text);
+		} catch (WeixinException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testSendCorpMsg4Image() {
+		try {
+			MediaResult result = this.weixinCorpClientManager.uploadTempMedia(CorpInstance.Sagacityidea, MediaType.Image, new File("d:/ditu.jpg"));
+			CorpMsg4Img corpMsg = new CorpMsg4Img(CorpAppInstance.App1, false);
+			corpMsg.setMediaID(result.getMediaID());
+			this.weixinCorpClientManager.sendCorpMsg(CorpInstance.Sagacityidea, corpMsg);
+		} catch (WeixinException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testSendCorpMsg4File() {
+		try {
+			MediaResult result = this.weixinCorpClientManager.uploadTempMedia(CorpInstance.Sagacityidea, MediaType.File, new File("e:/about云资源汇总指引V7 -  -.pdf"));
+			CorpMsg4File corpMsg4File = new CorpMsg4File(CorpAppInstance.App1, false);
+			corpMsg4File.setMediaID(result.getMediaID());
+			this.weixinCorpClientManager.sendCorpMsg(CorpInstance.Sagacityidea, corpMsg4File);
+		} catch (WeixinException e) {
+			e.printStackTrace();
+		}
 	}
 }

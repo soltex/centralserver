@@ -15,8 +15,8 @@ import com.vanstone.centralserver.common.corp.ICorpApp;
  * @author shipeng
  *
  */
-public class CorpMsg4File extends AbstractCorpMsg {
-	
+public class CorpMsg4Img extends AbstractCorpMsg {
+
 	private String mediaID;
 
 	/**
@@ -24,8 +24,8 @@ public class CorpMsg4File extends AbstractCorpMsg {
 	 * @param agentid
 	 * @param safe
 	 */
-	public CorpMsg4File(ICorpApp agentid, boolean safe) {
-		super(CorpMsgType.File,agentid, safe, true, null, null, null);
+	public CorpMsg4Img(ICorpApp agentid, boolean safe) {
+		super(CorpMsgType.Image ,agentid, safe, true, null, null, null);
 	}
 	
 	/**
@@ -36,8 +36,8 @@ public class CorpMsg4File extends AbstractCorpMsg {
 	 * @param topartyids
 	 * @param tagids
 	 */
-	public CorpMsg4File(ICorpApp agentid, boolean safe, Collection<String> touserids, Collection<String> topartyids, Collection<String> tagids) {
-		super(CorpMsgType.File, agentid, safe, false, touserids, topartyids, tagids);
+	public CorpMsg4Img(ICorpApp agentid, boolean safe, Collection<String> touserids, Collection<String> topartyids, Collection<String> tagids) {
+		super(CorpMsgType.Image, agentid, safe, false, touserids, topartyids, tagids);
 	}
 	
 	public String getMediaID() {
@@ -47,14 +47,16 @@ public class CorpMsg4File extends AbstractCorpMsg {
 	public void setMediaID(String mediaID) {
 		this.mediaID = mediaID;
 	}
-	
+
 	@Override
 	public String toJson() {
 		MyAssert.hasText(this.mediaID);
 		Map<String, Object> map = this.toInteralMap();
-		Map<String, Object> fileMap = new HashMap<String, Object>();
-		fileMap.put("media_id", this.mediaID);
-		map.put("file", fileMap);
+		Map<String, Object> imageMap = new HashMap<String, Object>();
+		imageMap.put("media_id", this.mediaID);
+		map.put("image", imageMap);
+		
 		return JsonUtil.object2PrettyString(map, false);
 	}
+
 }

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.vanstone.weixin.corp.client;
+package com.vanstone.centralserver.common.corp;
 
 /**
  * @author shipeng
