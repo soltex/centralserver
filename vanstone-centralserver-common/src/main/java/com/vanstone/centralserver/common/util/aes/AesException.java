@@ -1,4 +1,4 @@
-﻿package com.vanstone.centralserver.common.util.aes;
+package com.vanstone.centralserver.common.util.aes;
 
 @SuppressWarnings("serial")
 public class AesException extends Exception {

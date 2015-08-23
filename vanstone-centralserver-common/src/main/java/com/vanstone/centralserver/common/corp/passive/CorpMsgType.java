@@ -21,6 +21,8 @@ public enum CorpMsgType {
 
 	LOCATION("location消息", "location"),
 
+	NEWS("新闻消息", "news"),
+	
 	EVENT("事件", "event");
 
 	private String desc;

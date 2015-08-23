@@ -22,6 +22,7 @@
 		<module>vanstone-configuration-sdk</module>
 		<module>vanstone-centralserver</module>
 		<module>vanstone-centralserver-admisnervice-sdk</module>
+    <module>vanstone-centralserver-example-webapp</module>
   </modules>
 	<distributionManagement>
 		<repository>
