@@ -2,7 +2,7 @@
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	version="2.4"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-	
+
 	<servlet>
 		<servlet-name>CorpApp0Servlet</servlet-name>
 		<servlet-class>example.CorpApp0Servlet</servlet-class>
@@ -11,7 +11,7 @@
 		<servlet-name>CorpApp0Servlet</servlet-name>
 		<url-pattern>/corp0</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>CorpApp1Servlet</servlet-name>
 		<servlet-class>example.CorpApp1Servlet</servlet-class>
@@ -20,7 +20,7 @@
 		<servlet-name>CorpApp1Servlet</servlet-name>
 		<url-pattern>/corp1</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>CorpApp2Servlet</servlet-name>
 		<servlet-class>example.CorpApp2Servlet</servlet-class>
@@ -29,7 +29,7 @@
 		<servlet-name>CorpApp2Servlet</servlet-name>
 		<url-pattern>/corp2</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>CorpApp3Servlet</servlet-name>
 		<servlet-class>example.CorpApp3Servlet</servlet-class>
@@ -38,7 +38,7 @@
 		<servlet-name>CorpApp3Servlet</servlet-name>
 		<url-pattern>/corp3</url-pattern>
 	</servlet-mapping>
-	
+
 	<servlet>
 		<servlet-name>CorpApp4Servlet</servlet-name>
 		<servlet-class>example.CorpApp4Servlet</servlet-class>
@@ -47,12 +47,19 @@
 		<servlet-name>CorpApp4Servlet</servlet-name>
 		<url-pattern>/corp4</url-pattern>
 	</servlet-mapping>
-	
-	
-	
+
+	<servlet>
+		<servlet-name>TestServlet</servlet-name>
+		<servlet-class>example.TestServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>TestServlet</servlet-name>
+		<url-pattern>/test</url-pattern>
+	</servlet-mapping>
+
 	
 	<listener>
 		<listener-class>com.vanstone.weixin.corp.client.CorpWeixinServletContextListener</listener-class>
 	</listener>
-	
+
 </web-app>

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package example;
+package com.vanstone.weixin.corp.client.impl;
 
 import java.util.Date;
 
@@ -70,18 +70,14 @@ public class DefaultPassiveMsgListener implements PassiveMsgListener {
 	 */
 	@Override
 	public void OnPassiveTextMsg(PassiveTextMsg msg, HttpServletRequest servletRequest, HttpServletResponse servletResponse) {
-		WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
 		DebugUtil.print(msg);
 		PassiveTextReply reply = new PassiveTextReply();
-		try {
-			reply.setContent("我是测试使用的东西，你看看<a href='" + weixinCorpClientManager.createOAuth2RedirectUrl(CorpClientConf.getInstance().getCorp(), "http://testcorp.sagacityidea.com/test", "ABC") + "'>测试</a>");
-		} catch (WeixinException e1) {
-			e1.printStackTrace();
-		}
+		reply.setContent("我是测试使用的东西，你看看");
 		reply.setCreateTime(new Date());
 		reply.setFromUserName(msg.getToUserName());
 		reply.setToUserName(msg.getFromUserName());
 		
+		WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
 		try {
 			weixinCorpClientManager.sendCorpReply(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(Integer.parseInt(msg.getAgentID())), reply, String.valueOf(msg.getTimestamp()), msg.getNonce(), servletResponse);
 		} catch (WeixinException e) {

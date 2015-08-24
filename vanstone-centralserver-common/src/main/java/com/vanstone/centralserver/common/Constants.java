@@ -12,6 +12,7 @@ import org.apache.commons.lang.StringUtils;
 import com.vanstone.centralserver.common.conf.VanstoneConf;
 import com.vanstone.centralserver.common.configuration.GroupIdDataIdObject;
 import com.vanstone.centralserver.common.corp.media.MediaType;
+import com.vanstone.centralserver.common.weixin.wrap.oauth2.Scope;
 
 /**
  * Weixin 全局常量
@@ -757,4 +758,34 @@ public abstract class Constants {
 		String url = CORP_SEND_MSG_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
 		return url;
 	}
+	
+	// ================================== 企业号 OAUTH2 认证接口 ================================== //
+	
+	public static final String CORP_OAUTH2_REDIRECT_TEMPLATE = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=#CORPID#&redirect_uri=#REDIRECT_URI#&response_type=code&scope=#SCOPE#&state=#STATE##wechat_redirect";
+	
+	public static String getCorpOAuth2RedirectURL(String corpID, String redirectUri, Scope scope, String state) {
+		MyAssert.hasText(corpID);
+		MyAssert.hasText(redirectUri);
+		scope = Scope.snsapi_base;
+		if (state == null) {
+			state = "";
+		}
+		
+		String url = CORP_OAUTH2_REDIRECT_TEMPLATE.replaceAll("#CORPID#", corpID);
+		url = url.replaceAll("#REDIRECT_URI#", URLUtil.urlencode(redirectUri));
+		url = url.replaceAll("#SCOPE#", scope.toString());
+		url = url.replaceAll("#STATE#", state);
+		return url;
+	}
+	
+	public static final String CORP_GER_USERINFO = "https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token=#ACCESS_TOKEN#&code=#CODE#";
+	
+	public static String getCorpUserInfoUrl(String accesstoken, String code) {
+		MyAssert.hasText(accesstoken);
+		MyAssert.hasText(code);
+		String url = CORP_GER_USERINFO.replaceAll("#ACCESS_TOKEN#", accesstoken);
+		url = url.replaceAll("#CODE#", code);
+		return url;
+	}
+	
 }

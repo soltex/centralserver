@@ -13,8 +13,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -40,6 +42,8 @@ import com.vanstone.centralserver.common.corp.media.MediaStat;
 import com.vanstone.centralserver.common.corp.media.MediaType;
 import com.vanstone.centralserver.common.corp.msg.AbstractCorpMsg;
 import com.vanstone.centralserver.common.corp.msg.CorpMsgResult;
+import com.vanstone.centralserver.common.corp.oauth2.OAuth2Result;
+import com.vanstone.centralserver.common.corp.oauth2.RedirectResult;
 import com.vanstone.centralserver.common.corp.passive.AbstractPassiveReply;
 import com.vanstone.centralserver.common.util.HttpClientTemplate;
 import com.vanstone.centralserver.common.util.HttpClientTemplate.HttpClientCallback;
@@ -47,6 +51,7 @@ import com.vanstone.centralserver.common.util.UnixJavaDateTimeUtil;
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.centralserver.common.weixin.WeixinException.ErrorCode;
 import com.vanstone.centralserver.common.weixin.wrap.menu.Menu;
+import com.vanstone.centralserver.common.weixin.wrap.oauth2.Scope;
 import com.vanstone.weixin.corp.client.WeixinCorpClientManager;
 
 /**
@@ -56,7 +61,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 
 	/** HttpClientTemplate */
 	private HttpClientTemplate clientTemplate = new HttpClientTemplate();
-	
+
 	/**
 	 * 获取当前AccessToken
 	 * 
@@ -572,7 +577,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 			}
 		});
 	}
-	
+
 	@Override
 	public CorpMsgResult sendCorpMsg(ICorp corp, AbstractCorpMsg corpMsg) throws WeixinException {
 		MyAssert.notNull(corp);
@@ -599,5 +604,46 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 		String replyxml = passiveReply.toEncryptJson(corpApp.getToken(), corpApp.getEncodingAESKey(), corp, timestamp, nonce);
 		ServletUtil.write(servletResponse, replyxml);
 	}
-	
+
+	@Override
+	public String createOAuth2RedirectUrl(ICorp corp, String redirectUri, String state) throws WeixinException {
+		MyAssert.notNull(corp);
+		MyAssert.hasText(redirectUri);
+		String url = Constants.getCorpOAuth2RedirectURL(corp.getAppID(), redirectUri, Scope.snsapi_base, state);
+		return url;
+	}
+
+	@Override
+	public RedirectResult getRedirectResult(HttpServletRequest servletRequest) {
+		MyAssert.notNull(servletRequest);
+		// code=CODE&state=STATE
+		String code = servletRequest.getParameter("code");
+		String state = servletRequest.getParameter("state");
+		if (StringUtils.isEmpty(code)) {
+			return null;
+		}
+		RedirectResult rr = new RedirectResult();
+		rr.setCode(code);
+		rr.setState(state);
+		return rr;
+	}
+
+	@Override
+	public OAuth2Result getUserInfo(ICorp corp, String code) throws WeixinException {
+		MyAssert.notNull(corp);
+		MyAssert.hasText(code);
+		final String accesstoken = this.getAccessToken(corp);
+		String url = Constants.getCorpUserInfoUrl(accesstoken, code);
+		HttpGet httpGet = new HttpGet(url);
+		return this.clientTemplate.execute(httpGet, new HttpClientCallback<OAuth2Result>() {
+			@Override
+			public OAuth2Result executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				String userID = (String) map.get("UserId");
+				String deviceID = (String) map.get("DeviceId");
+				String openID = (String) map.get("OpenId");
+				return new OAuth2Result(userID, openID, deviceID);
+			}
+		});
+	}
+
 }

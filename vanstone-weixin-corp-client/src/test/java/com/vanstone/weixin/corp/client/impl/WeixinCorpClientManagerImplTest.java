@@ -22,6 +22,7 @@ import com.vanstone.centralserver.common.weixin.wrap.menu.MenuItem;
 import com.vanstone.weixin.corp.client.WeixinCorpClientFactory;
 import com.vanstone.weixin.corp.client.WeixinCorpClientManager;
 import com.vanstone.weixin.corp.client.conf.CorpClientConf;
+import com.vanstone.weixin.corp.client.conf.xml.DefaultXmlConfInitiator;
 
 @SuppressWarnings("unused")
 public class WeixinCorpClientManagerImplTest {
@@ -36,14 +37,18 @@ public class WeixinCorpClientManagerImplTest {
 
 	@Test
 	public void testCreateMenu() throws WeixinException {
+		DefaultXmlConfInitiator initiator = new DefaultXmlConfInitiator();
+		initiator.initial();
+		
 		WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
 		Menu menu = new Menu();
 		MenuItem item1 = new MenuItem("菜单1");
-
+		
 		MenuItem item11 = new MenuItem(ButtonType.View, "菜单11", "http://www.baidu.com");
-		MenuItem item12 = new MenuItem(ButtonType.Click, "菜单12", "http://www.baidu.com");
+		MenuItem item12 = new MenuItem(ButtonType.View, "菜单12", "http://www.baidu.com");
 		MenuItem item13 = new MenuItem(ButtonType.View, "菜单13", "http://www.baidu.com");
 		MenuItem item14 = new MenuItem(ButtonType.View, "菜单14", "http://www.baidu.com");
+		MenuItem item5 = new MenuItem(ButtonType.View, "Oauth2测试", "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx87c2c0c1d9ec9f7a&redirect_uri=http://testcorp.sagacityidea.com/test&response_type=code&scope=snsapi_base&state=ABC#wechat_redirect");
 		item1.addSubMenuItem(item11);
 		item1.addSubMenuItem(item12);
 		item1.addSubMenuItem(item13);
@@ -165,6 +170,18 @@ public class WeixinCorpClientManagerImplTest {
 			CorpMsg4File corpMsg4File = new CorpMsg4File(CorpClientConf.getInstance().getCorpApp(1), false);
 			corpMsg4File.setMediaID(result.getMediaID());
 			this.weixinCorpClientManager.sendCorpMsg(CorpClientConf.getInstance().getCorp(), corpMsg4File);
+		} catch (WeixinException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void testcreateOAuth2RedirectUrl() {
+		DefaultXmlConfInitiator initiator = new DefaultXmlConfInitiator();
+		initiator.initial();
+		try {
+			String url = this.weixinCorpClientManager.createOAuth2RedirectUrl(CorpClientConf.getInstance().getCorp(), "http://testcorp.sagacityidea.com/test", "ABC");
+			System.out.println(url);
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}

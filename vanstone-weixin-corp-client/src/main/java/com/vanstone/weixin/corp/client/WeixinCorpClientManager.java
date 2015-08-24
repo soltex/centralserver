@@ -3,6 +3,7 @@ package com.vanstone.weixin.corp.client;
 import java.io.File;
 import java.util.Collection;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.vanstone.centralserver.common.corp.CorpAppInfo;
@@ -15,6 +16,8 @@ import com.vanstone.centralserver.common.corp.media.MediaStat;
 import com.vanstone.centralserver.common.corp.media.MediaType;
 import com.vanstone.centralserver.common.corp.msg.AbstractCorpMsg;
 import com.vanstone.centralserver.common.corp.msg.CorpMsgResult;
+import com.vanstone.centralserver.common.corp.oauth2.OAuth2Result;
+import com.vanstone.centralserver.common.corp.oauth2.RedirectResult;
 import com.vanstone.centralserver.common.corp.passive.AbstractPassiveReply;
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.centralserver.common.weixin.wrap.menu.Menu;
@@ -171,4 +174,26 @@ public interface WeixinCorpClientManager {
 	 */
 	void sendCorpReply(ICorp corp, ICorpApp corpApp, AbstractPassiveReply passiveReply, String timestamp, String nonce, HttpServletResponse servletResponse) throws WeixinException;
 	
+	/**
+	 * getCorpOAuth2RedirectURL
+	 * @return
+	 * @throws WeixinException
+	 */
+	String createOAuth2RedirectUrl(ICorp corp, String redirectUri, String state) throws WeixinException;
+	
+	/**
+	 * 获取回调RedirectResult
+	 * @param servletRequest
+	 * @return
+	 */
+	RedirectResult getRedirectResult(HttpServletRequest servletRequest);
+	
+	/**
+	 * 获取用户信息
+	 * @param corp
+	 * @param code
+	 * @return
+	 * @throws WeixinException
+	 */
+	OAuth2Result getUserInfo(ICorp corp, String code) throws WeixinException;
 }
