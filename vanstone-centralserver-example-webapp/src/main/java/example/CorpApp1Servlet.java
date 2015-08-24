@@ -3,12 +3,6 @@
  */
 package example;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import com.vanstone.centralserver.common.corp.ICorpApp;
 import com.vanstone.weixin.corp.client.conf.CorpClientConf;
 import com.vanstone.weixin.corp.client.servlet.AbstractCorpWeixinServlet;
@@ -27,8 +21,4 @@ public class CorpApp1Servlet extends AbstractCorpWeixinServlet{
 		return CorpClientConf.getInstance().getCorpApp(1);
 	}
 	
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		this.doPost(req, resp);
-	}
 }
