@@ -6,7 +6,7 @@ package com.vanstone.centralserver.common.corp.passive.msg;
 import org.dom4j.Element;
 
 import com.vanstone.centralserver.common.corp.passive.AbstractPassiveMsg;
-import com.vanstone.centralserver.common.corp.passive.CorpMsgType;
+import com.vanstone.centralserver.common.corp.passive.PassiveCorpMsgType;
 
 /**
  * @author shipeng
@@ -17,7 +17,7 @@ public class PassiveVideoMsg extends AbstractPassiveMsg {
 	private String thumbMediaId;
 
 	public PassiveVideoMsg() {
-		super(CorpMsgType.VIDEO);
+		super(PassiveCorpMsgType.VIDEO);
 	}
 
 	public String getMediaID() {

@@ -20,7 +20,7 @@ public abstract class AbstractPassiveMsg {
 	private String fromUserName;
 	private Date createTime;
 	private String agentID;
-	private CorpMsgType msgType;
+	private PassiveCorpMsgType msgType;
 	private Long msgID;
 	
 	// 参数中携带的值
@@ -28,7 +28,7 @@ public abstract class AbstractPassiveMsg {
 	private long timestamp;
 	private String nonce;
 	
-	protected AbstractPassiveMsg(CorpMsgType msgType) {
+	protected AbstractPassiveMsg(PassiveCorpMsgType msgType) {
 		this.msgType = msgType;
 	}
 	
@@ -64,7 +64,7 @@ public abstract class AbstractPassiveMsg {
 		this.agentID = agentID;
 	}
 
-	public CorpMsgType getMsgType() {
+	public PassiveCorpMsgType getMsgType() {
 		return msgType;
 	}
 
@@ -92,7 +92,7 @@ public abstract class AbstractPassiveMsg {
 		this.nonce = nonce;
 	}
 
-	public void setMsgType(CorpMsgType msgType) {
+	public void setMsgType(PassiveCorpMsgType msgType) {
 		this.msgType = msgType;
 	}
 	

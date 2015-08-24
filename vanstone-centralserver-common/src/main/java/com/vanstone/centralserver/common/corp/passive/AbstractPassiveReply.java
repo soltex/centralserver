@@ -57,10 +57,6 @@ public abstract class AbstractPassiveReply {
 		return msgType;
 	}
 	
-	public void setMsgType(CorpMsgType msgType) {
-		this.msgType = msgType;
-	}
-	
 	/**
 	 * 转换成加密后的字符串
 	 * @param timestamp

@@ -6,7 +6,7 @@ package com.vanstone.centralserver.common.corp.passive.msg;
 import org.dom4j.Element;
 
 import com.vanstone.centralserver.common.corp.passive.AbstractPassiveMsg;
-import com.vanstone.centralserver.common.corp.passive.CorpMsgType;
+import com.vanstone.centralserver.common.corp.passive.PassiveCorpMsgType;
 
 /**
  * @author shipeng
@@ -18,7 +18,7 @@ public class PassiveVoiceMsg extends AbstractPassiveMsg {
 	private String format;
 
 	public PassiveVoiceMsg() {
-		super(CorpMsgType.VOICE);
+		super(PassiveCorpMsgType.VOICE);
 	}
 
 	public String getMediaID() {

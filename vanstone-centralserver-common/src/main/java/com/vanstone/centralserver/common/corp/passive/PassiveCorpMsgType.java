@@ -7,7 +7,7 @@ package com.vanstone.centralserver.common.corp.passive;
  * @author shipeng
  *
  */
-public enum CorpMsgType {
+public enum PassiveCorpMsgType {
 
 	TEXT("text消息", "text"),
 
@@ -28,7 +28,7 @@ public enum CorpMsgType {
 	private String desc;
 	private String type;
 
-	private CorpMsgType(String desc, String type) {
+	private PassiveCorpMsgType(String desc, String type) {
 		this.desc = desc;
 		this.type = type;
 	}
@@ -41,12 +41,12 @@ public enum CorpMsgType {
 		return type;
 	}
 	
-	public static CorpMsgType parseIgnoreCase(String typestring) {
+	public static PassiveCorpMsgType parseIgnoreCase(String typestring) {
 		if (typestring == null || typestring.equals("")) {
 			return null;
 		}
-		CorpMsgType[] msgTypes = CorpMsgType.values();
-		for (CorpMsgType msgType : msgTypes) {
+		PassiveCorpMsgType[] msgTypes = PassiveCorpMsgType.values();
+		for (PassiveCorpMsgType msgType : msgTypes) {
 			if (msgType.getType().equalsIgnoreCase(typestring)) {
 				return msgType;
 			}

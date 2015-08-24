@@ -21,23 +21,25 @@ import com.vanstone.centralserver.common.weixin.wrap.menu.Menu;
 import com.vanstone.centralserver.common.weixin.wrap.menu.MenuItem;
 import com.vanstone.weixin.corp.client.WeixinCorpClientFactory;
 import com.vanstone.weixin.corp.client.WeixinCorpClientManager;
+import com.vanstone.weixin.corp.client.conf.CorpClientConf;
 
+@SuppressWarnings("unused")
 public class WeixinCorpClientManagerImplTest {
 
 	@Test
 	public void testGetAccessToken() throws WeixinException {
 		WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
-		String accessToken = weixinCorpClientManager.getAccessToken(CorpInstance.Sagacityidea);
-		System.out.println(accessToken);
+		// String accessToken =
+		// weixinCorpClientManager.getAccessToken(CorpInstance.Sagacityidea);
+		// System.out.println(accessToken);
 	}
-	
+
 	@Test
 	public void testCreateMenu() throws WeixinException {
 		WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
 		Menu menu = new Menu();
 		MenuItem item1 = new MenuItem("菜单1");
-		
-		
+
 		MenuItem item11 = new MenuItem(ButtonType.View, "菜单11", "http://www.baidu.com");
 		MenuItem item12 = new MenuItem(ButtonType.Click, "菜单12", "http://www.baidu.com");
 		MenuItem item13 = new MenuItem(ButtonType.View, "菜单13", "http://www.baidu.com");
@@ -46,115 +48,123 @@ public class WeixinCorpClientManagerImplTest {
 		item1.addSubMenuItem(item12);
 		item1.addSubMenuItem(item13);
 		item1.addSubMenuItem(item14);
-		
+
 		menu.addMenuItem(item1);
-		
+
 		System.out.println(menu.toJson());
-		
-		weixinCorpClientManager.createMenu(CorpInstance.Sagacityidea, CorpAppInstance.App1, menu);
-//		weixinCorpClientManager.createMenu(CorpInstance.Sagacityidea, CorpAppInstance.App1, menu);
-//		weixinCorpClientManager.createMenu(CorpInstance.Sagacityidea, CorpAppInstance.App3, menu);
-//		weixinCorpClientManager.createMenu(CorpInstance.Sagacityidea, CorpAppInstance.App4, menu);
-//		weixinCorpClientManager.createMenu(CorpInstance.Sagacityidea, CorpAppInstance.App5, menu);
+
+		weixinCorpClientManager.createMenu(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1), menu);
+		// weixinCorpClientManager.createMenu(CorpInstance.Sagacityidea,
+		// CorpAppInstance.App1, menu);
+		// weixinCorpClientManager.createMenu(CorpInstance.Sagacityidea,
+		// CorpAppInstance.App3, menu);
+		// weixinCorpClientManager.createMenu(CorpInstance.Sagacityidea,
+		// CorpAppInstance.App4, menu);
+		// weixinCorpClientManager.createMenu(CorpInstance.Sagacityidea,
+		// CorpAppInstance.App5, menu);
 	}
-	
+
 	@Test
 	public void testgetCorpAppInfo() throws WeixinException {
 		WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
-		CorpAppInfo corpAppInfo = weixinCorpClientManager.getCorpAppInfo(CorpInstance.Sagacityidea, CorpAppInstance.App1);
-		DebugUtil.print(corpAppInfo);
+		// CorpAppInfo corpAppInfo =
+		// weixinCorpClientManager.getCorpAppInfo(CorpInstance.Sagacityidea,
+		// CorpAppInstance.App1);
+		// DebugUtil.print(corpAppInfo);
 	}
-	
+
 	@Test
 	public void testgetCorpAppInfos() throws WeixinException {
 		WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
-		Collection<CorpAppInfo> appInfos = weixinCorpClientManager.getCorpAppInfos(CorpInstance.Sagacityidea);
+		Collection<CorpAppInfo> appInfos = weixinCorpClientManager.getCorpAppInfos(CorpClientConf.getInstance().getCorp());
 		DebugUtil.print(appInfos);
 	}
-	
+
 	@Test
 	public void testuploadTempMedia() {
 		WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
 		try {
-			MediaResult result = weixinCorpClientManager.uploadTempMedia(CorpInstance.Sagacityidea, MediaType.Image, new File("F:/2020.jpg"));
+			MediaResult result = weixinCorpClientManager.uploadTempMedia(CorpClientConf.getInstance().getCorp(), MediaType.Image, new File("F:/2020.jpg"));
 			DebugUtil.print(result);
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
-	
+
 	@Test
 	public void testdownloadTempMedia() throws WeixinException {
-		this.weixinCorpClientManager.downloadTempMedia(CorpInstance.Sagacityidea, "2pR72hFxy6P9YklrN-JgGel2pFPM5BbzyjsaceBl0dFSmu0mRKUw24y3vRHz9XmcO7aHJYvE0bQPOD8029KW-qg", new File("e:/aaa.jpg"));
+		this.weixinCorpClientManager.downloadTempMedia(CorpClientConf.getInstance().getCorp(), "2pR72hFxy6P9YklrN-JgGel2pFPM5BbzyjsaceBl0dFSmu0mRKUw24y3vRHz9XmcO7aHJYvE0bQPOD8029KW-qg",
+				new File("e:/aaa.jpg"));
 	}
-	
+
 	@Test
 	public void testuploadMPNewsArticle() throws WeixinException {
-		this.weixinCorpClientManager.downloadForeverMedia(CorpInstance.Sagacityidea, CorpAppInstance.App1, "2ZQyuFRuvewj5_9jW6Qt8BsmKNNNTS8JA4ZbUuLgbmxalAy7YHdhGaEmHU71Uj1wMeDaL5HDS-ZANvTx71n7RWw", new File("e:/aaa.jpg"));
+		this.weixinCorpClientManager.downloadForeverMedia(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1),
+				"2ZQyuFRuvewj5_9jW6Qt8BsmKNNNTS8JA4ZbUuLgbmxalAy7YHdhGaEmHU71Uj1wMeDaL5HDS-ZANvTx71n7RWw", new File("e:/aaa.jpg"));
 	}
-	
+
 	@Test
 	public void testuploadForeverMedia() throws WeixinException {
-		String mediaID = this.weixinCorpClientManager.uploadForeverMedia(CorpInstance.Sagacityidea, CorpAppInstance.App1, MediaType.Image, new File("f:/2020.jpg"));
+		String mediaID = this.weixinCorpClientManager.uploadForeverMedia(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1), MediaType.Image, new File("f:/2020.jpg"));
 		System.out.println(mediaID);
 	}
-	
+
 	@Test
 	public void testuloadmpnewsForeverMedia() throws WeixinException {
 		Collection<MPNewsArticle> articles = new ArrayList<MPNewsArticle>();
-		String mediaID = this.weixinCorpClientManager.uploadForeverMedia(CorpInstance.Sagacityidea, CorpAppInstance.App1, MediaType.Image, new File("f:/2020.jpg"));
+		String mediaID = this.weixinCorpClientManager.uploadForeverMedia(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1), MediaType.Image, new File("f:/2020.jpg"));
 		MPNewsArticle article = new MPNewsArticle("呵呵呵", mediaID, null, null, "呵呵呵呵呵呵呵", "和是简介", false);
 		articles.add(article);
-		this.weixinCorpClientManager.uploadMPNewsArticle(CorpInstance.Sagacityidea, CorpAppInstance.App1, articles);
+		this.weixinCorpClientManager.uploadMPNewsArticle(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1), articles);
 	}
-	
+
 	@Test
 	public void testdownloadmpnews() throws WeixinException {
 		String mediaID = "2iazhR8urNTCADmj3vthPhrBFSMP0y1rRKyqTP9nolv9-4tnOXHN6qKW86ABd8Qd7";
-		Collection<MPNewsArticle> mpNewsArticles = this.weixinCorpClientManager.downloadForeverMedia(CorpInstance.Sagacityidea, CorpAppInstance.App1, mediaID, null);
+		Collection<MPNewsArticle> mpNewsArticles = this.weixinCorpClientManager.downloadForeverMedia(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1), mediaID, null);
 		DebugUtil.print(mpNewsArticles);
 	}
-	
+
 	@Test
 	public void testgetMediaStat() throws WeixinException {
-		MediaStat stat = this.weixinCorpClientManager.getMediaStat(CorpInstance.Sagacityidea, CorpAppInstance.App1);
+		MediaStat stat = this.weixinCorpClientManager.getMediaStat(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1));
 		DebugUtil.print(stat);
 	}
-	
+
 	@Test
 	public void testsendCorpMsg() {
 		Collection<String> userids = new ArrayList<String>();
 		userids.add("shipeng");
-		CorpMsg4Text corpMsg4Text = new CorpMsg4Text(CorpAppInstance.App1, false, userids, null, null);
+		CorpMsg4Text corpMsg4Text = new CorpMsg4Text(CorpClientConf.getInstance().getCorpApp(1), false, userids, null, null);
 		corpMsg4Text.setContent("投资公司初期注册资本100亿元，由京津冀三省市政府及铁路总公司按照3:3:3:1的比例共同出资成立");
 		try {
-			this.weixinCorpClientManager.sendCorpMsg(CorpInstance.Sagacityidea, corpMsg4Text);
+			this.weixinCorpClientManager.sendCorpMsg(CorpClientConf.getInstance().getCorp(), corpMsg4Text);
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testSendCorpMsg4Image() {
 		try {
-			MediaResult result = this.weixinCorpClientManager.uploadTempMedia(CorpInstance.Sagacityidea, MediaType.Image, new File("d:/ditu.jpg"));
-			CorpMsg4Img corpMsg = new CorpMsg4Img(CorpAppInstance.App1, false);
+			MediaResult result = this.weixinCorpClientManager.uploadTempMedia(CorpClientConf.getInstance().getCorp(), MediaType.Image, new File("d:/ditu.jpg"));
+			CorpMsg4Img corpMsg = new CorpMsg4Img(CorpClientConf.getInstance().getCorpApp(1), false);
 			corpMsg.setMediaID(result.getMediaID());
-			this.weixinCorpClientManager.sendCorpMsg(CorpInstance.Sagacityidea, corpMsg);
+			this.weixinCorpClientManager.sendCorpMsg(CorpClientConf.getInstance().getCorp(), corpMsg);
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Test
 	public void testSendCorpMsg4File() {
 		try {
-			MediaResult result = this.weixinCorpClientManager.uploadTempMedia(CorpInstance.Sagacityidea, MediaType.File, new File("e:/about云资源汇总指引V7 -  -.pdf"));
-			CorpMsg4File corpMsg4File = new CorpMsg4File(CorpAppInstance.App1, false);
+			MediaResult result = this.weixinCorpClientManager.uploadTempMedia(CorpClientConf.getInstance().getCorp(), MediaType.File, new File("e:/about云资源汇总指引V7 -  -.pdf"));
+			CorpMsg4File corpMsg4File = new CorpMsg4File(CorpClientConf.getInstance().getCorpApp(1), false);
 			corpMsg4File.setMediaID(result.getMediaID());
-			this.weixinCorpClientManager.sendCorpMsg(CorpInstance.Sagacityidea, corpMsg4File);
+			this.weixinCorpClientManager.sendCorpMsg(CorpClientConf.getInstance().getCorp(), corpMsg4File);
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}

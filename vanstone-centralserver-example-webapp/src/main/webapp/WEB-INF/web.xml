@@ -1,16 +1,58 @@
-<!DOCTYPE web-app PUBLIC
- "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
- "http://java.sun.com/dtd/web-app_2_3.dtd" >
-
-<web-app>
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	version="2.4"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 	
 	<servlet>
-		<servlet-name>CorpCommandServlet</servlet-name>
-		<servlet-class>example.CorpCommandServlet</servlet-class>
+		<servlet-name>CorpApp0Servlet</servlet-name>
+		<servlet-class>example.CorpApp0Servlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>CorpCommandServlet</servlet-name>
-		<url-pattern>/corpcontroller</url-pattern>
+		<servlet-name>CorpApp0Servlet</servlet-name>
+		<url-pattern>/corp0</url-pattern>
 	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CorpApp1Servlet</servlet-name>
+		<servlet-class>example.CorpApp1Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CorpApp1Servlet</servlet-name>
+		<url-pattern>/corp1</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CorpApp2Servlet</servlet-name>
+		<servlet-class>example.CorpApp2Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CorpApp2Servlet</servlet-name>
+		<url-pattern>/corp2</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CorpApp3Servlet</servlet-name>
+		<servlet-class>example.CorpApp3Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CorpApp3Servlet</servlet-name>
+		<url-pattern>/corp3</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>CorpApp4Servlet</servlet-name>
+		<servlet-class>example.CorpApp4Servlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CorpApp4Servlet</servlet-name>
+		<url-pattern>/corp4</url-pattern>
+	</servlet-mapping>
+	
+	
+	
+	
+	<listener>
+		<listener-class>com.vanstone.weixin.corp.client.CorpWeixinServletContextListener</listener-class>
+	</listener>
 	
 </web-app>

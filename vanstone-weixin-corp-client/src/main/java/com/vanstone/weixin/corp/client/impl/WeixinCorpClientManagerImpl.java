@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
@@ -27,6 +29,7 @@ import org.apache.http.util.EntityUtils;
 import com.vanstone.centralserver.common.Constants;
 import com.vanstone.centralserver.common.JsonUtil;
 import com.vanstone.centralserver.common.MyAssert;
+import com.vanstone.centralserver.common.ServletUtil;
 import com.vanstone.centralserver.common.corp.CorpAppInfo;
 import com.vanstone.centralserver.common.corp.ICorp;
 import com.vanstone.centralserver.common.corp.ICorpApp;
@@ -37,6 +40,7 @@ import com.vanstone.centralserver.common.corp.media.MediaStat;
 import com.vanstone.centralserver.common.corp.media.MediaType;
 import com.vanstone.centralserver.common.corp.msg.AbstractCorpMsg;
 import com.vanstone.centralserver.common.corp.msg.CorpMsgResult;
+import com.vanstone.centralserver.common.corp.passive.AbstractPassiveReply;
 import com.vanstone.centralserver.common.util.HttpClientTemplate;
 import com.vanstone.centralserver.common.util.HttpClientTemplate.HttpClientCallback;
 import com.vanstone.centralserver.common.util.UnixJavaDateTimeUtil;
@@ -52,7 +56,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 
 	/** HttpClientTemplate */
 	private HttpClientTemplate clientTemplate = new HttpClientTemplate();
-
+	
 	/**
 	 * 获取当前AccessToken
 	 * 
@@ -589,4 +593,11 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 			}
 		});
 	}
+
+	@Override
+	public void sendCorpReply(ICorp corp, ICorpApp corpApp, AbstractPassiveReply passiveReply, String timestamp, String nonce, HttpServletResponse servletResponse) throws WeixinException {
+		String replyxml = passiveReply.toEncryptJson(corpApp.getToken(), corpApp.getEncodingAESKey(), corp, timestamp, nonce);
+		ServletUtil.write(servletResponse, replyxml);
+	}
+	
 }

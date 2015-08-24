@@ -22,10 +22,10 @@ public interface ICorpApp {
 	String getDesc();
 	
 	/**
-	 * 回调响应的URL
+	 * 当前应用监听器
 	 * @return
 	 */
-	String getCallbackURL();
+	PassiveMsgListener getListener();
 	
 	/**
 	 * 获取当前应用的令牌Token值

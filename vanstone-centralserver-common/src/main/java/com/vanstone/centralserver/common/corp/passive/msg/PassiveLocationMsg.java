@@ -6,7 +6,7 @@ package com.vanstone.centralserver.common.corp.passive.msg;
 import org.dom4j.Element;
 
 import com.vanstone.centralserver.common.corp.passive.AbstractPassiveMsg;
-import com.vanstone.centralserver.common.corp.passive.CorpMsgType;
+import com.vanstone.centralserver.common.corp.passive.PassiveCorpMsgType;
 
 /**
  * @author shipeng
@@ -20,7 +20,7 @@ public class PassiveLocationMsg extends AbstractPassiveMsg {
 	private String label;
 
 	public PassiveLocationMsg() {
-		super(CorpMsgType.LOCATION);
+		super(PassiveCorpMsgType.LOCATION);
 	}
 
 	public double getLocationX() {

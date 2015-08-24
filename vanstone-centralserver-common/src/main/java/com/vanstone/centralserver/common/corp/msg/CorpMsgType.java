@@ -38,5 +38,5 @@ public enum CorpMsgType {
 	public String getCode() {
 		return code;
 	}
-
+	
 }

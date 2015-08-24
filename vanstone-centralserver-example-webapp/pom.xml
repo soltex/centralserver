@@ -38,7 +38,7 @@
 		</dependency>
 		<dependency>
 			<groupId>com.vanstone</groupId>
-			<artifactId>vanstone-centralserver-common</artifactId>
+			<artifactId>vanstone-weixin-corp-client</artifactId>
 			<version>${centralserver.version}</version>
 		</dependency>
 	</dependencies>

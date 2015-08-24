@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/2002/xmlspec/dtd/2.10/xmlspec.dtd">
+
+<conf>
+
+	<default-listener>example.DefaultPassiveMsgListener</default-listener>
+
+	<corp appID="wx87c2c0c1d9ec9f7a" appSecret="DvNnPTVFkoQVNOh9VdjfcAnKOr_XaZCjwgxg8sNn4fHW1Co_2Thok2ymdnCjNLPq" />
+	
+	<corp-app id="0">
+		<desc>这个可以改</desc>
+		<listener></listener>
+		<token>sagacity</token>
+		<encoding-aes-key>jWmYm7qr5nMoAUwZRjGtBxmz3KA1tkAj3ykkR6q2B2C</encoding-aes-key>
+	</corp-app>
+	<corp-app id="1">
+		<desc> 思睿鸿奇--开发部</desc>
+		<listener></listener>
+		<token>sagacity</token>
+		<encoding-aes-key>jWmYm7qr5nMoAUwZRjGtBxmz3KA1tkAj3ykkR6q2B2C</encoding-aes-key>
+	</corp-app>
+	<corp-app id="2">
+		<desc>思睿鸿奇--产品部</desc>
+		<listener></listener>
+		<token>sagacity</token>
+		<encoding-aes-key>jWmYm7qr5nMoAUwZRjGtBxmz3KA1tkAj3ykkR6q2B2C</encoding-aes-key>
+	</corp-app>
+	<corp-app id="3">
+		<desc>思睿鸿奇--设计部</desc>
+		<listener></listener>
+		<token>sagacity</token>
+		<encoding-aes-key>jWmYm7qr5nMoAUwZRjGtBxmz3KA1tkAj3ykkR6q2B2C</encoding-aes-key>
+	</corp-app>
+	<corp-app id="4">
+		<desc>思睿鸿奇--客服部</desc>
+		<listener></listener>
+		<token>sagacity</token>
+		<encoding-aes-key>jWmYm7qr5nMoAUwZRjGtBxmz3KA1tkAj3ykkR6q2B2C</encoding-aes-key>
+	</corp-app>
+</conf>

@@ -3,6 +3,8 @@ package com.vanstone.weixin.corp.client;
 import java.io.File;
 import java.util.Collection;
 
+import javax.servlet.http.HttpServletResponse;
+
 import com.vanstone.centralserver.common.corp.CorpAppInfo;
 import com.vanstone.centralserver.common.corp.ICorp;
 import com.vanstone.centralserver.common.corp.ICorpApp;
@@ -13,6 +15,7 @@ import com.vanstone.centralserver.common.corp.media.MediaStat;
 import com.vanstone.centralserver.common.corp.media.MediaType;
 import com.vanstone.centralserver.common.corp.msg.AbstractCorpMsg;
 import com.vanstone.centralserver.common.corp.msg.CorpMsgResult;
+import com.vanstone.centralserver.common.corp.passive.AbstractPassiveReply;
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.centralserver.common.weixin.wrap.menu.Menu;
 
@@ -159,5 +162,13 @@ public interface WeixinCorpClientManager {
 	 * @throws WeixinException
 	 */
 	CorpMsgResult sendCorpMsg(ICorp corp, AbstractCorpMsg corpMsg) throws WeixinException;
+	
+	/**
+	 * @param corp
+	 * @param corpApp
+	 * @param passiveReply
+	 * @throws WeixinException
+	 */
+	void sendCorpReply(ICorp corp, ICorpApp corpApp, AbstractPassiveReply passiveReply, String timestamp, String nonce, HttpServletResponse servletResponse) throws WeixinException;
 	
 }
