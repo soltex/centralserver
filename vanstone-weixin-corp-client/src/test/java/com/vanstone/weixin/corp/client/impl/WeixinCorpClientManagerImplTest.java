@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import com.vanstone.centralserver.common.corp.CorpAppInfo;
@@ -28,6 +29,12 @@ import com.vanstone.weixin.corp.client.conf.xml.DefaultXmlConfInitiator;
 @SuppressWarnings("unused")
 public class WeixinCorpClientManagerImplTest {
 
+	@Before
+	public void initial() {
+		DefaultXmlConfInitiator initiator = new DefaultXmlConfInitiator();
+		initiator.initial();
+	}
+	
 	@Test
 	public void testGetAccessToken() throws WeixinException {
 		WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
@@ -59,7 +66,7 @@ public class WeixinCorpClientManagerImplTest {
 
 		System.out.println(menu.toJson());
 
-		weixinCorpClientManager.createMenu(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1), menu);
+		weixinCorpClientManager.createMenu(CorpClientConf.getInstance().getCorpApp(1), menu);
 		// weixinCorpClientManager.createMenu(CorpInstance.Sagacityidea,
 		// CorpAppInstance.App1, menu);
 		// weixinCorpClientManager.createMenu(CorpInstance.Sagacityidea,
@@ -82,7 +89,7 @@ public class WeixinCorpClientManagerImplTest {
 	@Test
 	public void testgetCorpAppInfos() throws WeixinException {
 		WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
-		Collection<CorpAppInfo> appInfos = weixinCorpClientManager.getCorpAppInfos(CorpClientConf.getInstance().getCorp());
+		Collection<CorpAppInfo> appInfos = weixinCorpClientManager.getCorpAppInfos();
 		DebugUtil.print(appInfos);
 	}
 
@@ -90,7 +97,7 @@ public class WeixinCorpClientManagerImplTest {
 	public void testuploadTempMedia() {
 		WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
 		try {
-			MediaResult result = weixinCorpClientManager.uploadTempMedia(CorpClientConf.getInstance().getCorp(), MediaType.Image, new File("F:/2020.jpg"));
+			MediaResult result = weixinCorpClientManager.uploadTempMedia( MediaType.Image, new File("F:/2020.jpg"));
 			DebugUtil.print(result);
 		} catch (WeixinException e) {
 			e.printStackTrace();
@@ -101,41 +108,41 @@ public class WeixinCorpClientManagerImplTest {
 
 	@Test
 	public void testdownloadTempMedia() throws WeixinException {
-		this.weixinCorpClientManager.downloadTempMedia(CorpClientConf.getInstance().getCorp(), "2pR72hFxy6P9YklrN-JgGel2pFPM5BbzyjsaceBl0dFSmu0mRKUw24y3vRHz9XmcO7aHJYvE0bQPOD8029KW-qg",
+		this.weixinCorpClientManager.downloadTempMedia( "2pR72hFxy6P9YklrN-JgGel2pFPM5BbzyjsaceBl0dFSmu0mRKUw24y3vRHz9XmcO7aHJYvE0bQPOD8029KW-qg",
 				new File("e:/aaa.jpg"));
 	}
 
 	@Test
 	public void testuploadMPNewsArticle() throws WeixinException {
-		this.weixinCorpClientManager.downloadForeverMedia(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1),
+		this.weixinCorpClientManager.downloadForeverMedia( CorpClientConf.getInstance().getCorpApp(1),
 				"2ZQyuFRuvewj5_9jW6Qt8BsmKNNNTS8JA4ZbUuLgbmxalAy7YHdhGaEmHU71Uj1wMeDaL5HDS-ZANvTx71n7RWw", new File("e:/aaa.jpg"));
 	}
 
 	@Test
 	public void testuploadForeverMedia() throws WeixinException {
-		String mediaID = this.weixinCorpClientManager.uploadForeverMedia(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1), MediaType.Image, new File("f:/2020.jpg"));
+		String mediaID = this.weixinCorpClientManager.uploadForeverMedia( CorpClientConf.getInstance().getCorpApp(1), MediaType.Image, new File("f:/2020.jpg"));
 		System.out.println(mediaID);
 	}
 
 	@Test
 	public void testuloadmpnewsForeverMedia() throws WeixinException {
 		Collection<MPNewsArticle> articles = new ArrayList<MPNewsArticle>();
-		String mediaID = this.weixinCorpClientManager.uploadForeverMedia(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1), MediaType.Image, new File("f:/2020.jpg"));
+		String mediaID = this.weixinCorpClientManager.uploadForeverMedia( CorpClientConf.getInstance().getCorpApp(1), MediaType.Image, new File("f:/2020.jpg"));
 		MPNewsArticle article = new MPNewsArticle("呵呵呵", mediaID, null, null, "呵呵呵呵呵呵呵", "和是简介", false);
 		articles.add(article);
-		this.weixinCorpClientManager.uploadMPNewsArticle(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1), articles);
+		this.weixinCorpClientManager.uploadMPNewsArticle( CorpClientConf.getInstance().getCorpApp(1), articles);
 	}
 
 	@Test
 	public void testdownloadmpnews() throws WeixinException {
 		String mediaID = "2iazhR8urNTCADmj3vthPhrBFSMP0y1rRKyqTP9nolv9-4tnOXHN6qKW86ABd8Qd7";
-		Collection<MPNewsArticle> mpNewsArticles = this.weixinCorpClientManager.downloadForeverMedia(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1), mediaID, null);
+		Collection<MPNewsArticle> mpNewsArticles = this.weixinCorpClientManager.downloadForeverMedia( CorpClientConf.getInstance().getCorpApp(1), mediaID, null);
 		DebugUtil.print(mpNewsArticles);
 	}
 
 	@Test
 	public void testgetMediaStat() throws WeixinException {
-		MediaStat stat = this.weixinCorpClientManager.getMediaStat(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(1));
+		MediaStat stat = this.weixinCorpClientManager.getMediaStat( CorpClientConf.getInstance().getCorpApp(1));
 		DebugUtil.print(stat);
 	}
 
@@ -146,7 +153,7 @@ public class WeixinCorpClientManagerImplTest {
 		CorpMsg4Text corpMsg4Text = new CorpMsg4Text(CorpClientConf.getInstance().getCorpApp(1), false, userids, null, null);
 		corpMsg4Text.setContent("投资公司初期注册资本100亿元，由京津冀三省市政府及铁路总公司按照3:3:3:1的比例共同出资成立");
 		try {
-			this.weixinCorpClientManager.sendCorpMsg(CorpClientConf.getInstance().getCorp(), corpMsg4Text);
+			this.weixinCorpClientManager.sendCorpMsg(corpMsg4Text);
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}
@@ -155,22 +162,22 @@ public class WeixinCorpClientManagerImplTest {
 	@Test
 	public void testSendCorpMsg4Image() {
 		try {
-			MediaResult result = this.weixinCorpClientManager.uploadTempMedia(CorpClientConf.getInstance().getCorp(), MediaType.Image, new File("d:/ditu.jpg"));
+			MediaResult result = this.weixinCorpClientManager.uploadTempMedia(MediaType.Image, new File("d:/ditu.jpg"));
 			CorpMsg4Img corpMsg = new CorpMsg4Img(CorpClientConf.getInstance().getCorpApp(1), false);
 			corpMsg.setMediaID(result.getMediaID());
-			this.weixinCorpClientManager.sendCorpMsg(CorpClientConf.getInstance().getCorp(), corpMsg);
+			this.weixinCorpClientManager.sendCorpMsg( corpMsg);
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}
 	}
-
+	
 	@Test
 	public void testSendCorpMsg4File() {
 		try {
-			MediaResult result = this.weixinCorpClientManager.uploadTempMedia(CorpClientConf.getInstance().getCorp(), MediaType.File, new File("e:/about云资源汇总指引V7 -  -.pdf"));
+			MediaResult result = this.weixinCorpClientManager.uploadTempMedia(MediaType.File, new File("e:/about云资源汇总指引V7 -  -.pdf"));
 			CorpMsg4File corpMsg4File = new CorpMsg4File(CorpClientConf.getInstance().getCorpApp(1), false);
 			corpMsg4File.setMediaID(result.getMediaID());
-			this.weixinCorpClientManager.sendCorpMsg(CorpClientConf.getInstance().getCorp(), corpMsg4File);
+			this.weixinCorpClientManager.sendCorpMsg( corpMsg4File);
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}
@@ -181,7 +188,7 @@ public class WeixinCorpClientManagerImplTest {
 		DefaultXmlConfInitiator initiator = new DefaultXmlConfInitiator();
 		initiator.initial();
 		try {
-			String url = this.weixinCorpClientManager.createOAuth2RedirectUrl(CorpClientConf.getInstance().getCorp(), "http://testcorp.sagacityidea.com/test", "ABC");
+			String url = this.weixinCorpClientManager.createOAuth2RedirectUrl( "http://testcorp.sagacityidea.com/test", "ABC");
 			System.out.println(url);
 		} catch (WeixinException e) {
 			e.printStackTrace();
@@ -191,7 +198,7 @@ public class WeixinCorpClientManagerImplTest {
 	@Test
 	public void testgetCorpUserInfo() {
 		try {
-			CorpUserInfo userInfo = this.weixinCorpClientManager.getCorpUserInfo(CorpClientConf.getInstance().getCorp(), "shipeng");
+			CorpUserInfo userInfo = this.weixinCorpClientManager.getCorpUserInfo( "shipeng");
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}

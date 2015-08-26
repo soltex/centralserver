@@ -16,7 +16,6 @@ import com.vanstone.centralserver.common.util.DebugUtil;
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.weixin.corp.client.WeixinCorpClientFactory;
 import com.vanstone.weixin.corp.client.WeixinCorpClientManager;
-import com.vanstone.weixin.corp.client.conf.CorpClientConf;
 
 /**
  * @author shipeng
@@ -34,7 +33,7 @@ public class TestServlet extends HttpServlet {
 		RedirectResult rr = weixinCorpClientManager.getRedirectResult(req);
 		
 		try {
-			OAuth2Result result = weixinCorpClientManager.getUserInfo(CorpClientConf.getInstance().getCorp(), rr.getCode());
+			OAuth2Result result = weixinCorpClientManager.getUserInfo( rr.getCode());
 			
 			DebugUtil.print(result);
 			

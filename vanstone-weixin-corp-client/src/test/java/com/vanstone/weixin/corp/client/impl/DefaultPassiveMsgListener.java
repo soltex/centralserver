@@ -79,7 +79,7 @@ public class DefaultPassiveMsgListener implements PassiveMsgListener {
 		
 		WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
 		try {
-			weixinCorpClientManager.sendCorpReply(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(Integer.parseInt(msg.getAgentID())), reply, String.valueOf(msg.getTimestamp()), msg.getNonce(), servletResponse);
+			weixinCorpClientManager.sendCorpReply(CorpClientConf.getInstance().getCorpApp(Integer.parseInt(msg.getAgentID())), reply, String.valueOf(msg.getTimestamp()), msg.getNonce(), servletResponse);
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}

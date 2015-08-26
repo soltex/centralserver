@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.vanstone.centralserver.common.corp.CorpAppInfo;
-import com.vanstone.centralserver.common.corp.ICorp;
 import com.vanstone.centralserver.common.corp.ICorpApp;
 import com.vanstone.centralserver.common.corp.ReportLocationFlag;
 import com.vanstone.centralserver.common.corp.media.MPNewsArticle;
@@ -37,7 +36,7 @@ public interface WeixinCorpClientManager {
 	 * @return
 	 * @throws WeixinException
 	 */
-	String getAccessToken(ICorp corp) throws WeixinException;
+	String getAccessToken() throws WeixinException;
 	
 	/**
 	 * 创建菜单
@@ -45,7 +44,7 @@ public interface WeixinCorpClientManager {
 	 * @param corpApp
 	 * @throws WeixinException
 	 */
-	void createMenu(ICorp corp, ICorpApp corpApp, Menu menu) throws WeixinException;
+	void createMenu(ICorpApp corpApp, Menu menu) throws WeixinException;
 	
 	/**
 	 * 获取CorpAppInfo信息
@@ -54,7 +53,7 @@ public interface WeixinCorpClientManager {
 	 * @return
 	 * @throws WeixinException
 	 */
-	CorpAppInfo getCorpAppInfo(ICorp corp, ICorpApp corpApp) throws WeixinException;
+	CorpAppInfo getCorpAppInfo(ICorpApp corpApp) throws WeixinException;
 	
 	/**
 	 * 更新企业应用设置
@@ -69,7 +68,7 @@ public interface WeixinCorpClientManager {
 	 * @param reportenter
 	 * @throws WeixinException
 	 */
-	void updateCorpAppInfo(ICorp corp, ICorpApp corpApp, ReportLocationFlag reportLocationFlag, String logoMediaID, String name, String description, String redirectDomain, boolean reportuser, boolean reportenter) throws WeixinException;
+	void updateCorpAppInfo(ICorpApp corpApp, ReportLocationFlag reportLocationFlag, String logoMediaID, String name, String description, String redirectDomain, boolean reportuser, boolean reportenter) throws WeixinException;
 	
 	/**
 	 * 获取企业应用信息列表
@@ -77,7 +76,7 @@ public interface WeixinCorpClientManager {
 	 * @return
 	 * @throws WeixinException
 	 */
-	Collection<CorpAppInfo> getCorpAppInfos(ICorp corp) throws WeixinException;
+	Collection<CorpAppInfo> getCorpAppInfos() throws WeixinException;
 	
 	/**
 	 * 上传临时文件
@@ -88,7 +87,7 @@ public interface WeixinCorpClientManager {
 	 * @return
 	 * @throws WeixinException
 	 */
-	MediaResult uploadTempMedia(ICorp corp, MediaType mediaType, File mediaFile) throws WeixinException;
+	MediaResult uploadTempMedia(MediaType mediaType, File mediaFile) throws WeixinException;
 	
 	/**
 	 * 下载临时文件到指定文件里
@@ -98,7 +97,7 @@ public interface WeixinCorpClientManager {
 	 * @param file
 	 * @throws WeixinException
 	 */
-	void downloadTempMedia(ICorp corp, String mediaID, File file) throws WeixinException;
+	void downloadTempMedia(String mediaID, File file) throws WeixinException;
 	
 	/**
 	 * 上传MPNewsArticles
@@ -108,7 +107,7 @@ public interface WeixinCorpClientManager {
 	 * @return
 	 * @throws WeixinException
 	 */
-	String uploadMPNewsArticle(ICorp corp, ICorpApp corpApp, Collection<MPNewsArticle> articles) throws WeixinException;
+	String uploadMPNewsArticle(ICorpApp corpApp, Collection<MPNewsArticle> articles) throws WeixinException;
 	
 	/**
 	 * 修改MPNewsArticles
@@ -118,7 +117,7 @@ public interface WeixinCorpClientManager {
 	 * @param articles
 	 * @throws WeixinException
 	 */
-	void updateMPNewsArticle(String mediaID, ICorp corp, ICorpApp corpApp, Collection<MPNewsArticle> articles) throws WeixinException;
+	void updateMPNewsArticle(String mediaID, ICorpApp corpApp, Collection<MPNewsArticle> articles) throws WeixinException;
 	
 	/**
 	 * 上传永久素材
@@ -129,7 +128,7 @@ public interface WeixinCorpClientManager {
 	 * @return
 	 * @throws WeixinException
 	 */
-	String uploadForeverMedia(ICorp corp, ICorpApp corpApp, MediaType mediaType, File media) throws WeixinException;
+	String uploadForeverMedia(ICorpApp corpApp, MediaType mediaType, File media) throws WeixinException;
 	
 	/**
 	 * 下载文件或者永久MPNewsArticle
@@ -139,7 +138,7 @@ public interface WeixinCorpClientManager {
 	 * @param file
 	 * @throws WeixinException
 	 */
-	Collection<MPNewsArticle> downloadForeverMedia(ICorp corp, ICorpApp corpApp, String mediaID, File file) throws WeixinException;
+	Collection<MPNewsArticle> downloadForeverMedia(ICorpApp corpApp, String mediaID, File file) throws WeixinException;
 	
 	/**
 	 * 删除永久素材
@@ -148,7 +147,7 @@ public interface WeixinCorpClientManager {
 	 * @param mediaID
 	 * @throws WeixinException
 	 */
-	void deleteForeverMedia(ICorp corp, ICorpApp corpApp, String mediaID) throws WeixinException;
+	void deleteForeverMedia(ICorpApp corpApp, String mediaID) throws WeixinException;
 	
 	/**
 	 * 获取素材统计
@@ -157,7 +156,7 @@ public interface WeixinCorpClientManager {
 	 * @return
 	 * @throws WeixinException
 	 */
-	MediaStat getMediaStat(ICorp corp, ICorpApp corpApp) throws WeixinException;
+	MediaStat getMediaStat(ICorpApp corpApp) throws WeixinException;
 	
 	/**
 	 * 主动下发信息
@@ -165,7 +164,7 @@ public interface WeixinCorpClientManager {
 	 * @return
 	 * @throws WeixinException
 	 */
-	CorpMsgResult sendCorpMsg(ICorp corp, AbstractCorpMsg corpMsg) throws WeixinException;
+	CorpMsgResult sendCorpMsg(AbstractCorpMsg corpMsg) throws WeixinException;
 	
 	/**
 	 * @param corp
@@ -173,14 +172,14 @@ public interface WeixinCorpClientManager {
 	 * @param passiveReply
 	 * @throws WeixinException
 	 */
-	void sendCorpReply(ICorp corp, ICorpApp corpApp, AbstractPassiveReply passiveReply, String timestamp, String nonce, HttpServletResponse servletResponse) throws WeixinException;
+	void sendCorpReply(ICorpApp corpApp, AbstractPassiveReply passiveReply, String timestamp, String nonce, HttpServletResponse servletResponse) throws WeixinException;
 	
 	/**
 	 * getCorpOAuth2RedirectURL
 	 * @return
 	 * @throws WeixinException
 	 */
-	String createOAuth2RedirectUrl(ICorp corp, String redirectUri, String state) throws WeixinException;
+	String createOAuth2RedirectUrl(String redirectUri, String state) throws WeixinException;
 	
 	/**
 	 * 获取回调RedirectResult
@@ -196,7 +195,7 @@ public interface WeixinCorpClientManager {
 	 * @return
 	 * @throws WeixinException
 	 */
-	OAuth2Result getUserInfo(ICorp corp, String code) throws WeixinException;
+	OAuth2Result getUserInfo(String code) throws WeixinException;
 	
 	
 	//管理通讯录部分
@@ -207,5 +206,5 @@ public interface WeixinCorpClientManager {
 	 * @return
 	 * @throws WeixinException
 	 */
-	CorpUserInfo getCorpUserInfo(ICorp corp, String userid) throws WeixinException;
+	CorpUserInfo getCorpUserInfo(String userid) throws WeixinException;
 }

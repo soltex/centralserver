@@ -56,6 +56,7 @@ import com.vanstone.centralserver.common.weixin.wrap.Sex;
 import com.vanstone.centralserver.common.weixin.wrap.menu.Menu;
 import com.vanstone.centralserver.common.weixin.wrap.oauth2.Scope;
 import com.vanstone.weixin.corp.client.WeixinCorpClientManager;
+import com.vanstone.weixin.corp.client.conf.CorpClientConf;
 
 /**
  * @author shipeng
@@ -72,9 +73,8 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	 * @return
 	 * @throws WeixinException
 	 */
-	public String getAccessToken(ICorp corp) throws WeixinException {
-		MyAssert.notNull(corp);
-
+	public String getAccessToken() throws WeixinException {
+		ICorp corp = CorpClientConf.getInstance().getCorp();
 		HttpGet get = new HttpGet(Constants.getCorpRetrievalAccessToken(corp.getAppID(), corp.getAppSecret()));
 		return this.clientTemplate.execute(get, new HttpClientCallback<String>() {
 			@Override
@@ -86,11 +86,10 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public void createMenu(ICorp corp, ICorpApp corpApp, Menu menu) throws WeixinException {
-		MyAssert.notNull(corp);
+	public void createMenu( ICorpApp corpApp, Menu menu) throws WeixinException {
 		MyAssert.notNull(corpApp);
 		MyAssert.notNull(menu);
-		String accessToken = this.getAccessToken(corp);
+		String accessToken = this.getAccessToken();
 		MyAssert.hasText(accessToken);
 		HttpPost httpPost = new HttpPost(Constants.getCorpCreateMenuUrl(accessToken, corpApp.getId()));
 		StringEntity stringEntity = new StringEntity(menu.toJson(), Constants.SYS_CHARSET_UTF8);
@@ -104,10 +103,9 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public CorpAppInfo getCorpAppInfo(ICorp corp, ICorpApp corpApp) throws WeixinException {
-		MyAssert.notNull(corp);
+	public CorpAppInfo getCorpAppInfo( ICorpApp corpApp) throws WeixinException {
 		MyAssert.notNull(corpApp);
-		String accessToken = this.getAccessToken(corp);
+		String accessToken = this.getAccessToken();
 		MyAssert.hasText(accessToken);
 		HttpGet httpGet = new HttpGet(Constants.getCorpRetrievalAppInfoUrl(accessToken, corpApp.getId()));
 		return this.clientTemplate.execute(httpGet, new HttpClientCallback<CorpAppInfo>() {
@@ -203,11 +201,10 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public void updateCorpAppInfo(ICorp corp, ICorpApp corpApp, ReportLocationFlag reportLocationFlag, String logoMediaID, String name, String description, String redirectDomain, boolean reportuser,
+	public void updateCorpAppInfo( ICorpApp corpApp, ReportLocationFlag reportLocationFlag, String logoMediaID, String name, String description, String redirectDomain, boolean reportuser,
 			boolean reportenter) throws WeixinException {
-		MyAssert.notNull(corp);
 		MyAssert.notNull(corpApp);
-		String accessToken = this.getAccessToken(corp);
+		String accessToken = this.getAccessToken();
 		MyAssert.hasText(accessToken);
 		HttpPost httpPost = new HttpPost(Constants.getCorpUpdateCorpInfoUrl(accessToken));
 		// {
@@ -242,9 +239,8 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public Collection<CorpAppInfo> getCorpAppInfos(ICorp corp) throws WeixinException {
-		MyAssert.notNull(corp);
-		String accessToken = this.getAccessToken(corp);
+	public Collection<CorpAppInfo> getCorpAppInfos() throws WeixinException {
+		String accessToken = this.getAccessToken();
 		MyAssert.hasText(accessToken);
 		HttpGet httpGet = new HttpGet(Constants.getCorpAgentsListUrl(accessToken));
 		return this.clientTemplate.execute(httpGet, new HttpClientCallback<Collection<CorpAppInfo>>() {
@@ -274,11 +270,10 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public MediaResult uploadTempMedia(ICorp corp, MediaType mediaType, File file) throws WeixinException {
-		MyAssert.notNull(corp);
+	public MediaResult uploadTempMedia( MediaType mediaType, File file) throws WeixinException {
 		MyAssert.notNull(mediaType);
 		MyAssert.notNull(file);
-		String accessToken = this.getAccessToken(corp);
+		String accessToken = this.getAccessToken();
 		MyAssert.hasText(accessToken);
 		HttpPost post = new HttpPost(Constants.getCorpUploadTempMediaUrl(accessToken, mediaType));
 		FileBody fileBody = new FileBody(file);
@@ -302,10 +297,9 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public void downloadTempMedia(ICorp corp, String mediaID, final File file) throws WeixinException {
-		MyAssert.notNull(corp);
+	public void downloadTempMedia( String mediaID, final File file) throws WeixinException {
 		MyAssert.notNull(file);
-		String accessToken = this.getAccessToken(corp);
+		String accessToken = this.getAccessToken();
 		MyAssert.hasText(accessToken);
 		if (mediaID == null || "".equals(mediaID) || file == null) {
 			throw new IllegalArgumentException();
@@ -361,14 +355,13 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public String uploadMPNewsArticle(ICorp corp, ICorpApp corpApp, Collection<MPNewsArticle> articles) throws WeixinException {
-		MyAssert.notNull(corp);
+	public String uploadMPNewsArticle( ICorpApp corpApp, Collection<MPNewsArticle> articles) throws WeixinException {
 		MyAssert.notNull(corpApp);
 		MyAssert.notNull(articles);
 		if (articles.size() > Constants.MAX_ARTICLE_ITEM_NUM) {
 			throw new WeixinException(WeixinException.ErrorCode.MAX_ARTICLE_ITEM_COUNT_GT_10);
 		}
-		String accessToken = this.getAccessToken(corp);
+		String accessToken = this.getAccessToken();
 		HttpPost post = new HttpPost(Constants.getCorpForeverUploadNpnewsArticlesUrl(accessToken));
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("agentid", corpApp.getId());
@@ -401,14 +394,13 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public void updateMPNewsArticle(String mediaID, ICorp corp, ICorpApp corpApp, Collection<MPNewsArticle> articles) throws WeixinException {
-		MyAssert.notNull(corp);
+	public void updateMPNewsArticle(String mediaID,  ICorpApp corpApp, Collection<MPNewsArticle> articles) throws WeixinException {
 		MyAssert.notNull(corpApp);
 		MyAssert.notNull(articles);
 		if (articles.size() > Constants.MAX_ARTICLE_ITEM_NUM) {
 			throw new WeixinException(WeixinException.ErrorCode.MAX_ARTICLE_ITEM_COUNT_GT_10);
 		}
-		String accessToken = this.getAccessToken(corp);
+		String accessToken = this.getAccessToken();
 		HttpPost post = new HttpPost(Constants.getCorpForeverUpdateUploadMpnewsArticlesUrl(accessToken));
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("agentid", corpApp.getId());
@@ -443,13 +435,12 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public String uploadForeverMedia(ICorp corp, ICorpApp corpApp, MediaType mediaType, File media) throws WeixinException {
-		MyAssert.notNull(corp);
+	public String uploadForeverMedia( ICorpApp corpApp, MediaType mediaType, File media) throws WeixinException {
 		MyAssert.notNull(corpApp);
 		MyAssert.notNull(mediaType);
 		MyAssert.notNull(media);
 
-		String accessToken = this.getAccessToken(corp);
+		String accessToken = this.getAccessToken();
 		HttpPost post = new HttpPost(Constants.getCorpUploadForeverMediaUrl(corpApp.getId(), mediaType, accessToken));
 		FileBody fileBody = new FileBody(media);
 		MultipartEntity multipartEntity = new MultipartEntity();
@@ -465,9 +456,8 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<MPNewsArticle> downloadForeverMedia(ICorp corp, ICorpApp corpApp, String mediaID, File file) throws WeixinException {
-		MyAssert.notNull(corp);
-		String accessToken = this.getAccessToken(corp);
+	public Collection<MPNewsArticle> downloadForeverMedia( ICorpApp corpApp, String mediaID, File file) throws WeixinException {
+		String accessToken = this.getAccessToken();
 		MyAssert.hasText(accessToken);
 		if (mediaID == null || "".equals(mediaID)) {
 			throw new IllegalArgumentException();
@@ -540,11 +530,10 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public void deleteForeverMedia(ICorp corp, ICorpApp corpApp, String mediaID) throws WeixinException {
-		MyAssert.notNull(corp);
+	public void deleteForeverMedia( ICorpApp corpApp, String mediaID) throws WeixinException {
 		MyAssert.notNull(corpApp);
 		MyAssert.hasText(mediaID);
-		String accessToken = this.getAccessToken(corp);
+		String accessToken = this.getAccessToken();
 		HttpGet httpGet = new HttpGet(Constants.getCorpDeleteForeverMediaUrl(accessToken, corpApp.getId(), mediaID));
 		this.clientTemplate.execute(httpGet, new HttpClientCallback<Object>() {
 			@Override
@@ -555,10 +544,9 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public MediaStat getMediaStat(ICorp corp, ICorpApp corpApp) throws WeixinException {
-		MyAssert.notNull(corp);
+	public MediaStat getMediaStat( ICorpApp corpApp) throws WeixinException {
 		MyAssert.notNull(corpApp);
-		String accessToken = this.getAccessToken(corp);
+		String accessToken = this.getAccessToken();
 		HttpGet get = new HttpGet(Constants.getCorpForeverStatUrl(accessToken, corpApp.getId()));
 		return this.clientTemplate.execute(get, new HttpClientCallback<MediaStat>() {
 			@Override
@@ -582,9 +570,8 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public CorpMsgResult sendCorpMsg(ICorp corp, AbstractCorpMsg corpMsg) throws WeixinException {
-		MyAssert.notNull(corp);
-		String accessToken = this.getAccessToken(corp);
+	public CorpMsgResult sendCorpMsg( AbstractCorpMsg corpMsg) throws WeixinException {
+		String accessToken = this.getAccessToken();
 		HttpPost post = new HttpPost(Constants.getCorpSendMsgUrl(accessToken));
 		StringEntity stringEntity = new StringEntity(corpMsg.toJson(), Constants.SYS_CHARSET_UTF8);
 		post.setEntity(stringEntity);
@@ -603,19 +590,18 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public void sendCorpReply(ICorp corp, ICorpApp corpApp, AbstractPassiveReply passiveReply, String timestamp, String nonce, HttpServletResponse servletResponse) throws WeixinException {
-		String replyxml = passiveReply.toEncryptJson(corpApp.getToken(), corpApp.getEncodingAESKey(), corp, timestamp, nonce);
+	public void sendCorpReply( ICorpApp corpApp, AbstractPassiveReply passiveReply, String timestamp, String nonce, HttpServletResponse servletResponse) throws WeixinException {
+		String replyxml = passiveReply.toEncryptJson(corpApp.getToken(), corpApp.getEncodingAESKey(), CorpClientConf.getInstance().getCorp(), timestamp, nonce);
 		ServletUtil.write(servletResponse, replyxml);
 	}
-
+	
 	@Override
-	public String createOAuth2RedirectUrl(ICorp corp, String redirectUri, String state) throws WeixinException {
-		MyAssert.notNull(corp);
+	public String createOAuth2RedirectUrl( String redirectUri, String state) throws WeixinException {
 		MyAssert.hasText(redirectUri);
-		String url = Constants.getCorpOAuth2RedirectURL(corp.getAppID(), redirectUri, Scope.snsapi_base, state);
+		String url = Constants.getCorpOAuth2RedirectURL(CorpClientConf.getInstance().getCorp().getAppID(), redirectUri, Scope.snsapi_base, state);
 		return url;
 	}
-
+	
 	@Override
 	public RedirectResult getRedirectResult(HttpServletRequest servletRequest) {
 		MyAssert.notNull(servletRequest);
@@ -632,10 +618,9 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public OAuth2Result getUserInfo(ICorp corp, String code) throws WeixinException {
-		MyAssert.notNull(corp);
+	public OAuth2Result getUserInfo( String code) throws WeixinException {
 		MyAssert.hasText(code);
-		final String accesstoken = this.getAccessToken(corp);
+		final String accesstoken = this.getAccessToken();
 		String url = Constants.getCorpUserInfoUrl(accesstoken, code);
 		HttpGet httpGet = new HttpGet(url);
 		return this.clientTemplate.execute(httpGet, new HttpClientCallback<OAuth2Result>() {
@@ -650,8 +635,8 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public CorpUserInfo getCorpUserInfo(ICorp corp, String userid) throws WeixinException {
-		final String accesstoken = this.getAccessToken(corp);
+	public CorpUserInfo getCorpUserInfo(String userid) throws WeixinException {
+		final String accesstoken = this.getAccessToken();
 		String url = Constants.getUserInfoUrl(accesstoken, userid);
 		HttpGet httpGet = new HttpGet(url);
 		return this.clientTemplate.execute(httpGet, new HttpClientCallback<CorpUserInfo>() {

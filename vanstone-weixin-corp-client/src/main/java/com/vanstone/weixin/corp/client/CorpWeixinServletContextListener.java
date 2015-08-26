@@ -7,7 +7,6 @@ import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import com.vanstone.centralserver.common.weixin.WeixinException;
-import com.vanstone.weixin.corp.client.conf.CorpClientConf;
 import com.vanstone.weixin.corp.client.conf.IConfInitiator;
 import com.vanstone.weixin.corp.client.conf.xml.DefaultXmlConfInitiator;
 
@@ -29,7 +28,7 @@ public class CorpWeixinServletContextListener implements ServletContextListener 
 		getConfInitator().initial();
 		WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
 		try {
-			weixinCorpClientManager.getAccessToken(CorpClientConf.getInstance().getCorp());
+			weixinCorpClientManager.getAccessToken();
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}

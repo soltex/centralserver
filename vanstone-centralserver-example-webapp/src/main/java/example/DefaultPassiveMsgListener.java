@@ -74,7 +74,7 @@ public class DefaultPassiveMsgListener implements PassiveMsgListener {
 		DebugUtil.print(msg);
 		PassiveTextReply reply = new PassiveTextReply();
 		try {
-			reply.setContent("我是测试使用的东西，你看看<a href='" + weixinCorpClientManager.createOAuth2RedirectUrl(CorpClientConf.getInstance().getCorp(), "http://testcorp.sagacityidea.com/test", "ABC") + "'>测试</a>");
+			reply.setContent("我是测试使用的东西，你看看<a href='" + weixinCorpClientManager.createOAuth2RedirectUrl("http://testcorp.sagacityidea.com/test", "ABC") + "'>测试</a>");
 		} catch (WeixinException e1) {
 			e1.printStackTrace();
 		}
@@ -83,7 +83,7 @@ public class DefaultPassiveMsgListener implements PassiveMsgListener {
 		reply.setToUserName(msg.getFromUserName());
 		
 		try {
-			weixinCorpClientManager.sendCorpReply(CorpClientConf.getInstance().getCorp(), CorpClientConf.getInstance().getCorpApp(Integer.parseInt(msg.getAgentID())), reply, String.valueOf(msg.getTimestamp()), msg.getNonce(), servletResponse);
+			weixinCorpClientManager.sendCorpReply(CorpClientConf.getInstance().getCorpApp(Integer.parseInt(msg.getAgentID())), reply, String.valueOf(msg.getTimestamp()), msg.getNonce(), servletResponse);
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}
