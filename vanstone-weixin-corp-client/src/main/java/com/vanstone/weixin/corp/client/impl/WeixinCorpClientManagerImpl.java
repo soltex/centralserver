@@ -37,6 +37,7 @@ import com.vanstone.centralserver.common.corp.ICorp;
 import com.vanstone.centralserver.common.corp.ICorpApp;
 import com.vanstone.centralserver.common.corp.ReportLocationFlag;
 import com.vanstone.centralserver.common.corp.UserStatus;
+import com.vanstone.centralserver.common.corp.WeixinOrEmail;
 import com.vanstone.centralserver.common.corp.media.MPNewsArticle;
 import com.vanstone.centralserver.common.corp.media.MediaResult;
 import com.vanstone.centralserver.common.corp.media.MediaStat;
@@ -46,7 +47,9 @@ import com.vanstone.centralserver.common.corp.msg.CorpMsgResult;
 import com.vanstone.centralserver.common.corp.oauth2.OAuth2Result;
 import com.vanstone.centralserver.common.corp.oauth2.RedirectResult;
 import com.vanstone.centralserver.common.corp.passive.AbstractPassiveReply;
+import com.vanstone.centralserver.common.corp.user.CorpDepartment;
 import com.vanstone.centralserver.common.corp.user.CorpUserInfo;
+import com.vanstone.centralserver.common.corp.user.UserExtAttr;
 import com.vanstone.centralserver.common.util.HttpClientTemplate;
 import com.vanstone.centralserver.common.util.HttpClientTemplate.HttpClientCallback;
 import com.vanstone.centralserver.common.util.UnixJavaDateTimeUtil;
@@ -86,7 +89,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public void createMenu( ICorpApp corpApp, Menu menu) throws WeixinException {
+	public void createMenu(ICorpApp corpApp, Menu menu) throws WeixinException {
 		MyAssert.notNull(corpApp);
 		MyAssert.notNull(menu);
 		String accessToken = this.getAccessToken();
@@ -103,7 +106,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public CorpAppInfo getCorpAppInfo( ICorpApp corpApp) throws WeixinException {
+	public CorpAppInfo getCorpAppInfo(ICorpApp corpApp) throws WeixinException {
 		MyAssert.notNull(corpApp);
 		String accessToken = this.getAccessToken();
 		MyAssert.hasText(accessToken);
@@ -201,7 +204,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public void updateCorpAppInfo( ICorpApp corpApp, ReportLocationFlag reportLocationFlag, String logoMediaID, String name, String description, String redirectDomain, boolean reportuser,
+	public void updateCorpAppInfo(ICorpApp corpApp, ReportLocationFlag reportLocationFlag, String logoMediaID, String name, String description, String redirectDomain, boolean reportuser,
 			boolean reportenter) throws WeixinException {
 		MyAssert.notNull(corpApp);
 		String accessToken = this.getAccessToken();
@@ -270,7 +273,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public MediaResult uploadTempMedia( MediaType mediaType, File file) throws WeixinException {
+	public MediaResult uploadTempMedia(MediaType mediaType, File file) throws WeixinException {
 		MyAssert.notNull(mediaType);
 		MyAssert.notNull(file);
 		String accessToken = this.getAccessToken();
@@ -297,7 +300,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public void downloadTempMedia( String mediaID, final File file) throws WeixinException {
+	public void downloadTempMedia(String mediaID, final File file) throws WeixinException {
 		MyAssert.notNull(file);
 		String accessToken = this.getAccessToken();
 		MyAssert.hasText(accessToken);
@@ -355,7 +358,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public String uploadMPNewsArticle( ICorpApp corpApp, Collection<MPNewsArticle> articles) throws WeixinException {
+	public String uploadMPNewsArticle(ICorpApp corpApp, Collection<MPNewsArticle> articles) throws WeixinException {
 		MyAssert.notNull(corpApp);
 		MyAssert.notNull(articles);
 		if (articles.size() > Constants.MAX_ARTICLE_ITEM_NUM) {
@@ -394,7 +397,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public void updateMPNewsArticle(String mediaID,  ICorpApp corpApp, Collection<MPNewsArticle> articles) throws WeixinException {
+	public void updateMPNewsArticle(String mediaID, ICorpApp corpApp, Collection<MPNewsArticle> articles) throws WeixinException {
 		MyAssert.notNull(corpApp);
 		MyAssert.notNull(articles);
 		if (articles.size() > Constants.MAX_ARTICLE_ITEM_NUM) {
@@ -435,7 +438,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public String uploadForeverMedia( ICorpApp corpApp, MediaType mediaType, File media) throws WeixinException {
+	public String uploadForeverMedia(ICorpApp corpApp, MediaType mediaType, File media) throws WeixinException {
 		MyAssert.notNull(corpApp);
 		MyAssert.notNull(mediaType);
 		MyAssert.notNull(media);
@@ -456,7 +459,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public Collection<MPNewsArticle> downloadForeverMedia( ICorpApp corpApp, String mediaID, File file) throws WeixinException {
+	public Collection<MPNewsArticle> downloadForeverMedia(ICorpApp corpApp, String mediaID, File file) throws WeixinException {
 		String accessToken = this.getAccessToken();
 		MyAssert.hasText(accessToken);
 		if (mediaID == null || "".equals(mediaID)) {
@@ -530,7 +533,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public void deleteForeverMedia( ICorpApp corpApp, String mediaID) throws WeixinException {
+	public void deleteForeverMedia(ICorpApp corpApp, String mediaID) throws WeixinException {
 		MyAssert.notNull(corpApp);
 		MyAssert.hasText(mediaID);
 		String accessToken = this.getAccessToken();
@@ -544,7 +547,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public MediaStat getMediaStat( ICorpApp corpApp) throws WeixinException {
+	public MediaStat getMediaStat(ICorpApp corpApp) throws WeixinException {
 		MyAssert.notNull(corpApp);
 		String accessToken = this.getAccessToken();
 		HttpGet get = new HttpGet(Constants.getCorpForeverStatUrl(accessToken, corpApp.getId()));
@@ -570,7 +573,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public CorpMsgResult sendCorpMsg( AbstractCorpMsg corpMsg) throws WeixinException {
+	public CorpMsgResult sendCorpMsg(AbstractCorpMsg corpMsg) throws WeixinException {
 		String accessToken = this.getAccessToken();
 		HttpPost post = new HttpPost(Constants.getCorpSendMsgUrl(accessToken));
 		StringEntity stringEntity = new StringEntity(corpMsg.toJson(), Constants.SYS_CHARSET_UTF8);
@@ -590,18 +593,18 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public void sendCorpReply( ICorpApp corpApp, AbstractPassiveReply passiveReply, String timestamp, String nonce, HttpServletResponse servletResponse) throws WeixinException {
+	public void sendCorpReply(ICorpApp corpApp, AbstractPassiveReply passiveReply, String timestamp, String nonce, HttpServletResponse servletResponse) throws WeixinException {
 		String replyxml = passiveReply.toEncryptJson(corpApp.getToken(), corpApp.getEncodingAESKey(), CorpClientConf.getInstance().getCorp(), timestamp, nonce);
 		ServletUtil.write(servletResponse, replyxml);
 	}
-	
+
 	@Override
-	public String createOAuth2RedirectUrl( String redirectUri, String state) throws WeixinException {
+	public String createOAuth2RedirectUrl(String redirectUri, String state) throws WeixinException {
 		MyAssert.hasText(redirectUri);
 		String url = Constants.getCorpOAuth2RedirectURL(CorpClientConf.getInstance().getCorp().getAppID(), redirectUri, Scope.snsapi_base, state);
 		return url;
 	}
-	
+
 	@Override
 	public RedirectResult getRedirectResult(HttpServletRequest servletRequest) {
 		MyAssert.notNull(servletRequest);
@@ -618,7 +621,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
-	public OAuth2Result getUserInfo( String code) throws WeixinException {
+	public OAuth2Result getUserInfo(String code) throws WeixinException {
 		MyAssert.hasText(code);
 		final String accesstoken = this.getAccessToken();
 		String url = Constants.getCorpUserInfoUrl(accesstoken, code);
@@ -635,6 +638,135 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 	}
 
 	@Override
+	public void authSuccess(String userID) throws WeixinException {
+		final String accessToken = this.getAccessToken();
+		final String url = Constants.getCorpAuthSuccessUrl(accessToken, userID);
+		HttpGet httpGet = new HttpGet(url);
+
+		this.clientTemplate.execute(httpGet, new HttpClientCallback<Object>() {
+			@Override
+			public Object executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				return null;
+			}
+		});
+	}
+
+	@Override
+	public int createDepartment(String name, int parentid, Integer order, Integer id) throws WeixinException {
+		if (parentid <= 1) {
+			parentid = 1;
+		}
+		if (id != null && id < 1) {
+			throw new IllegalArgumentException();
+		}
+
+		final String accessToken = this.getAccessToken();
+		HttpPost httpPost = new HttpPost(Constants.getCreateDepartmentUrl(accessToken));
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("name", name);
+		params.put("parentid", parentid);
+		if (order != null) {
+			params.put("order", order);
+		}
+		if (id != null) {
+			params.put("id", id);
+		}
+		StringEntity stringEntity = new StringEntity(JsonUtil.object2PrettyString(params, false), Constants.SYS_CHARSET_UTF8);
+		httpPost.setEntity(stringEntity);
+		return this.clientTemplate.execute(httpPost, new HttpClientCallback<Integer>() {
+			@Override
+			public Integer executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				Number value = (Number) map.get("id");
+				return value.intValue();
+			}
+		});
+	}
+	
+	@Override
+	public int createDepartment(String name) throws WeixinException {
+		return this.createDepartment(name, 1, null, null);
+	}
+
+	@Override
+	public void updateDepartment(int id, String name, int parentid, Integer order) throws WeixinException {
+		if (parentid <= 1) {
+			parentid = 1;
+		}
+		final String accessToken = this.getAccessToken();
+		HttpPost httpPost = new HttpPost(Constants.getUpdateDepartmentUrl(accessToken));
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("name", name);
+		params.put("id", id);
+		params.put("parentid", parentid);
+		if (order != null) {
+			params.put("order", order);
+		}
+		StringEntity stringEntity = new StringEntity(JsonUtil.object2PrettyString(params, false), Constants.SYS_CHARSET_UTF8);
+		httpPost.setEntity(stringEntity);
+		this.clientTemplate.execute(httpPost, new HttpClientCallback<Integer>() {
+			@Override
+			public Integer executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				return null;
+			}
+		});
+	}
+
+	@Override
+	public void upateDepartment(int id, String name) throws WeixinException {
+		this.updateDepartment(id, name, 1, null);
+	}
+
+	@Override
+	public void deleteDepartment(int id) throws WeixinException {
+		final String accessToken = this.getAccessToken();
+		HttpGet httpGet = new HttpGet(Constants.getDeleteDepartmentUrl(accessToken, id));
+		this.clientTemplate.execute(httpGet, new HttpClientCallback<Object>() {
+			@Override
+			public Object executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				return null;
+			}
+		});
+	}
+
+	@Override
+	public List<CorpDepartment> getDepartments(int id) throws WeixinException {
+		if (id <= 1) {
+			id = 1;
+		}
+		final String accessToken = this.getAccessToken();
+		HttpGet httpGet = new HttpGet(Constants.getGetDepartmentsUrl(accessToken, id));
+		return this.clientTemplate.execute(httpGet, new HttpClientCallback<List<CorpDepartment>>() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public List<CorpDepartment> executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				List<Map<String, Object>> departmentList = (List<Map<String, Object>>) map.get("department");
+				if (departmentList == null || departmentList.size() <= 0) {
+					return null;
+				}
+				List<CorpDepartment> corpDepartments = new ArrayList<CorpDepartment>();
+				for (Map<String, Object> tempMap : departmentList) {
+					Number id = (Number) tempMap.get("id");
+					String name = (String) tempMap.get("name");
+					Number parentid = (Number) tempMap.get("parentid");
+					Number order = (Number) tempMap.get("order");
+					CorpDepartment corpDepartment = new CorpDepartment();
+					corpDepartment.setId(id.intValue());
+					corpDepartment.setName(name);
+					corpDepartment.setOrder(order.intValue());
+					corpDepartment.setParentid(parentid.intValue());
+					corpDepartments.add(corpDepartment);
+				}
+				return corpDepartments;
+			}
+		});
+	}
+
+	@Override
+	public List<CorpDepartment> getDepartments() throws WeixinException {
+		return this.getDepartments(1);
+	}
+
+	@Override
 	public CorpUserInfo getCorpUserInfo(String userid) throws WeixinException {
 		final String accesstoken = this.getAccessToken();
 		String url = Constants.getUserInfoUrl(accesstoken, userid);
@@ -643,22 +775,22 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 			@SuppressWarnings("unchecked")
 			@Override
 			public CorpUserInfo executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
-				String userid = (String)map.get("userid");
-				String name = (String)map.get("name");
-				List<Integer> departmentids = (List<Integer>)map.get("department");
-				String position = (String)map.get("position");
-				String mobile = (String)map.get("mobile");
-				String gender = (String)map.get("gender");
-				String email = (String)map.get("email");
-				String weixinid = (String)map.get("weixinid");
-				String avatar = (String)map.get("avatar");
-				Number status = (Number)map.get("status");
-				Map<String, Object> attrsMap = (Map<String, Object>)map.get("extattr");
-				
+				String userid = (String) map.get("userid");
+				String name = (String) map.get("name");
+				List<Integer> departmentids = (List<Integer>) map.get("department");
+				String position = (String) map.get("position");
+				String mobile = (String) map.get("mobile");
+				String gender = (String) map.get("gender");
+				String email = (String) map.get("email");
+				String weixinid = (String) map.get("weixinid");
+				String avatar = (String) map.get("avatar");
+				Number status = (Number) map.get("status");
+				Map<String, Object> attrsMap = (Map<String, Object>) map.get("extattr");
+
 				CorpUserInfo userInfo = new CorpUserInfo();
 				userInfo.setUserid(userid);
 				userInfo.setName(name);
-				if (departmentids != null && departmentids.size() >0) {
+				if (departmentids != null && departmentids.size() > 0) {
 					userInfo.addDepartmentIDs(departmentids);
 				}
 				userInfo.setPosition(position);
@@ -666,7 +798,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 				if (!StringUtils.isEmpty(gender)) {
 					if (gender.equals("1")) {
 						userInfo.setSex(Sex.Male);
-					}else if (gender.equals("2")) {
+					} else if (gender.equals("2")) {
 						userInfo.setSex(Sex.FMale);
 					}
 				}
@@ -687,17 +819,346 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 						break;
 					}
 				}
-				if (attrsMap != null && attrsMap.size() >0) {
-					List<Map<String, Object>> attrs = (List<Map<String,Object>>)attrsMap.get("attrsMap");
-					if (attrs != null && attrs.size() >0) {
+				if (attrsMap != null && attrsMap.size() > 0) {
+					List<Map<String, Object>> attrs = (List<Map<String, Object>>) attrsMap.get("attrsMap");
+					if (attrs != null && attrs.size() > 0) {
 						for (Map<String, Object> temp : attrs) {
-							String attrName = (String)temp.get("name");
-							String attrValue = (String)temp.get("value");
+							String attrName = (String) temp.get("name");
+							String attrValue = (String) temp.get("value");
 							userInfo.addUserExtAttr(attrName, attrValue);
 						}
 					}
 				}
 				return userInfo;
+			}
+		});
+	}
+
+	@Override
+	public void addCorpUserInfo(String userid, String name, Integer department, String position, String mobile, String email, String weixinid, Sex sex, String avatar_mediaid, List<UserExtAttr> extAttrs) throws WeixinException {
+		final String accesstoken = this.getAccessToken();
+		String url = Constants.getCreateUserUrl(accesstoken);
+		HttpPost httpPost = new HttpPost(url);
+
+		Map<String, Object> param = new HashMap<String, Object>();
+
+		if (!StringUtils.isEmpty(userid)) {
+			param.put("userid", userid);
+		}
+		if (!StringUtils.isEmpty(name)) {
+			param.put("name", name);
+		}
+		if (department != null) {
+			param.put("department", department);
+		}
+		if (!StringUtils.isEmpty(position)) {
+			param.put("position", position);
+		}
+		if (!StringUtils.isEmpty(mobile)) {
+			param.put("mobile", mobile);
+		}
+		if (sex != null) {
+			if (sex.equals(Sex.Male)) {
+				param.put("gender", 1);
+			} else {
+				param.put("gender", 0);
+			}
+		}
+		if (!StringUtils.isEmpty(email)) {
+			param.put("email", email);
+		}
+		if (!StringUtils.isEmpty(weixinid)) {
+			param.put("weixinid", weixinid);
+		}
+		if (!StringUtils.isEmpty(avatar_mediaid)) {
+			param.put("avatar_mediaid ", avatar_mediaid);
+		}
+		if (extAttrs != null && extAttrs.size() > 0) {
+			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+			for (UserExtAttr attr : extAttrs) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("name", attr.getName());
+				map.put("value", attr.getValue());
+				list.add(map);
+			}
+			Map<String, Object> attrsMap = new HashMap<String, Object>();
+			attrsMap.put("attrs", list);
+			param.put("extattr", attrsMap);
+		}
+
+		StringEntity stringEntity = new StringEntity(JsonUtil.object2PrettyString(param, false), Constants.SYS_CHARSET_UTF8);
+		httpPost.setEntity(stringEntity);
+		this.clientTemplate.execute(httpPost, new HttpClientCallback<Object>() {
+			@Override
+			public Object executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				return null;
+			}
+		});
+	}
+	
+	@Override
+	public void updateCorpUserInfo(String userid, String name, Integer department, String position, String mobile, String email, String weixinid, Sex sex, String avatar_mediaid, List<UserExtAttr> extAttrs, Boolean enable) throws WeixinException {
+		final String accesstoken = this.getAccessToken();
+		String url = Constants.getUpdateUserUrl(accesstoken);
+		HttpPost httpPost = new HttpPost(url);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+
+		if (!StringUtils.isEmpty(userid)) {
+			param.put("userid", userid);
+		}
+		if (!StringUtils.isEmpty(name)) {
+			param.put("name", name);
+		}
+		if (department != null) {
+			param.put("department", department);
+		}
+		if (!StringUtils.isEmpty(position)) {
+			param.put("position", position);
+		}
+		if (!StringUtils.isEmpty(mobile)) {
+			param.put("mobile", mobile);
+		}
+		if (sex != null) {
+			if (sex.equals(Sex.Male)) {
+				param.put("gender", 1);
+			} else {
+				param.put("gender", 0);
+			}
+		}
+		if (!StringUtils.isEmpty(email)) {
+			param.put("email", email);
+		}
+		if (!StringUtils.isEmpty(weixinid)) {
+			param.put("weixinid", weixinid);
+		}
+		if (!StringUtils.isEmpty(avatar_mediaid)) {
+			param.put("avatar_mediaid ", avatar_mediaid);
+		}
+		if (enable != null) {
+			if (enable) {
+				param.put("enable", 1);
+			}else {
+				param.put("enable", 0);
+			}
+		}
+		
+		if (extAttrs != null && extAttrs.size() > 0) {
+			List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
+			for (UserExtAttr attr : extAttrs) {
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("name", attr.getName());
+				map.put("value", attr.getValue());
+				list.add(map);
+			}
+			Map<String, Object> attrsMap = new HashMap<String, Object>();
+			attrsMap.put("attrs", list);
+			param.put("extattr", attrsMap);
+		}
+
+		StringEntity stringEntity = new StringEntity(JsonUtil.object2PrettyString(param, false), Constants.SYS_CHARSET_UTF8);
+		httpPost.setEntity(stringEntity);
+		this.clientTemplate.execute(httpPost, new HttpClientCallback<Object>() {
+			@Override
+			public Object executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				return null;
+			}
+		});
+	}
+	
+	@Override
+	public void deleteCorpUser(String userid) throws WeixinException {
+		final String accesstoken = this.getAccessToken();
+		String url = Constants.getDeleteUserUrl(accesstoken, userid);
+		HttpGet get = new HttpGet(url);
+		this.clientTemplate.execute(get, new HttpClientCallback<Object>() {
+			@Override
+			public Object executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				return null;
+			}
+		});
+	}
+
+	@Override
+	public void batchDeleteCorpUsers(List<String> userids) throws WeixinException {
+		MyAssert.notEmpty(userids);
+		final String accesstoken = this.getAccessToken();
+		String url = Constants.getBatchDeleteUsersUrl(accesstoken);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("useridlist", userids);
+		StringEntity stringEntity = new StringEntity(JsonUtil.object2PrettyString(param, false), Constants.SYS_CHARSET_UTF8);
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setEntity(stringEntity);
+		this.clientTemplate.execute(httpPost, new HttpClientCallback<Object>() {
+			@Override
+			public Object executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				return null;
+			}
+		});
+	}
+
+	@Override
+	public List<CorpUserInfo> getSimpleListCorpUsers(int departmentid, Boolean fetchChild, boolean all, boolean subscribe, boolean forbit, boolean unsubscribe) throws WeixinException {
+		final String accesstoken = this.getAccessToken();
+		boolean contain_status = false;
+		int status = 0;
+		if (all) {
+			status = status + 0;
+			contain_status = true;
+		}
+		if (subscribe) {
+			status = status + 1;
+			contain_status = true;
+		}
+		if (forbit) {
+			status = status + 2;
+			contain_status = true;
+		}
+		if (subscribe) {
+			status = status + 4;
+			contain_status = true;
+		}
+		
+		String url = Constants.getSimpleListUserUrl(accesstoken, departmentid, fetchChild, contain_status ? status : null);
+		HttpGet get = new HttpGet(url);
+		return this.clientTemplate.execute(get, new HttpClientCallback<List<CorpUserInfo>>() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public List<CorpUserInfo> executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				List<Map<String, Object>> userlist = (List<Map<String,Object>>)map.get("userlist");
+				if (userlist == null || userlist.size() <=0) {
+					return null;
+				}
+				List<CorpUserInfo> userInfos = new ArrayList<CorpUserInfo>();
+				for (Map<String, Object> datamap : userlist) {
+					String userid = (String)datamap.get("userid");
+					String name = (String)datamap.get("name");
+					List<Integer> departmentids = (List<Integer>)datamap.get("department");
+					CorpUserInfo userInfo = new CorpUserInfo();
+					userInfo.setUserid(userid);
+					userInfo.setName(name);
+					userInfo.addDepartmentIDs(departmentids);
+					userInfos.add(userInfo);
+				}
+				return userInfos;
+			}
+		});
+	}
+
+	@Override
+	public List<CorpUserInfo> getFullListCorpUsers(int departmentid, Boolean fetchChild, boolean all, boolean subscribe, boolean forbit, boolean unsubscribe) throws WeixinException {
+		final String accesstoken = this.getAccessToken();
+		boolean contain_status = false;
+		int status = 0;
+		if (all) {
+			status = status + 0;
+			contain_status = true;
+		}
+		if (subscribe) {
+			status = status + 1;
+			contain_status = true;
+		}
+		if (forbit) {
+			status = status + 2;
+			contain_status = true;
+		}
+		if (subscribe) {
+			status = status + 4;
+			contain_status = true;
+		}
+		
+		String url = Constants.getFullListUserUrl(accesstoken, departmentid, fetchChild, contain_status ? status : null);
+		HttpGet get = new HttpGet(url);
+		return this.clientTemplate.execute(get, new HttpClientCallback<List<CorpUserInfo>>() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public List<CorpUserInfo> executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				List<Map<String, Object>> userlist = (List<Map<String,Object>>)map.get("userlist");
+				if (userlist == null || userlist.size() <=0) {
+					return null;
+				}
+				List<CorpUserInfo> userInfos = new ArrayList<CorpUserInfo>();
+				for (Map<String, Object> datamap : userlist) {
+					String userid = (String) datamap.get("userid");
+					String name = (String) datamap.get("name");
+					List<Integer> departmentids = (List<Integer>) datamap.get("department");
+					String position = (String) datamap.get("position");
+					String mobile = (String) datamap.get("mobile");
+					String gender = (String) datamap.get("gender");
+					String email = (String) datamap.get("email");
+					String weixinid = (String) datamap.get("weixinid");
+					String avatar = (String) datamap.get("avatar");
+					Number status = (Number) datamap.get("status");
+					Map<String, Object> attrsMap = (Map<String, Object>) datamap.get("extattr");
+					
+					CorpUserInfo userInfo = new CorpUserInfo();
+					userInfo.setUserid(userid);
+					userInfo.setName(name);
+					if (departmentids != null && departmentids.size() > 0) {
+						userInfo.addDepartmentIDs(departmentids);
+					}
+					userInfo.setPosition(position);
+					userInfo.setMobile(mobile);
+					if (!StringUtils.isEmpty(gender)) {
+						if (gender.equals("1")) {
+							userInfo.setSex(Sex.Male);
+						} else if (gender.equals("2")) {
+							userInfo.setSex(Sex.FMale);
+						}
+					}
+					userInfo.setEmail(email);
+					userInfo.setWeixinid(weixinid);
+					userInfo.setAvatar(avatar);
+					if (status != null) {
+						int statusValue = status.intValue();
+						switch (statusValue) {
+						case 1:
+							userInfo.setUserStatus(UserStatus.Subscribe);
+							break;
+						case 2:
+							userInfo.setUserStatus(UserStatus.Forbit);
+							break;
+						default:
+							userInfo.setUserStatus(UserStatus.Unsubscribe);
+							break;
+						}
+					}
+					if (attrsMap != null && attrsMap.size() > 0) {
+						List<Map<String, Object>> attrs = (List<Map<String, Object>>) attrsMap.get("attrsMap");
+						if (attrs != null && attrs.size() > 0) {
+							for (Map<String, Object> temp : attrs) {
+								String attrName = (String) temp.get("name");
+								String attrValue = (String) temp.get("value");
+								userInfo.addUserExtAttr(attrName, attrValue);
+							}
+						}
+					}
+					userInfos.add(userInfo);
+				}
+				return userInfos;
+			}
+		});
+	}
+
+	@Override
+	public WeixinOrEmail sendInvite(String userid) throws WeixinException {
+		MyAssert.hasText(userid);
+		final String accesstoken = this.getAccessToken();
+		String url = Constants.getSendInviteUrl(accesstoken);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("userid", userid);
+		StringEntity stringEntity = new StringEntity(JsonUtil.object2PrettyString(param, false), Constants.SYS_CHARSET_UTF8);
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setEntity(stringEntity);
+		return this.clientTemplate.execute(httpPost, new HttpClientCallback<WeixinOrEmail>() {
+			@Override
+			public WeixinOrEmail executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				Number type = (Number)map.get("type");
+				if(type.intValue() == 1) {
+					return WeixinOrEmail.Weixin;
+				}else {
+					return WeixinOrEmail.Email;
+				}
 			}
 		});
 	}

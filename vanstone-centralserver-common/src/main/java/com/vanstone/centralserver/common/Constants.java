@@ -798,5 +798,136 @@ public abstract class Constants {
 		return url;
 	}
 	
+	/**微信二次认证模板*/
+	public static final String CORP_AUTH_SUCCESS_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/user/authsucc?access_token=#ACCESS_TOKEN#&userid=#USERID#";
+	
+	public static String getCorpAuthSuccessUrl(String accessToken, String userid) {
+		MyAssert.hasText(accessToken);
+		MyAssert.hasText(userid);
+		String url = CORP_AUTH_SUCCESS_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#USERID#", userid);
+		return url;
+	}
+	
+	public static final String CORP_CREATE_DEPARTMENT_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token=#ACCESS_TOKEN#";
+	
+	public static String getCreateDepartmentUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_CREATE_DEPARTMENT_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
+	public static final String CORP_UPDATE_DEPARTMENT_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/department/update?access_token=#ACCESS_TOKEN#";
+	
+	public static String getUpdateDepartmentUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_UPDATE_DEPARTMENT_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
+	public static final String CORP_DELETE_DEPARTMENT_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=#ACCESS_TOKEN#&id=#ID#";
+	
+	public static String getDeleteDepartmentUrl(String accessToken, int id) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_DELETE_DEPARTMENT_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#ID#", String.valueOf(id));
+		return url;
+	}
+	
+	public static final String CORP_GET_DEPARTMENTS_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token=#ACCESS_TOKEN#&id=#ID#";
+	
+	public static String getGetDepartmentsUrl(String accessToken, int id) { 
+		MyAssert.hasText(accessToken);
+		String url = CORP_GET_DEPARTMENTS_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#ID#", String.valueOf(id));
+		return url;
+	}
+	
+	public static final String CORP_CREATE_USER_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/user/create?access_token=#ACCESS_TOKEN#";
+	
+	public static String getCreateUserUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_CREATE_USER_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
+	public static final String CORP_UPDATE_USER_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/user/update?access_token=#ACCESS_TOKEN#";
+	
+	public static String getUpdateUserUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_UPDATE_USER_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
+	public static final String CORP_DELETE_USER_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/user/delete?access_token=#ACCESS_TOKEN#&userid=#USERID#";
+	
+	public static String getDeleteUserUrl(String accessToken, String userid) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_DELETE_USER_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#USERID#", userid);
+		return url;
+	}
+	
+	public static final String CORP_BATCH_DELETE_USERS_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/user/batchdelete?access_token=#ACCESS_TOKEN#";
+	
+	public static String getBatchDeleteUsersUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_BATCH_DELETE_USERS_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
+	public static final String CORP_SIMPLELIST_USER_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/user/simplelist?access_token=#ACCESS_TOKEN#&department_id=#DEPARTMENT_ID#&fetch_child=#FETCH_CHILD#&status=#STATUS#";
+	
+	public static String getSimpleListUserUrl(String accessToken, int departmentid, Boolean fetchChild, Integer status) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_SIMPLELIST_USER_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#DEPARTMENT_ID#", String.valueOf(departmentid));
+		if (fetchChild == null) {
+			url = url.replaceAll("#FETCH_CHILD#", "");
+		}else {
+			if (fetchChild) {
+				url = url.replaceAll("#FETCH_CHILD#", "1");
+			}else{
+				url = url.replaceAll("#FETCH_CHILD#", "0");
+			}
+		}
+		if (status == null) {
+			url = url.replaceAll("#STATUS#", "");
+		}else {
+			url = url.replaceAll("#STATUS#", String.valueOf(status));
+		}
+		return url;
+	}
+	
+	public static final String CORP_FULLLIST_USRE_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/user/list?access_token=#ACCESS_TOKEN#&department_id=#DEPARTMENT_ID#&fetch_child=#FETCH_CHILD#&status=#STATUS#";
+	
+	public static String getFullListUserUrl(String accessToken, int departmentid, Boolean fetchChild, Integer status) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_FULLLIST_USRE_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#DEPARTMENT_ID#", String.valueOf(departmentid));
+		if (fetchChild == null) {
+			url = url.replaceAll("#FETCH_CHILD#", "");
+		}else {
+			if (fetchChild) {
+				url = url.replaceAll("#FETCH_CHILD#", "1");
+			}else{
+				url = url.replaceAll("#FETCH_CHILD#", "0");
+			}
+		}
+		if (status == null) {
+			url = url.replaceAll("#STATUS#", "");
+		}else {
+			url = url.replaceAll("#STATUS#", String.valueOf(status));
+		}
+		return url;
+	}
+	
+	public static final String CORP_SEND_INVITE_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/invite/send?access_token=#ACCESS_TOKEN#";
+	
+	public static String getSendInviteUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_SEND_INVITE_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
 	
 }

@@ -2,6 +2,7 @@ package com.vanstone.weixin.corp.client;
 
 import java.io.File;
 import java.util.Collection;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.vanstone.centralserver.common.corp.CorpAppInfo;
 import com.vanstone.centralserver.common.corp.ICorpApp;
 import com.vanstone.centralserver.common.corp.ReportLocationFlag;
+import com.vanstone.centralserver.common.corp.WeixinOrEmail;
 import com.vanstone.centralserver.common.corp.media.MPNewsArticle;
 import com.vanstone.centralserver.common.corp.media.MediaResult;
 import com.vanstone.centralserver.common.corp.media.MediaStat;
@@ -18,8 +20,11 @@ import com.vanstone.centralserver.common.corp.msg.CorpMsgResult;
 import com.vanstone.centralserver.common.corp.oauth2.OAuth2Result;
 import com.vanstone.centralserver.common.corp.oauth2.RedirectResult;
 import com.vanstone.centralserver.common.corp.passive.AbstractPassiveReply;
+import com.vanstone.centralserver.common.corp.user.CorpDepartment;
 import com.vanstone.centralserver.common.corp.user.CorpUserInfo;
+import com.vanstone.centralserver.common.corp.user.UserExtAttr;
 import com.vanstone.centralserver.common.weixin.WeixinException;
+import com.vanstone.centralserver.common.weixin.wrap.Sex;
 import com.vanstone.centralserver.common.weixin.wrap.menu.Menu;
 
 /**
@@ -199,6 +204,72 @@ public interface WeixinCorpClientManager {
 	
 	
 	//管理通讯录部分
+	
+	/**
+	 * 微信二次认证
+	 * @param userID
+	 * @throws WeixinException
+	 */
+	void authSuccess(String userID) throws WeixinException;
+	
+	//部门管理
+	/**
+	 * @param name
+	 * @param parentid
+	 * @param order
+	 * @param id
+	 * @return
+	 * @throws WeixinException
+	 */
+	int createDepartment(String name, int parentid, Integer order, Integer id) throws WeixinException;
+	
+	/**
+	 * @param name
+	 * @return
+	 * @throws WeixinException
+	 */
+	int createDepartment(String name) throws WeixinException;
+	
+	/**
+	 * 更新部门信息
+	 * @param id
+	 * @param name
+	 * @param parentid
+	 * @param order
+	 * @throws WeixinException
+	 */
+	void updateDepartment(int id, String name, int parentid, Integer order) throws WeixinException;
+	
+	/**
+	 * 更新部门信息
+	 * @param id
+	 * @param name
+	 * @throws WeixinException
+	 */
+	void upateDepartment(int id, String name) throws WeixinException;
+	
+	/**
+	 * 删除部门信息
+	 * @param id
+	 * @throws WeixinException
+	 */
+	void deleteDepartment(int id) throws WeixinException;
+	
+	/**
+	 * 获取部门列表
+	 * @param id
+	 * @return
+	 * @throws WeixinException
+	 */
+	List<CorpDepartment> getDepartments(int id) throws WeixinException;
+	
+	/**
+	 * 获取根节点下的部门列表
+	 * @return
+	 * @throws WeixinException
+	 */
+	List<CorpDepartment> getDepartments() throws WeixinException;
+	
 	/**
 	 * 获取企业用户详情
 	 * @param corp
@@ -207,4 +278,85 @@ public interface WeixinCorpClientManager {
 	 * @throws WeixinException
 	 */
 	CorpUserInfo getCorpUserInfo(String userid) throws WeixinException;
+	
+	/**
+	 * 添加CorpUser
+	 * @param userid
+	 * @param name
+	 * @param department
+	 * @param position
+	 * @param mobile
+	 * @param email
+	 * @param weixinid
+	 * @param sex
+	 * @param avatar_mediaid
+	 * @param extAttrs
+	 * @return
+	 * @throws WeixinException
+	 */
+	void addCorpUserInfo(String userid, String name, Integer department, String position, String mobile, String email, String weixinid, Sex sex, String avatar_mediaid, List<UserExtAttr> extAttrs) throws WeixinException;
+	
+	/**
+	 * 更新CorpUser信息
+	 * @param userid
+	 * @param name
+	 * @param department
+	 * @param position
+	 * @param mobile
+	 * @param email
+	 * @param weixinid
+	 * @param sex
+	 * @param avatar_mediaid
+	 * @param extAttrs
+	 * @param enable
+	 * @throws WeixinException
+	 */
+	void updateCorpUserInfo(String userid, String name, Integer department, String position, String mobile, String email, String weixinid, Sex sex, String avatar_mediaid, List<UserExtAttr> extAttrs, Boolean enable) throws WeixinException;
+	
+	/**
+	 * 删除用户
+	 * @param userid
+	 * @throws WeixinException
+	 */
+	void deleteCorpUser(String userid) throws WeixinException;
+	
+	/**
+	 * 批量删除用户
+	 * @param userids
+	 * @throws WeixinException
+	 */
+	void batchDeleteCorpUsers(List<String> userids) throws WeixinException;
+	
+	/**
+	 * @param departmentid
+	 * @param fetchChild
+	 * @param all
+	 * @param subscribe
+	 * @param forbit
+	 * @param unsubscribe
+	 * @return
+	 */
+	List<CorpUserInfo> getSimpleListCorpUsers(int departmentid, Boolean fetchChild, boolean all, boolean subscribe, boolean forbit, boolean unsubscribe) throws WeixinException;
+	
+	/**
+	 * 获取详情用户信息列表
+	 * @param departmentid
+	 * @param fetchChild
+	 * @param all
+	 * @param subscribe
+	 * @param forbit
+	 * @param unsubscribe
+	 * @return
+	 * @throws WeixinException
+	 */
+	List<CorpUserInfo> getFullListCorpUsers(int departmentid, Boolean fetchChild, boolean all, boolean subscribe, boolean forbit, boolean unsubscribe) throws WeixinException;
+	
+	/**
+	 * 发送邀请
+	 * @param userid
+	 * @return
+	 * @throws WeixinException
+	 */
+	WeixinOrEmail sendInvite(String userid) throws WeixinException;
+	
 }
