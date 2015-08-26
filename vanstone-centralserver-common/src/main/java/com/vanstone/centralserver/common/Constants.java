@@ -788,4 +788,15 @@ public abstract class Constants {
 		return url;
 	}
 	
+	public static final String CORP_GET_USERINFO_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token=#ACCESS_TOKEN#&userid=#USERID#";
+	
+	public static String getUserInfoUrl(String accessToken, String userid) {
+		MyAssert.hasText(accessToken);
+		MyAssert.hasText(userid);
+		String url = CORP_GET_USERINFO_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#USERID#", userid);
+		return url;
+	}
+	
+	
 }

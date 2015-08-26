@@ -2,9 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/2002/xmlspec/dtd/2.10/xmlspec.dtd">
 
 <conf>
-	
-	<!-- example.DefaultPassiveMsgListener -->
-	<default-listener>com.vanstone.weixin.corp.client.impl.DefaultPassiveMsgListener</default-listener>
+
+	<default-listener>example.DefaultPassiveMsgListener</default-listener>
 
 	<corp appID="wx87c2c0c1d9ec9f7a" appSecret="DvNnPTVFkoQVNOh9VdjfcAnKOr_XaZCjwgxg8sNn4fHW1Co_2Thok2ymdnCjNLPq" />
 	

@@ -19,6 +19,7 @@ import com.vanstone.centralserver.common.corp.msg.CorpMsgResult;
 import com.vanstone.centralserver.common.corp.oauth2.OAuth2Result;
 import com.vanstone.centralserver.common.corp.oauth2.RedirectResult;
 import com.vanstone.centralserver.common.corp.passive.AbstractPassiveReply;
+import com.vanstone.centralserver.common.corp.user.CorpUserInfo;
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.centralserver.common.weixin.wrap.menu.Menu;
 
@@ -196,4 +197,15 @@ public interface WeixinCorpClientManager {
 	 * @throws WeixinException
 	 */
 	OAuth2Result getUserInfo(ICorp corp, String code) throws WeixinException;
+	
+	
+	//管理通讯录部分
+	/**
+	 * 获取企业用户详情
+	 * @param corp
+	 * @param userid
+	 * @return
+	 * @throws WeixinException
+	 */
+	CorpUserInfo getCorpUserInfo(ICorp corp, String userid) throws WeixinException;
 }

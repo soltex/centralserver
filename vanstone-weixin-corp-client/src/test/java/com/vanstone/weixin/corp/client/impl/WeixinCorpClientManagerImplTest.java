@@ -14,6 +14,7 @@ import com.vanstone.centralserver.common.corp.media.MediaType;
 import com.vanstone.centralserver.common.corp.msg.CorpMsg4File;
 import com.vanstone.centralserver.common.corp.msg.CorpMsg4Img;
 import com.vanstone.centralserver.common.corp.msg.CorpMsg4Text;
+import com.vanstone.centralserver.common.corp.user.CorpUserInfo;
 import com.vanstone.centralserver.common.util.DebugUtil;
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.centralserver.common.weixin.wrap.ButtonType;
@@ -185,5 +186,15 @@ public class WeixinCorpClientManagerImplTest {
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testgetCorpUserInfo() {
+		try {
+			CorpUserInfo userInfo = this.weixinCorpClientManager.getCorpUserInfo(CorpClientConf.getInstance().getCorp(), "shipeng");
+		} catch (WeixinException e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

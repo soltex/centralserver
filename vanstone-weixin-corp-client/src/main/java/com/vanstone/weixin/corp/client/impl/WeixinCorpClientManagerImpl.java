@@ -36,6 +36,7 @@ import com.vanstone.centralserver.common.corp.CorpAppInfo;
 import com.vanstone.centralserver.common.corp.ICorp;
 import com.vanstone.centralserver.common.corp.ICorpApp;
 import com.vanstone.centralserver.common.corp.ReportLocationFlag;
+import com.vanstone.centralserver.common.corp.UserStatus;
 import com.vanstone.centralserver.common.corp.media.MPNewsArticle;
 import com.vanstone.centralserver.common.corp.media.MediaResult;
 import com.vanstone.centralserver.common.corp.media.MediaStat;
@@ -45,11 +46,13 @@ import com.vanstone.centralserver.common.corp.msg.CorpMsgResult;
 import com.vanstone.centralserver.common.corp.oauth2.OAuth2Result;
 import com.vanstone.centralserver.common.corp.oauth2.RedirectResult;
 import com.vanstone.centralserver.common.corp.passive.AbstractPassiveReply;
+import com.vanstone.centralserver.common.corp.user.CorpUserInfo;
 import com.vanstone.centralserver.common.util.HttpClientTemplate;
 import com.vanstone.centralserver.common.util.HttpClientTemplate.HttpClientCallback;
 import com.vanstone.centralserver.common.util.UnixJavaDateTimeUtil;
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.centralserver.common.weixin.WeixinException.ErrorCode;
+import com.vanstone.centralserver.common.weixin.wrap.Sex;
 import com.vanstone.centralserver.common.weixin.wrap.menu.Menu;
 import com.vanstone.centralserver.common.weixin.wrap.oauth2.Scope;
 import com.vanstone.weixin.corp.client.WeixinCorpClientManager;
@@ -646,4 +649,71 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 		});
 	}
 
+	@Override
+	public CorpUserInfo getCorpUserInfo(ICorp corp, String userid) throws WeixinException {
+		final String accesstoken = this.getAccessToken(corp);
+		String url = Constants.getUserInfoUrl(accesstoken, userid);
+		HttpGet httpGet = new HttpGet(url);
+		return this.clientTemplate.execute(httpGet, new HttpClientCallback<CorpUserInfo>() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public CorpUserInfo executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				String userid = (String)map.get("userid");
+				String name = (String)map.get("name");
+				List<Integer> departmentids = (List<Integer>)map.get("department");
+				String position = (String)map.get("position");
+				String mobile = (String)map.get("mobile");
+				String gender = (String)map.get("gender");
+				String email = (String)map.get("email");
+				String weixinid = (String)map.get("weixinid");
+				String avatar = (String)map.get("avatar");
+				Number status = (Number)map.get("status");
+				Map<String, Object> attrsMap = (Map<String, Object>)map.get("extattr");
+				
+				CorpUserInfo userInfo = new CorpUserInfo();
+				userInfo.setUserid(userid);
+				userInfo.setName(name);
+				if (departmentids != null && departmentids.size() >0) {
+					userInfo.addDepartmentIDs(departmentids);
+				}
+				userInfo.setPosition(position);
+				userInfo.setMobile(mobile);
+				if (!StringUtils.isEmpty(gender)) {
+					if (gender.equals("1")) {
+						userInfo.setSex(Sex.Male);
+					}else if (gender.equals("2")) {
+						userInfo.setSex(Sex.FMale);
+					}
+				}
+				userInfo.setEmail(email);
+				userInfo.setWeixinid(weixinid);
+				userInfo.setAvatar(avatar);
+				if (status != null) {
+					int statusValue = status.intValue();
+					switch (statusValue) {
+					case 1:
+						userInfo.setUserStatus(UserStatus.Subscribe);
+						break;
+					case 2:
+						userInfo.setUserStatus(UserStatus.Forbit);
+						break;
+					default:
+						userInfo.setUserStatus(UserStatus.Unsubscribe);
+						break;
+					}
+				}
+				if (attrsMap != null && attrsMap.size() >0) {
+					List<Map<String, Object>> attrs = (List<Map<String,Object>>)attrsMap.get("attrsMap");
+					if (attrs != null && attrs.size() >0) {
+						for (Map<String, Object> temp : attrs) {
+							String attrName = (String)temp.get("name");
+							String attrValue = (String)temp.get("value");
+							userInfo.addUserExtAttr(attrName, attrValue);
+						}
+					}
+				}
+				return userInfo;
+			}
+		});
+	}
 }
