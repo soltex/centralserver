@@ -22,6 +22,8 @@ import com.vanstone.centralserver.common.corp.oauth2.RedirectResult;
 import com.vanstone.centralserver.common.corp.passive.AbstractPassiveReply;
 import com.vanstone.centralserver.common.corp.user.CorpDepartment;
 import com.vanstone.centralserver.common.corp.user.CorpUserInfo;
+import com.vanstone.centralserver.common.corp.user.Tag;
+import com.vanstone.centralserver.common.corp.user.UserCollectionWithTag;
 import com.vanstone.centralserver.common.corp.user.UserExtAttr;
 import com.vanstone.centralserver.common.weixin.WeixinException;
 import com.vanstone.centralserver.common.weixin.wrap.Sex;
@@ -358,5 +360,60 @@ public interface WeixinCorpClientManager {
 	 * @throws WeixinException
 	 */
 	WeixinOrEmail sendInvite(String userid) throws WeixinException;
+	
+	
+	//标签相关 =========================== 
+	
+	/**
+	 * @param tagname
+	 * @param tagid
+	 * @return
+	 * @throws WeixinException
+	 */
+	int addTag(String tagname, Integer tagid) throws WeixinException;
+	
+	/**
+	 * @param tagid
+	 * @param tagname
+	 * @throws WeixinException
+	 */
+	void updateTag(int tagid, String tagname) throws WeixinException;
+	
+	/**
+	 * @param tagid
+	 * @throws WeixinException
+	 */
+	void deleteTag(int tagid) throws WeixinException;
+	
+	/**
+	 * @param tagid
+	 * @return
+	 * @throws WeixinException
+	 */
+	UserCollectionWithTag getUserCollectionWithTag(int tagid) throws WeixinException;
+	
+	/**
+	 * @param tagid
+	 * @param userids
+	 * @param partylist
+	 * @return
+	 * @throws WeixinException
+	 */
+	CorpMsgResult addTagRelUsers(int tagid, List<String> userids, List<Integer> partylist) throws WeixinException;
+	
+	/**
+	 * @param tagid
+	 * @param userids
+	 * @param partlist
+	 * @return
+	 * @throws WeixinException
+	 */
+	CorpMsgResult deleteTagRelUsers(int tagid, List<String> userids, List<Integer> partlist) throws WeixinException;
+	
+	/**
+	 * @return
+	 * @throws WeixinException
+	 */
+	List<Tag> getTags() throws WeixinException;
 	
 }

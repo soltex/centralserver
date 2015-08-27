@@ -930,4 +930,63 @@ public abstract class Constants {
 		return url;
 	}
 	
+	//标签相关
+	public static final String CORP_CREATE_TAG_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/tag/create?access_token=#ACCESS_TOKEN#";
+	
+	public static String getCorpCreateTagUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_CREATE_TAG_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
+	public static final String CORP_UPDATE_TAG_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/tag/update?access_token=#ACCESS_TOKEN#";
+	
+	public static String getUpdateTagUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_UPDATE_TAG_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
+	public static final String CORP_DELETE_TAG_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/tag/delete?access_token=#ACCESS_TOKEN#&tagid=#TAGID#";
+	
+	public static String getDeleteTagUrl(String accessToken, int tagid) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_DELETE_TAG_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#TAGID#", String.valueOf(tagid));
+		return url;
+	}
+	
+	public static final String CORP_TAG_GETUSERS_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/tag/get?access_token=#ACCESS_TOKEN#&tagid=#TAGID#";
+	
+	public static final String getTagGetUsersUrl(String accessToken, int tagid) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_TAG_GETUSERS_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		url = url.replaceAll("#TAGID#", String.valueOf(tagid));
+		return url;
+	}
+	
+	public static final String CORP_ADDTAGUSERS_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/tag/addtagusers?access_token=#ACCESS_TOKEN#";
+	
+	public static String getAddTagUsersUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_ADDTAGUSERS_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
+	public static final String CORP_DELETETAGUSER_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/tag/deltagusers?access_token=#ACCESS_TOKEN#";
+	
+	public static String getDeleteTagUserUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_DELETETAGUSER_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
+	public static final String CORP_GET_TAGLIST_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/tag/list?access_token=#ACCESS_TOKEN#";
+	
+	public static String getGetTagListUrl(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_GET_TAGLIST_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
 }

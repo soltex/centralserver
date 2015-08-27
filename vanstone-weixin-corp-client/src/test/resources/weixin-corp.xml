@@ -5,7 +5,7 @@
 
 	<default-listener>example.DefaultPassiveMsgListener</default-listener>
 
-	<corp appID="wx87c2c0c1d9ec9f7a" appSecret="DvNnPTVFkoQVNOh9VdjfcAnKOr_XaZCjwgxg8sNn4fHW1Co_2Thok2ymdnCjNLPq" />
+	<corp appID="wx70d50c6d416b9c42" appSecret="PBeqFvFgxgDkgfxw8B8dXN6Ai_mlI2ImOgsP0p0-YQ0C0xltp4Fm0uZFdt8LR-NE" />
 	
 	<corp-app id="0">
 		<desc>这个可以改</desc>

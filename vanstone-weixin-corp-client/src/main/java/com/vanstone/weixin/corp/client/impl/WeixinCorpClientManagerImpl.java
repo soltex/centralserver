@@ -49,6 +49,8 @@ import com.vanstone.centralserver.common.corp.oauth2.RedirectResult;
 import com.vanstone.centralserver.common.corp.passive.AbstractPassiveReply;
 import com.vanstone.centralserver.common.corp.user.CorpDepartment;
 import com.vanstone.centralserver.common.corp.user.CorpUserInfo;
+import com.vanstone.centralserver.common.corp.user.Tag;
+import com.vanstone.centralserver.common.corp.user.UserCollectionWithTag;
 import com.vanstone.centralserver.common.corp.user.UserExtAttr;
 import com.vanstone.centralserver.common.util.HttpClientTemplate;
 import com.vanstone.centralserver.common.util.HttpClientTemplate.HttpClientCallback;
@@ -1162,4 +1164,217 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 			}
 		});
 	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	@Override
+	public int addTag(String tagname, Integer tagid) throws WeixinException {
+		MyAssert.hasText(tagname);
+		
+		final String accesstoken = this.getAccessToken();
+		String url = Constants.getCorpCreateTagUrl(accesstoken);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("tagname", tagname);
+		if (tagid != null) {
+			param.put("tagid", tagid);
+		}
+		StringEntity stringEntity = new StringEntity(JsonUtil.object2PrettyString(param, false), Constants.SYS_CHARSET_UTF8);
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setEntity(stringEntity);
+		return this.clientTemplate.execute(httpPost, new HttpClientCallback<Integer>() {
+			@Override
+			public Integer executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				Number tagid = (Number)map.get("tagid");
+				return tagid.intValue();
+			}
+		});
+	}
+	
+	@Override
+	public void updateTag(int tagid, String tagname) throws WeixinException {
+		MyAssert.hasText(tagname);
+		
+		final String accesstoken = this.getAccessToken();
+		String url = Constants.getUpdateTagUrl(accesstoken);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("tagname", tagname);
+		param.put("tagid", tagid);
+		
+		StringEntity stringEntity = new StringEntity(JsonUtil.object2PrettyString(param, false), Constants.SYS_CHARSET_UTF8);
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setEntity(stringEntity);
+		
+		this.clientTemplate.execute(httpPost, new HttpClientCallback<Object>() {
+			@Override
+			public Integer executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				return null;
+			}
+		});
+	}
+	
+	@Override
+	public void deleteTag(int tagid) throws WeixinException {
+		final String accesstoken = this.getAccessToken();
+		String url = Constants.getDeleteTagUrl(accesstoken, tagid);
+		HttpGet httpGet = new HttpGet(url);
+		this.clientTemplate.execute(httpGet, new HttpClientCallback<Object>() {
+			@Override
+			public Object executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				return null;
+			}
+		});
+	}
+	
+	@Override
+	public UserCollectionWithTag getUserCollectionWithTag(final int tagid) throws WeixinException {
+		final String accesstoken = this.getAccessToken();
+		String url = Constants.getTagGetUsersUrl(accesstoken, tagid);
+		HttpGet httpGet = new HttpGet(url);
+		return this.clientTemplate.execute(httpGet, new HttpClientCallback<UserCollectionWithTag>() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public UserCollectionWithTag executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				List<Map<String, Object>> userlist = (List<Map<String,Object>>)map.get("userlist");
+				List<Integer> partylist = (List<Integer>)map.get("partylist");
+				UserCollectionWithTag userCollectionWithTag = new UserCollectionWithTag();
+				userCollectionWithTag.setTagid(tagid);
+				if (userlist != null && userlist.size() >0) {
+					for (Map<String, Object> usermap : userlist) {
+						String userid = (String)usermap.get("userid");
+						String name = (String)usermap.get("name");
+						CorpUserInfo userInfo = new CorpUserInfo();
+						userInfo.setUserid(userid);
+						userInfo.setName(name);
+						userCollectionWithTag.addCorpUserInfo(userInfo);
+					}
+				}
+				
+				if (partylist != null && partylist.size() >0) {
+					userCollectionWithTag.addPartys(partylist);
+				}
+				return userCollectionWithTag;
+			}
+		});
+	}
+	
+	@Override
+	public CorpMsgResult addTagRelUsers(int tagid, List<String> userids, List<Integer> partylist) throws WeixinException {
+		if ((userids == null || userids.size() <=0) && (partylist == null || partylist.size() <= 0)) {
+			throw new IllegalArgumentException();
+		}
+		final String accesstoken = this.getAccessToken();
+		String url = Constants.getAddTagUsersUrl(accesstoken);
+		/*
+		 * {
+			   "tagid": "1",
+			   "userlist":[ "user1","user2"],
+			   "partylist": [4]
+			}
+		 */
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("tagid", tagid);
+		if (userids != null && userids.size() >0) {
+			param.put("userlist", userids);
+		}
+		if (partylist != null && partylist.size() >0) {
+			param.put("partylist", partylist);
+		}
+		StringEntity stringEntity = new StringEntity(JsonUtil.object2PrettyString(param, false), Constants.SYS_CHARSET_UTF8);
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setEntity(stringEntity);
+		
+		return this.clientTemplate.execute(httpPost, new HttpClientCallback<CorpMsgResult>() {
+			@Override
+			public CorpMsgResult executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				int errcode = ((Number) map.get("errcode")).intValue();
+				String errmsg = (String) map.get("errmsg");
+				String invaliduser = (String) map.get("invaliduser");
+				String invalidparty = (String) map.get("invalidparty");
+				String invalidtag = (String) map.get("invalidtag");
+				ErrorCode errorCode = ErrorCode.parseErrorCode(errcode);
+				return new CorpMsgResult(errorCode, errmsg, invaliduser, invalidparty, invalidtag);
+			}
+		});
+	}
+	
+	@Override
+	public CorpMsgResult deleteTagRelUsers(int tagid, List<String> userids, List<Integer> partylist) throws WeixinException {
+		if ((userids == null || userids.size() <=0) && (partylist == null || partylist.size() <= 0)) {
+			throw new IllegalArgumentException();
+		}
+		final String accesstoken = this.getAccessToken();
+		String url = Constants.getDeleteTagUserUrl(accesstoken);
+		/*
+		 * {
+			   "tagid": "1",
+			   "userlist":[ "user1","user2"],
+			   "partylist": [4]
+			}
+		 */
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("tagid", tagid);
+		if (userids != null && userids.size() >0) {
+			param.put("userlist", userids);
+		}
+		if (partylist != null && partylist.size() >0) {
+			param.put("partylist", partylist);
+		}
+		StringEntity stringEntity = new StringEntity(JsonUtil.object2PrettyString(param, false), Constants.SYS_CHARSET_UTF8);
+		HttpPost httpPost = new HttpPost(url);
+		httpPost.setEntity(stringEntity);
+		
+		return this.clientTemplate.execute(httpPost, new HttpClientCallback<CorpMsgResult>() {
+			@Override
+			public CorpMsgResult executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				int errcode = ((Number) map.get("errcode")).intValue();
+				String errmsg = (String) map.get("errmsg");
+				String invaliduser = (String) map.get("invaliduser");
+				String invalidparty = (String) map.get("invalidparty");
+				String invalidtag = (String) map.get("invalidtag");
+				ErrorCode errorCode = ErrorCode.parseErrorCode(errcode);
+				return new CorpMsgResult(errorCode, errmsg, invaliduser, invalidparty, invalidtag);
+			}
+		});
+	}
+	
+	@Override
+	public List<Tag> getTags() throws WeixinException {
+		final String accesstoken = this.getAccessToken();
+		String url = Constants.getGetTagListUrl(accesstoken);
+		HttpGet httpGet = new HttpGet(url);
+		this.clientTemplate.execute(httpGet, new HttpClientCallback<Object>() {
+			@SuppressWarnings("unchecked")
+			@Override
+			public Object executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				List<Map<String, Object>> taglist = (List<Map<String,Object>>)map.get("taglist");
+				if (taglist == null || taglist.size() <=0) {
+					return null;
+				}
+				List<Tag> tags = new ArrayList<Tag>();
+				for (Map<String, Object> tmp : taglist) {
+					Number tagid = (Number)tmp.get("tagid");
+					String tagname = (String)tmp.get("tagname");
+					Tag tag = new Tag();
+					tag.setTagname(tagname);
+					tag.setId(tagid.intValue());
+					tags.add(tag);
+				}
+				return tags;
+			}
+		});
+		return null;
+	}
+	
 }
