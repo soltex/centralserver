@@ -13,7 +13,8 @@ public class CorpImpl implements ICorp {
 
 	private String AppID;
 	private String appSecret;
-
+	private String jsAPINoncestr;
+	
 	@Override
 	public String getAppID() {
 		return this.AppID;
@@ -30,6 +31,14 @@ public class CorpImpl implements ICorp {
 
 	public void setAppSecret(String appSecret) {
 		this.appSecret = appSecret;
+	}
+
+	public String getJsAPINoncestr() {
+		return jsAPINoncestr;
+	}
+	
+	public void setJsAPINoncestr(String jsAPINoncestr) {
+		this.jsAPINoncestr = jsAPINoncestr;
 	}
 	
 }

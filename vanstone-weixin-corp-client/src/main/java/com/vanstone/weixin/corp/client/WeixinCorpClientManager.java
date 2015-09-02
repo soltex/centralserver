@@ -11,6 +11,7 @@ import com.vanstone.centralserver.common.corp.CorpAppInfo;
 import com.vanstone.centralserver.common.corp.ICorpApp;
 import com.vanstone.centralserver.common.corp.ReportLocationFlag;
 import com.vanstone.centralserver.common.corp.WeixinOrEmail;
+import com.vanstone.centralserver.common.corp.js.TicketObject;
 import com.vanstone.centralserver.common.corp.media.MPNewsArticle;
 import com.vanstone.centralserver.common.corp.media.MediaResult;
 import com.vanstone.centralserver.common.corp.media.MediaStat;
@@ -105,6 +106,15 @@ public interface WeixinCorpClientManager {
 	 * @throws WeixinException
 	 */
 	void downloadTempMedia(String mediaID, File file) throws WeixinException;
+	
+	/**
+	 * 下载临时文件，到指定文件夹中
+	 * @param mediaID 媒体ID
+	 * @param filePath 文件路径
+	 * @param filenameWithoutExtName 可null，如为null，则自动生成文件名称
+	 * @throws WeixinException
+	 */
+	File downloadTempMedia(String mediaID, File filePath, String filenameWithoutExtName) throws WeixinException;
 	
 	/**
 	 * 上传MPNewsArticles
@@ -415,5 +425,12 @@ public interface WeixinCorpClientManager {
 	 * @throws WeixinException
 	 */
 	List<Tag> getTags() throws WeixinException;
+	
+	/**
+	 * 获取JSAPI Ticket
+	 * @return
+	 * @throws WeixinException
+	 */
+	TicketObject initialJSAPISignature(HttpServletRequest servletRequest) throws WeixinException;
 	
 }

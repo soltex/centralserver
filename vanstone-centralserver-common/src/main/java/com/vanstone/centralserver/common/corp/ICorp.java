@@ -20,4 +20,10 @@ public interface ICorp {
 	 */
 	String getAppSecret();
 	
+	/**
+	 * 获取JSAPI的noncestr值
+	 * @return
+	 */
+	String getJsAPINoncestr();
+	
 }

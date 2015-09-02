@@ -4,6 +4,7 @@
 package com.vanstone.weixin.corp.client.conf.xml;
 
 import java.util.Iterator;
+import java.util.UUID;
 
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
@@ -59,12 +60,19 @@ public class DefaultXmlConfInitiator implements IConfInitiator {
 		Element corpElement = rootElement.element("corp");
 		String appID = corpElement.attributeValue("appID");
 		String appSecret = corpElement.attributeValue("appSecret");
+		String jsapiNonceString = corpElement.attributeValue("jsapinoncestr");
+		if (jsapiNonceString == null || jsapiNonceString.equals("")) {
+			jsapiNonceString = UUID.randomUUID().toString();
+		}
+		
 		if (StringUtils.isEmpty(appID) || StringUtils.isEmpty(appSecret)) {
 			throw new ExceptionInInitializerError("APPID OR App Secret IS Blank");
 		}
 		CorpImpl corpImpl = new CorpImpl();
 		corpImpl.setAppID(appID);
 		corpImpl.setAppSecret(appSecret);
+		corpImpl.setJsAPINoncestr(jsapiNonceString);
+		
 		CorpClientConf.getInstance().setCorp(corpImpl);
 		
 		//corp app infos

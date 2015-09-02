@@ -989,4 +989,12 @@ public abstract class Constants {
 		return url;
 	}
 	
+	public static final String CORP_JSAPI_TICKET_TEMPLATE = "https://qyapi.weixin.qq.com/cgi-bin/get_jsapi_ticket?access_token=#ACCESS_TOKE#";
+	
+	public static String getJSAPITicketURL(String accessToken) {
+		MyAssert.hasText(accessToken);
+		String url = CORP_JSAPI_TICKET_TEMPLATE.replaceAll("#ACCESS_TOKEN#", accessToken);
+		return url;
+	}
+	
 }

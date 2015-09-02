@@ -9,13 +9,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -38,6 +42,7 @@ import com.vanstone.centralserver.common.corp.ICorpApp;
 import com.vanstone.centralserver.common.corp.ReportLocationFlag;
 import com.vanstone.centralserver.common.corp.UserStatus;
 import com.vanstone.centralserver.common.corp.WeixinOrEmail;
+import com.vanstone.centralserver.common.corp.js.TicketObject;
 import com.vanstone.centralserver.common.corp.media.MPNewsArticle;
 import com.vanstone.centralserver.common.corp.media.MediaResult;
 import com.vanstone.centralserver.common.corp.media.MediaStat;
@@ -323,19 +328,17 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 			HttpResponse httpResponse = httpClient.execute(httpGet);
 			Header[] headers = httpResponse.getHeaders("Content-Type");
 			if (headers != null && headers.length > 0) {
-				for (Header header : headers) {
-					String value = header.getValue();
-					if (value.indexOf("Text") != -1 || value.indexOf("text") != -1) {
-						String json = EntityUtils.toString(httpResponse.getEntity());
-						if (json == null || "".equals(json)) {
-							throw new IllegalArgumentException();
-						}
-						Map<String, Object> jsonMap = JsonUtil.json2Map(json);
-						WeixinException.ErrorCode errorCode = WeixinException.ErrorCode.parseErrorCode(((Number) jsonMap.get("errcode")).intValue());
-						if (!errorCode.equals(WeixinException.ErrorCode.WEIXIN_SUCCESS_0)) {
-							throw new WeixinException(errorCode);
-						}
-						return;
+				Header header=  headers[0];
+				String value = header.getValue();
+				if (value != null && !value.equals("") && value.indexOf("json") != -1) {
+					String json = EntityUtils.toString(httpResponse.getEntity());
+					if (json == null || "".equals(json)) {
+						throw new IllegalArgumentException();
+					}
+					Map<String, Object> jsonMap = JsonUtil.json2Map(json);
+					WeixinException.ErrorCode errorCode = WeixinException.ErrorCode.parseErrorCode(((Number) jsonMap.get("errcode")).intValue());
+					if (!errorCode.equals(WeixinException.ErrorCode.WEIXIN_SUCCESS_0)) {
+						throw new WeixinException(errorCode);
 					}
 				}
 			}
@@ -359,6 +362,74 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 		}
 	}
 
+	@Override
+	public File downloadTempMedia(String mediaID, File filePath, String filenameWithoutExtName) throws WeixinException {
+		MyAssert.notNull(filePath);
+		String accessToken = this.getAccessToken();
+		MyAssert.hasText(accessToken);
+		if (mediaID == null || "".equals(mediaID) || filePath == null) {
+			throw new IllegalArgumentException();
+		}
+		if (filenameWithoutExtName == null || filenameWithoutExtName.equals("")) {
+			filenameWithoutExtName = UUID.randomUUID().toString();
+		}
+		HttpClient httpClient = this.clientTemplate.createHttpClient();
+		HttpGet httpGet = new HttpGet(Constants.getCorpDownloadTempMediaUrl(accessToken, mediaID));
+		filePath.mkdirs();
+		String extName = null;
+		try {
+			HttpResponse httpResponse = httpClient.execute(httpGet);
+			Header[] headers = httpResponse.getHeaders("Content-Type");
+			if (headers != null && headers.length > 0) {
+				Header header=  headers[0];
+				String value = header.getValue();
+				if (value != null && !value.equals("") && value.indexOf("json") != -1) {
+					String json = EntityUtils.toString(httpResponse.getEntity());
+					if (json == null || "".equals(json)) {
+						throw new IllegalArgumentException();
+					}
+					Map<String, Object> jsonMap = JsonUtil.json2Map(json);
+					WeixinException.ErrorCode errorCode = WeixinException.ErrorCode.parseErrorCode(((Number) jsonMap.get("errcode")).intValue());
+					if (!errorCode.equals(WeixinException.ErrorCode.WEIXIN_SUCCESS_0)) {
+						throw new WeixinException(errorCode);
+					}
+				}
+			}
+			//文件下载指定名称
+			Header[] dispositionHeaders = httpResponse.getHeaders("Content-disposition");
+			if (dispositionHeaders == null || dispositionHeaders.length <=0) {
+				throw new IllegalArgumentException();
+			}
+			Header dispositionHeader = dispositionHeaders[0];
+			String headerValue = dispositionHeader.getValue();
+			headerValue = headerValue.replaceAll("\"", "");
+			extName = FilenameUtils.getExtension(headerValue);
+			
+			File file = new File(filePath, filenameWithoutExtName + "." + extName);
+			if(!file.exists()) {
+				file.createNewFile();
+			}
+			InputStream is = httpResponse.getEntity().getContent();
+			FileOutputStream fos = new FileOutputStream(file);
+			byte[] buffer = new byte[4096];
+			int n = -1;
+			while ((n = is.read(buffer)) != -1) {
+				fos.write(buffer, 0, n);
+			}
+			is.close();
+			fos.close();
+			return file;
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+			throw new IllegalArgumentException();
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new IllegalArgumentException();
+		} finally {
+			httpClient.getConnectionManager().shutdown();
+		}
+	}
+	
 	@Override
 	public String uploadMPNewsArticle(ICorpApp corpApp, Collection<MPNewsArticle> articles) throws WeixinException {
 		MyAssert.notNull(corpApp);
@@ -1375,6 +1446,38 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 			}
 		});
 		return null;
+	}
+
+	@Override
+	public TicketObject initialJSAPISignature(HttpServletRequest servletRequest) throws WeixinException {
+		MyAssert.notNull(servletRequest);
+		final String accesstoken = this.getAccessToken();
+		String url = Constants.getJSAPITicketURL(accesstoken);
+		HttpGet httpGet = new HttpGet(url);
+		String ticket = this.clientTemplate.execute(httpGet, new HttpClientCallback<String>() {
+			@Override
+			public String executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
+				String ticket = (String)map.get("ticket");
+				return ticket;
+			}
+		});
+		
+		String requestURL = servletRequest.getRequestURL().toString();
+		String query=servletRequest.getQueryString();
+		if(!StringUtils.isEmpty(query)){
+			requestURL+="?"+query;
+		}
+		long timestamp = UnixJavaDateTimeUtil.javaDateTimeToUnixTimestamp(new Date());
+		StringBuffer sb = new StringBuffer();
+		sb.append("noncestr=").append(CorpClientConf.getInstance().getCorp().getJsAPINoncestr()).append("&");
+		sb.append("jsapi_ticket=").append(ticket).append("&");
+		sb.append("timestamp=").append(timestamp).append("&");
+		sb.append("url=").append(servletRequest);
+		TicketObject object = new TicketObject();
+		object.setSignature(DigestUtils.shaHex(sb.toString()));
+		object.setTicket(ticket);
+		object.setUrl(requestURL);
+		return object;
 	}
 	
 }

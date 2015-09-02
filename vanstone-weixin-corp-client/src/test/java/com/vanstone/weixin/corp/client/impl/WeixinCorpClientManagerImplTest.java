@@ -103,13 +103,14 @@ public class WeixinCorpClientManagerImplTest {
 			e.printStackTrace();
 		}
 	}
-
+	
 	private WeixinCorpClientManager weixinCorpClientManager = WeixinCorpClientFactory.getWeixinCorpClientManager();
 
 	@Test
 	public void testdownloadTempMedia() throws WeixinException {
-		this.weixinCorpClientManager.downloadTempMedia( "2pR72hFxy6P9YklrN-JgGel2pFPM5BbzyjsaceBl0dFSmu0mRKUw24y3vRHz9XmcO7aHJYvE0bQPOD8029KW-qg",
-				new File("e:/aaa.jpg"));
+//		this.weixinCorpClientManager.downloadTempMedia( "1683emxqZFNPUuiHoxq_HxIXsLpXMsSlrP3n7dTECdTlBonHa81_WX2V8YNyhjlG01FNELkVA47zGQFh6VhkwTg",
+//				new File("e:/aaa.jpg"));
+		this.weixinCorpClientManager.downloadTempMedia("11683emxqZFNPUuiHoxq_HxIXsLpXMsSlrP3n7dTECdTlBonHa81_WX2V8YNyhjlG01FNELkVA47zGQFh6VhkwTg", new File("f:/aaaa.jpg"));
 	}
 
 	@Test
@@ -202,6 +203,10 @@ public class WeixinCorpClientManagerImplTest {
 		} catch (WeixinException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Test
+	public void testinitialJSAPISignature() {
 		
 	}
 }
