@@ -1477,6 +1477,8 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 		object.setSignature(DigestUtils.shaHex(sb.toString()));
 		object.setTicket(ticket);
 		object.setUrl(requestURL);
+		object.setNoncestr(CorpClientConf.getInstance().getCorp().getJsAPINoncestr());
+		object.setTimestamp(timestamp);
 		return object;
 	}
 	
