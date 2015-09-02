@@ -1469,8 +1469,8 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 		}
 		long timestamp = UnixJavaDateTimeUtil.javaDateTimeToUnixTimestamp(new Date());
 		StringBuffer sb = new StringBuffer();
-		sb.append("noncestr=").append(CorpClientConf.getInstance().getCorp().getJsAPINoncestr()).append("&");
 		sb.append("jsapi_ticket=").append(ticket).append("&");
+		sb.append("noncestr=").append(CorpClientConf.getInstance().getCorp().getJsAPINoncestr()).append("&");
 		sb.append("timestamp=").append(timestamp).append("&");
 		sb.append("url=").append(servletRequest);
 		TicketObject object = new TicketObject();
