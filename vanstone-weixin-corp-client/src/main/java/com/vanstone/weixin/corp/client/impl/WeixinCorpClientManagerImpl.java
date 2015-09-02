@@ -1472,7 +1472,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 		sb.append("jsapi_ticket=").append(ticket).append("&");
 		sb.append("noncestr=").append(CorpClientConf.getInstance().getCorp().getJsAPINoncestr()).append("&");
 		sb.append("timestamp=").append(timestamp).append("&");
-		sb.append("url=").append(servletRequest);
+		sb.append("url=").append(requestURL);
 		TicketObject object = new TicketObject();
 		object.setSignature(DigestUtils.shaHex(sb.toString()));
 		object.setTicket(ticket);
