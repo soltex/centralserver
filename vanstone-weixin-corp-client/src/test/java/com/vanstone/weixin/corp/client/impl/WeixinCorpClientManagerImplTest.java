@@ -198,6 +198,8 @@ public class WeixinCorpClientManagerImplTest {
 	
 	@Test
 	public void testgetCorpUserInfo() {
+		DefaultXmlConfInitiator initiator = new DefaultXmlConfInitiator();
+		initiator.initial();
 		try {
 			CorpUserInfo userInfo = this.weixinCorpClientManager.getCorpUserInfo( "shipeng");
 		} catch (WeixinException e) {

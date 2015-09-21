@@ -850,7 +850,7 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 			public CorpUserInfo executeHttpResponse(HttpResponse httpResponse, Map<String, Object> map) throws WeixinException {
 				String userid = (String) map.get("userid");
 				String name = (String) map.get("name");
-				List<Integer> departmentids = (List<Integer>) map.get("department");
+				List<Number> departmentids = (List<Number>) map.get("department");
 				String position = (String) map.get("position");
 				String mobile = (String) map.get("mobile");
 				String gender = (String) map.get("gender");
@@ -864,7 +864,9 @@ public class WeixinCorpClientManagerImpl implements WeixinCorpClientManager {
 				userInfo.setUserid(userid);
 				userInfo.setName(name);
 				if (departmentids != null && departmentids.size() > 0) {
-					userInfo.addDepartmentIDs(departmentids);
+					for (Number departmentid : departmentids) {
+						userInfo.addDepartmentID(departmentid.intValue());
+					}
 				}
 				userInfo.setPosition(position);
 				userInfo.setMobile(mobile);
