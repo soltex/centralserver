@@ -66,6 +66,24 @@ public class ListenerSelector {
 		String timestamp = servletRequest.getParameter("timestamp");
 		String nonce = servletRequest.getParameter("nonce");
 		
+		if (LOG.isDebugEnabled()) {
+			System.out.println(" == request_body_xml =================");
+			System.out.println(request_body_xml);
+			System.out.println(" == msg_signature =================");
+			System.out.println(msg_signature);
+			System.out.println(" == timestamp =================");
+			System.out.println(timestamp);
+			System.out.println(" == nonce =================");
+			System.out.println(nonce);
+			
+			System.out.println(" == corpApp.getToken() =================");
+			System.out.println(corpApp.getToken());
+			System.out.println(" == corpApp.getEncodingAESKey() =================");
+			System.out.println(corpApp.getEncodingAESKey());
+			System.out.println(" == CorpClientConf.getInstance().getCorp().getAppID() =================");
+			System.out.println(CorpClientConf.getInstance().getCorp().getAppID());
+		}
+		
 		WXBizMsgCrypt msgCrypt = new WXBizMsgCrypt(corpApp.getToken(), corpApp.getEncodingAESKey(), CorpClientConf.getInstance().getCorp().getAppID());
 		String msgxml = msgCrypt.DecryptMsg(msg_signature, timestamp, nonce, request_body_xml);
 		

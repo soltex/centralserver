@@ -120,7 +120,7 @@ public class HttpClientTemplate {
 			
 			WeixinException.ErrorCode errorCode = map.get("errcode") != null ? ErrorCode.parseErrorCode(((Number)map.get("errcode")).intValue()) : null;
 			
-			LOG.info("http response return errorcode : " + errorCode);
+			LOG.debug("http response return errorcode : " + errorCode);
 			
 			if (errorCode != null && !errorCode.equals(WeixinException.ErrorCode.WEIXIN_SUCCESS_0)) {
 				throw new WeixinException(errorCode);
