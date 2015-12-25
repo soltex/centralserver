@@ -917,7 +917,8 @@ public class WeixinAPIManagerImpl implements IWeixinAPIManager {
 				String city = (String)map.get("city");
 				String country = (String)map.get("country");
 				String headimgurl = (String)map.get("headimgurl");
-				String[] privilegeArray = (String[])map.get("privilege");
+				@SuppressWarnings("unchecked")
+				List<String> privileges = (List<String>)map.get("privilege");
 				
 				OAuth2UserInfo info = new OAuth2UserInfo();
 				info.setOpenId(openid);
@@ -939,8 +940,8 @@ public class WeixinAPIManagerImpl implements IWeixinAPIManager {
 					info.setHeadimgurl64(headimgurl + 64);
 					info.setHeadimgurl96(headimgurl + 96);
 				}
-				if (privilegeArray != null && privilegeArray.length >0) {
-					for (String str : privilegeArray) {
+				if (privileges != null && privileges.size() >0) {
+					for (String str : privileges) {
 						info.addPrivilege(str);
 					}
 				}
@@ -948,7 +949,7 @@ public class WeixinAPIManagerImpl implements IWeixinAPIManager {
 			}
 		});
 	}
-
+	
 	@Override
 	public boolean valdiateOAuth2AccessToken(String oauth2AccessToken, String openId) throws WeixinException {
 		MyAssert.hasText(oauth2AccessToken);
