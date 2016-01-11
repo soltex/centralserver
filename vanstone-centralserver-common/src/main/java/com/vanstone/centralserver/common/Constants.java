@@ -50,8 +50,8 @@ public abstract class Constants {
 	/**服务器刷新Token分页显示的页面大小*/
 	public static final int SERVER_FLUSH_PAGE_SIZE = 10;
 	
-	/**leader访问周期,DEFAULT = 7000*/
-	public static final int ACCESS_TOKEN_SCHEDULE_PERIOD = 7000;
+	/**leader访问周期,DEFAULT = 7000 | 60*90*/
+	public static final int ACCESS_TOKEN_SCHEDULE_PERIOD = 60*60;
 	
 	/**客户端定时更新,默认10分钟*/
 	public static final int CLIENT_SCHEDULER_PERIOD_IN_SENCOND = 60*10;
