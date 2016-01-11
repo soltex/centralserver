@@ -4,9 +4,6 @@
 package com.vanstone.centralserver.weixin.sdk.impl;
 
 import java.util.Collection;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PreDestroy;
 
@@ -43,12 +40,11 @@ public class WeixinServiceMgrImpl implements IWeixinServiceMgr {
 	private IUserTokenService userTokenService;
 	@Autowired
 	private IPersistenceService persistenceService;
-	
+
 	@Override
 	public IWeixinInfo addWeixinInfo(IWeixinInfo weixinInfo) throws WeixinException, AppnameExistsException {
 		// LoadAccessToken
-		UserToken userToken = this.userTokenService.loadUserTokenFromWebServer(weixinInfo.getAppid(),
-				weixinInfo.getAppSecret());
+		UserToken userToken = this.userTokenService.loadUserTokenFromWebServer(weixinInfo.getAppid(), weixinInfo.getAppSecret());
 		// 写入DB
 		weixinInfo = this.persistenceService.addWeixinInfo(weixinInfo);
 		weixinInfo = this.persistenceService.updateAccessToken(weixinInfo.getId(), userToken.getAccessToken());
@@ -61,26 +57,25 @@ public class WeixinServiceMgrImpl implements IWeixinServiceMgr {
 		ZKManager.getInstance().setNodeValue(Constants.getAppnameNode(weixinInfo.getId()), appDevInfo.toJsonString());
 		return weixinInfo;
 	}
-	
+
 	@Override
 	public IWeixinInfo updateWeixinInfo(IWeixinInfo weixinInfo) throws WeixinException {
-		UserToken userToken = this.userTokenService.loadUserTokenFromWebServer(weixinInfo.getAppid(),
-				weixinInfo.getAppSecret());
+		UserToken userToken = this.userTokenService.loadUserTokenFromWebServer(weixinInfo.getAppid(), weixinInfo.getAppSecret());
 		// 写入DB
 		weixinInfo = this.persistenceService.updateWeixinInfo(weixinInfo);
 		weixinInfo = this.persistenceService.updateAccessToken(weixinInfo.getId(), userToken.getAccessToken());
-		
+
 		AppDevInfo appDevInfo = new AppDevInfo();
 		appDevInfo.setAppid(weixinInfo.getAppid());
 		appDevInfo.setAccessToken(userToken.getAccessToken());
 		appDevInfo.setAppname(weixinInfo.getId());
 		appDevInfo.setSecret(weixinInfo.getAppSecret());
-		
+
 		// 写入ZK
 		ZKManager.getInstance().setNodeValue(Constants.getAppnameNode(weixinInfo.getId()), appDevInfo.toJsonString());
 		return weixinInfo;
 	}
-	
+
 	@Override
 	public void deleteWeixinInfo(IWeixinInfo weixinInfo) {
 		this.persistenceService.deleteWeixinInfo(weixinInfo.getId());
@@ -93,67 +88,61 @@ public class WeixinServiceMgrImpl implements IWeixinServiceMgr {
 
 	@Override
 	public IWeixinInfo flushAccessToken(IWeixinInfo weixinInfo) throws WeixinException {
-		UserToken userToken = this.userTokenService.loadUserTokenFromWebServer(weixinInfo.getAppid(),
-				weixinInfo.getAppSecret());
+		UserToken userToken = this.userTokenService.loadUserTokenFromWebServer(weixinInfo.getAppid(), weixinInfo.getAppSecret());
 		// 写入DB
 		weixinInfo = this.persistenceService.updateAccessToken(weixinInfo.getId(), userToken.getAccessToken());
-		
+
 		AppDevInfo appDevInfo = new AppDevInfo();
 		appDevInfo.setAppid(weixinInfo.getAppid());
 		appDevInfo.setAccessToken(userToken.getAccessToken());
 		appDevInfo.setAppname(weixinInfo.getId());
 		appDevInfo.setSecret(weixinInfo.getAppSecret());
-		
+
 		// 写入ZK
 		ZKManager.getInstance().setNodeValue(Constants.getAppnameNode(weixinInfo.getId()), appDevInfo.toJsonString());
 		return weixinInfo;
 	}
-	
+
 	@Override
 	public synchronized FlushResult flushAllAccessToken() {
-		ExecutorService executorService = Executors.newFixedThreadPool(Constants.SERVER_FLUSH_EXECUTOR_SERVICE_SIZE);
+		// ExecutorService executorService =
+		// Executors.newFixedThreadPool(Constants.SERVER_FLUSH_EXECUTOR_SERVICE_SIZE);
 		final int allrows = this.persistenceService.getTotalWeixinInfos(null);
 		PageUtil<IWeixinInfo> pageUtil = new PageUtil<IWeixinInfo>(allrows, 1, Constants.SERVER_FLUSH_PAGE_SIZE);
 		int pages = pageUtil.getPages();
 		final FlushResult result = new FlushResult();
 		for (int i = 1; i <= pages; i++) {
 			final int p = i;
-			executorService.submit(new Runnable() {
-				@Override
-				public void run() {
-					PageUtil<IWeixinInfo> pu = new PageUtil<IWeixinInfo>(allrows, p, Constants.SERVER_FLUSH_PAGE_SIZE);
-					int offset = pu.getOffset();
-					Collection<IWeixinInfo> weixinInfos = persistenceService.getWeixinInfos(null, offset,
-							Constants.SERVER_FLUSH_PAGE_SIZE);
-					if (weixinInfos != null && weixinInfos.size() > 0) {
-						for (IWeixinInfo weixinInfo : weixinInfos) {
-							try {
-								flushAccessToken(weixinInfo);
-							} catch (WeixinException e) {
-								System.out.println(e.getErrorCode());
-								e.printStackTrace();
-								result.addFailWeixinInfo(weixinInfo);
-							}
-						}
+			PageUtil<IWeixinInfo> pu = new PageUtil<IWeixinInfo>(allrows, p, Constants.SERVER_FLUSH_PAGE_SIZE);
+			int offset = pu.getOffset();
+			Collection<IWeixinInfo> weixinInfos = persistenceService.getWeixinInfos(null, offset, Constants.SERVER_FLUSH_PAGE_SIZE);
+			if (weixinInfos != null && weixinInfos.size() > 0) {
+				for (IWeixinInfo weixinInfo : weixinInfos) {
+					try {
+						flushAccessToken(weixinInfo);
+					} catch (WeixinException e) {
+						System.out.println(e.getErrorCode());
+						e.printStackTrace();
+						result.addFailWeixinInfo(weixinInfo);
 					}
 				}
-			});
-		}
-		try {
-			TimeUnit.SECONDS.sleep(1);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-		executorService.shutdown();
-		while (!executorService.isTerminated()) {
-			try {
-				TimeUnit.SECONDS.sleep(Constants.DEFAULT_RETRY_SLEEP_TIME);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-				throw new RuntimeException(e);
 			}
 		}
-		executorService.shutdown();
+		// try {
+		// TimeUnit.SECONDS.sleep(1);
+		// } catch (InterruptedException e) {
+		// e.printStackTrace();
+		// }
+		// executorService.shutdown();
+		// while (!executorService.isTerminated()) {
+		// try {
+		// TimeUnit.SECONDS.sleep(Constants.DEFAULT_RETRY_SLEEP_TIME);
+		// } catch (InterruptedException e) {
+		// e.printStackTrace();
+		// throw new RuntimeException(e);
+		// }
+		// }
+		// executorService.shutdown();
 		return result;
 	}
 
@@ -161,7 +150,7 @@ public class WeixinServiceMgrImpl implements IWeixinServiceMgr {
 	public void close() {
 		ZKManager.getInstance().close();
 	}
-	
+
 	@Override
 	public PageInfo<IWeixinInfo> getWeixinInfos(String key, int pageno, int size) {
 		int rows = this.persistenceService.getTotalWeixinInfos(key);
@@ -172,5 +161,5 @@ public class WeixinServiceMgrImpl implements IWeixinServiceMgr {
 		pageInfo.addObjects(weixinInfos);
 		return pageInfo;
 	}
-	
+
 }
